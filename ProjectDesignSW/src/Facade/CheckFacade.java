@@ -30,9 +30,10 @@ public class CheckFacade extends javax.swing.JFrame {
     private SnailGame snailGame;
     private Game snakeGame;
     private Tetris tetris;
+
     public CheckFacade() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
     }
 
@@ -202,62 +203,54 @@ public class CheckFacade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAsteroidGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsteroidGameActionPerformed
-        asteroidGame= new AsteroidGame();
+        asteroidGame = new AsteroidGame();
         asteroidGame.showWindow();
         this.setVisible(false);
     }//GEN-LAST:event_jBAsteroidGameActionPerformed
 
     private void jBSnakeGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeGameActionPerformed
-        snakeGame= new Game();
+        snakeGame = new Game();
         snakeGame.startGame();
         this.setVisible(false);
     }//GEN-LAST:event_jBSnakeGameActionPerformed
 
     private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
-        
-//       snailGame= new SnailGame(true);
-//       this.setVisible(false);
-//        
-//        try {
-//            snailGame.iniciarJuego();
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
+
+        snailGame = new SnailGame();
+        this.setVisible(false);
+        snailGame.startGame();
+
     }//GEN-LAST:event_jBSnailGameActionPerformed
 
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
-        tetris= new Tetris();
+        tetris = new Tetris();
         tetris.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jBTetrisGameActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
-       
+
         try {
             ArrayList<User> dataList = JSONParser.readField();
             for (int i = 0; i < dataList.size(); i++) {
-               if(dataList.get(i).getCurrentActive() == 1){
-                   dataList.get(i).setCurrentActive(0);
-               }
+                if (dataList.get(i).getCurrentActive() == 1) {
+                    dataList.get(i).setCurrentActive(0);
+                }
             }
             JSONParser.writeFile(dataList);
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.exit(0);
-       
+
     }//GEN-LAST:event_jBExitActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
