@@ -32,7 +32,7 @@ public class SnailGame extends JFrame {
 
     public SnailGame() {
         keyboard = new Keyboard();
-        //startGame();
+        startGame();
     }
 
     public void startGame() {
@@ -67,7 +67,7 @@ public class SnailGame extends JFrame {
         nivel = new Escene(lista);
 
         nivel.addKeyListener(keyboard);
-        this.state = true;
+        state = true;
         this.add(nivel);
         this.setSize(1200, 800);
         this.setVisible(state);
@@ -79,14 +79,10 @@ public class SnailGame extends JFrame {
         this.repaint();
         boton1.activate(caracol);
 
-        while (state) {
-            this.run(boton1, caracol, lista, enemy, portal);
-            break;
-        }
-        
+                
         //t0 = System.nanoTime();
         //System.out.print("TIEMPO INICIAL" + t0);
-        /*while (state) 
+        while (state) 
         {
         
         this.nivel.update();
@@ -109,37 +105,18 @@ public class SnailGame extends JFrame {
             
         } 
         
-        Thread.sleep(10);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         checkState();
         
 
-        }*/
+        }
     }
 
-    public void run(Button boton1, Snail caracol, ElementsList lista, Enemy enemy, Portal portal) {
-
-        for (int i = 1; i < lista.getLista().size(); i++) {
-            GameElement element = lista.getLista().get(i);
-            colision = new Collision(caracol, element);
-            colision.checkCollision();
-        }
-
-        if ((enemy.attackSnail(caracol) == false) || (portal.notifyEnd(caracol) == false)) {
-
-            //tf =System.nanoTime();
-            //System.out.print("TIEMPO FINAL" + tf);
-            state = false;
-        }
-
-        try {
-            Thread.sleep(10);
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 
     public void endGame(boolean state) {
         if (state == false) {
@@ -153,7 +130,6 @@ public class SnailGame extends JFrame {
 
     public void checkState() {
         endGame(this.state);
-        startGame();
     }
 
     public void exitMenu() {
