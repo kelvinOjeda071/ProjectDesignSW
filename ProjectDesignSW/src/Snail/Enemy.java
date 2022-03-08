@@ -21,8 +21,8 @@ public class Enemy extends GameElement {
 
     private final ImageIcon image;
 
-    public Enemy(Position posicion, int ancho, int largo) {
-        super(posicion, ancho, largo, 4);
+    public Enemy(Position position, int height, int width) {
+        super(position, height, width, 4);
         this.image = new ImageIcon(getClass().getResource("/SnailImagenes/spider.png"));
     }
 

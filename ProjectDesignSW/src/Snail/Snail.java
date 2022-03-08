@@ -24,19 +24,18 @@ import Snail.Input.Keyboard;
  */
 public class Snail extends GameElement {
 
-    private final ImageIcon imagen;
+    private final ImageIcon image;
     public int speedX;
     public int speedY;
-    private int tipo;
 
-    public Snail(Position posicion, int height, int width) {
-        super(posicion, height, width, 0);
+    public Snail(Position position, int height, int width) {
+        super(position, height, width, 0);
         ///super.position.x = 1;
         //super.position.y = 1;
         //this.position.y = 1;
         //this.position.x = 1;
         //this.speedX = 2;
-        this.imagen = new ImageIcon(getClass().getResource("/SnailImagenes/caracol.png"));
+        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/caracol.png"));
     }
 
     public void setSpeedX(int speedX) {
@@ -48,21 +47,16 @@ public class Snail extends GameElement {
     }
 
     @Override
-    public void draw(Graphics grafico, int width, int height) {
+    public void draw(Graphics graphics, int width, int height) {
         height = this.height;
         width = this.width;
         int posicionX = this.position.getX();
         int posicionY = this.position.getY();
-        Graphics2D g2d = (Graphics2D) grafico;
+        Graphics2D g2d = (Graphics2D) graphics;
         g2d.setColor(Color.red);
-        g2d.drawImage(this.imagen.getImage(), posicionX, posicionY, width, height, null);
+        g2d.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
 
     }
-
-    public void girar() {
-
-    }
-
 
     @Override
     public void move() {

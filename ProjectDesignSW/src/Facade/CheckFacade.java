@@ -217,8 +217,8 @@ public class CheckFacade extends javax.swing.JFrame {
     private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
 
         snailGame = new SnailGame();
+        snailGame.showWindow();
         this.setVisible(false);
-        snailGame.startGame();
 
     }//GEN-LAST:event_jBSnailGameActionPerformed
 

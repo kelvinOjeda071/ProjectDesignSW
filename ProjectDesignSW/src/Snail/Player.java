@@ -11,17 +11,17 @@ package Snail;
  * @author User
  */
 public class Player {
-    private String nombre;
-    private int puntaje;
+    private String name;
+    private int score;
 
-    public Player(String nombre, int puntaje) {
-        this.nombre = nombre;
-        this.puntaje = puntaje;
+    public Player(String name, int score) {
+        this.name = name;
+        this.score = score;
     }
     
-    public void updateScore(String nombre, int newPuntaje){
-        this.nombre = nombre;
-        this.puntaje = newPuntaje;
+    public void updateScore(String name, int newScore){
+        this.name = name;
+        this.score = newScore;
     }
     
 }

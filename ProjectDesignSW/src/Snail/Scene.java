@@ -19,16 +19,16 @@ import javax.swing.JPanel;
  *
  * @author bryan
  */
-public class Escene extends JPanel {
+public class Scene extends JPanel {
 
     private Image image;
     ElementsList list;
     GameElement element;
 
-    public Escene() {
+    public Scene() {
     }
 
-    public Escene(String background) {
+    public Scene(String background) {
         if (background != null) {
 
         } else {
@@ -39,8 +39,8 @@ public class Escene extends JPanel {
 
     }
 
-    public Escene(ElementsList lista) {
-        this.list = lista;
+    public Scene(ElementsList list) {
+        this.list = list;
         setFocusable(true);
 
     }

@@ -20,22 +20,32 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class SnailGame extends JFrame {
+public class SnailGame extends JFrame implements Runnable {
 
-    private boolean state;
+    private boolean state = false;
+    private Thread thread;
     //private Player jugador;
-    private Escene nivel;
+    private Scene scene;
     private Keyboard keyboard;
-    private Collision colision;
+    private Collision collision;
     private float t0;
     private float tf;
-
+    
     public SnailGame() {
+        setSize(1200, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
         keyboard = new Keyboard();
-        startGame();
+        scene = new Scene();
+        scene.setFocusable(true);
+        add(scene);
+        scene.addKeyListener(keyboard);
+        this.setVisible(state);
     }
 
-    public void startGame() {
+    @Override
+    public void run() {
         Position posicionCaracol = new Position(1, 1);
         Position posicionPlataforma1 = new Position(0, 150);
         Position posicionPlataforma2 = new Position(500, 400);
@@ -55,68 +65,63 @@ public class SnailGame extends JFrame {
         Portal portal = new Portal(positionPortal, 100, 100);
 
         ElementsList lista = new ElementsList();
-        lista.agregarElemento(caracol);
-        lista.agregarElemento(plataforma1);
-        lista.agregarElemento(plataforma2);
-        lista.agregarElemento(enemy);
-        lista.agregarElemento(boton1);
-        lista.agregarElemento(portal);
-        lista.agregarElemento(puerta1);
+        lista.addElement(caracol);
+        lista.addElement(plataforma1);
+        lista.addElement(plataforma2);
+        lista.addElement(enemy);
+        lista.addElement(boton1);
+        lista.addElement(portal);
+        lista.addElement(puerta1);
 
         //this.keyboard = new Keyboard();
-        nivel = new Escene(lista);
+        scene = new Scene(lista);
 
-        nivel.addKeyListener(keyboard);
+        scene.addKeyListener(keyboard);
         state = true;
-        this.add(nivel);
+        this.add(scene);
         this.setSize(1200, 800);
         this.setVisible(state);
         this.setLocation(100, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.nivel.update();
-        keyboard.update();
-        this.repaint();
-        boton1.activate(caracol);
-
-                
         //t0 = System.nanoTime();
         //System.out.print("TIEMPO INICIAL" + t0);
-        while (state) 
-        {
-        
-        this.nivel.update();
-        keyboard.update();
-        this.repaint();
-        boton1.activate(caracol);
-        
-        for(int i = 1; i<lista.getLista().size(); i++){
-            GameElement element = lista.getLista().get(i);
-            colision = new Collision(caracol, element);
-            colision.checkCollision();
-        }
+        while (state) {
 
-        if((enemy.attackSnail(caracol) == false)||(portal.notifyEnd(caracol) == false)){
-            
-            //tf =System.nanoTime();
-            //System.out.print("TIEMPO FINAL" + tf);
-            state = false;
-            
-            
-        } 
-        
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        checkState();
-        
+                this.scene.update();
+                keyboard.update();
+                this.repaint();
+                boton1.activate(caracol);
+
+                for (int i = 1; i < lista.getLista().size(); i++) {
+                    GameElement element = lista.getLista().get(i);
+                    collision = new Collision(caracol, element);
+                    collision.checkCollision();
+                }
+
+                if ((enemy.attackSnail(caracol) == false) || (portal.notifyEnd(caracol) == false)) {
+
+                    //tf =System.nanoTime();
+                    //System.out.print("TIEMPO FINAL" + tf);
+                    state = false;
+
+                }
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                checkState();
 
         }
+        stop();
     }
 
+    public void refresh() {
+
+        //}
+    }
 
     public void endGame(boolean state) {
         if (state == false) {
@@ -135,6 +140,29 @@ public class SnailGame extends JFrame {
     public void exitMenu() {
         this.setVisible(false);
 
+    }
+    
+    private void start() {
+        thread = new Thread(this);
+        thread.start();
+        state = true;
+
+    }
+
+    private void stop() {
+        try {
+            thread.join();
+            state = false;
+        } catch (InterruptedException e) {
+            /* Prints the error */
+            e.printStackTrace();
+        }
+    }
+    
+    public void showWindow(){
+        
+        new SnailGame().start();
+        
     }
 
 }

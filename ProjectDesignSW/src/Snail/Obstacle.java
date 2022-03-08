@@ -17,19 +17,19 @@ import javax.swing.ImageIcon;
  * @author User
  */
 public class Obstacle extends GameElement {
-    private int tipoObstaculo;
-    private final ImageIcon imagen;
+    private int typeObstacle;
+    private final ImageIcon image;
 
     public Obstacle(int tipoObstaculo, Position posicion, int height, int width) {
         super(posicion, height, width, 1);
-        this.tipoObstaculo = tipoObstaculo;
-        this.imagen = new ImageIcon(getClass().getResource("/SnailImagenes/plataforma.png"));
+        this.typeObstacle = tipoObstaculo;
+        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/plataforma.png"));
     }
 
     
 
     @Override
-    public void draw(Graphics grafico, int height, int width) {
+    public void draw(Graphics graphics, int height, int width) {
         
         height = this.height;
         width = this.width;
@@ -38,20 +38,20 @@ public class Obstacle extends GameElement {
         height = this.height;
         width = this.width;
         
-        grafico.setColor(Color.red);
+        graphics.setColor(Color.red);
         
         
-        if(tipoObstaculo == 0){ //Plataforma
-            grafico.setColor(Color.black);
-            grafico.drawImage(this.imagen.getImage(), posicionX, posicionY, width, height, null);
+        if(typeObstacle == 0){ //Plataforma
+            graphics.setColor(Color.black);
+            graphics.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
             //grafico.fillRect(posicionX, posicionY, width, height);
             
             
         }
         
-        if(tipoObstaculo == 1){ //Cajas
-            grafico.setColor(Color.red);
-            grafico.fillRect(posicionX, posicionY, width, height);
+        if(typeObstacle == 1){ //Cajas
+            graphics.setColor(Color.red);
+            graphics.fillRect(posicionX, posicionY, width, height);
         }
     }
 
@@ -61,7 +61,7 @@ public class Obstacle extends GameElement {
     }
 
  public void open() {
-        if (this.tipoObstaculo == 1) {
+        if (this.typeObstacle == 1) {
             this.setHeight(0);
             this.setWidth(0);
             this.setPosicionY(-1);

@@ -21,8 +21,8 @@ public abstract class GameElement{
     int height;
     int tipo;
 
-    public GameElement(Position posicion, int height, int width, int tipo) {
-        this.position = posicion;
+    public GameElement(Position position, int height, int width, int tipo) {
+        this.position = position;
         this.width = height;
         this.height = width;
         this.tipo = tipo;
@@ -57,7 +57,7 @@ public abstract class GameElement{
     }
 
 
-    public abstract void draw(Graphics grafico,int ancho, int largo);
+    public abstract void draw(Graphics graphics,int width, int height);
 
     public abstract void move();
    
