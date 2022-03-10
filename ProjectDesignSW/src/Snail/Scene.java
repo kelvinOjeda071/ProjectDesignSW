@@ -53,10 +53,11 @@ public class Scene extends JPanel {
         }
 
     }
+    
 
     public void paint(Graphics g) {
         super.paint(g);
-        image = new ImageIcon(getClass().getResource("/SnailImagenes/background.jpg")).getImage();
+        image = new ImageIcon(getClass().getResource("/SnailImages/background.jpg")).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
         GameElement elemento;

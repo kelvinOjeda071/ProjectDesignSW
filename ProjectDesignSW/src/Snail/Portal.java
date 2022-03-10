@@ -23,7 +23,7 @@ public class Portal extends GameElement {
 
     public Portal(Position position, int height, int width) {
         super(position, height, width, 5);
-        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/portal.png"));
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/portal.png"));
 
     }
 

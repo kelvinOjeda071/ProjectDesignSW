@@ -4,6 +4,7 @@ package Snail;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,10 +19,12 @@ import java.awt.event.KeyEvent;
 public class Button extends GameElement {
     
     private Obstacle obstacle;
+    private final ImageIcon image;
 
     public Button(Position position, int height, int width, Obstacle obstacle) {
         super(position, height, width, 2);
         this.obstacle = obstacle;
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/button.png"));
     }
     
     public void activate(Snail snail){
@@ -64,16 +67,15 @@ public class Button extends GameElement {
 
 
     @Override
-    public void draw(Graphics grafico, int ancho, int largo) {
+    public void draw(Graphics grafic, int width, int height) {
         height = this.height;
         width = this.width;
         int posicionX = this.position.getX();
         int posicionY = this.position.getY();
         height = this.height;
         width = this.width;
-        grafico.setColor(Color.red);
-        grafico.setColor(Color.red);
-        grafico.fillRect(posicionX, posicionY, width, height);
+        grafic.setColor(Color.yellow);
+        grafic.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
     }
 
     public void move() {

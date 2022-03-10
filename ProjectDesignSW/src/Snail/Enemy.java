@@ -20,10 +20,12 @@ import javax.swing.ImageIcon;
 public class Enemy extends GameElement {
 
     private final ImageIcon image;
+    int auxY;
 
     public Enemy(Position position, int height, int width) {
         super(position, height, width, 4);
-        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/spider.png"));
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/spider.png"));
+        auxY = position.getY();
     }
 
     public boolean attackSnail(Snail snail) {
@@ -89,16 +91,16 @@ public class Enemy extends GameElement {
 
     @Override
     public void move() {
+        
         int x0 = this.position.getX();
         int y0 = this.position.getY();
 
-        if ((y0 >= 0) && (y0 < 300)) {
+        if ((y0 >= auxY) && (y0 < auxY+200)) {
             this.position.setY(y0 + 1);
         }
-        if (y0 == 300) {
-            for (int i = 0; i < 200; i++) {
-                this.position.setY(200 - i);
-            }
+        if (y0 == auxY + 200) {
+            this.position.setY(auxY);
+            
         }
     }
 

@@ -35,7 +35,7 @@ public class Snail extends GameElement {
         //this.position.y = 1;
         //this.position.x = 1;
         //this.speedX = 2;
-        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/caracol.png"));
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/snail.png"));
     }
 
     public void setSpeedX(int speedX) {

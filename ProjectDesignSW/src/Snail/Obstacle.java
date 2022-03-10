@@ -1,6 +1,5 @@
 package Snail;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -11,47 +10,53 @@ import javax.swing.ImageIcon;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author User
  */
 public class Obstacle extends GameElement {
+
     private int typeObstacle;
-    private final ImageIcon image;
+    private final ImageIcon image1;
+    private final ImageIcon image2;
+    private final ImageIcon image3;
 
     public Obstacle(int tipoObstaculo, Position posicion, int height, int width) {
         super(posicion, height, width, 1);
         this.typeObstacle = tipoObstaculo;
-        this.image = new ImageIcon(getClass().getResource("/SnailImagenes/plataforma.png"));
+        this.image1 = new ImageIcon(getClass().getResource("/SnailImages/platform.png"));
+        this.image2 = new ImageIcon(getClass().getResource("/SnailImages/box.png"));
+        this.image3 = new ImageIcon(getClass().getResource("/SnailImages/wall.png"));
     }
-
-    
 
     @Override
     public void draw(Graphics graphics, int height, int width) {
-        
+
         height = this.height;
         width = this.width;
         int posicionX = this.position.getX();
         int posicionY = this.position.getY();
         height = this.height;
         width = this.width;
-        
+
         graphics.setColor(Color.red);
-        
-        
-        if(typeObstacle == 0){ //Plataforma
+
+        if (typeObstacle == 0) { //Plataforma
             graphics.setColor(Color.black);
-            graphics.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
+            graphics.drawImage(this.image1.getImage(), posicionX, posicionY, width, height, null);
             //grafico.fillRect(posicionX, posicionY, width, height);
-            
-            
+
+        }
+
+        if (typeObstacle == 2) { //Caja
+            graphics.setColor(Color.black);
+            graphics.drawImage(this.image2.getImage(), posicionX, posicionY, width, height, null);
+
         }
         
-        if(typeObstacle == 1){ //Cajas
-            graphics.setColor(Color.red);
-            graphics.fillRect(posicionX, posicionY, width, height);
+        if (typeObstacle == 1) {//Muro
+            graphics.setColor(Color.black);
+            graphics.drawImage(this.image3.getImage(), posicionX, posicionY, width, height, null);
         }
     }
 
@@ -60,7 +65,7 @@ public class Obstacle extends GameElement {
         //System.out.print("Moviendo\n");
     }
 
- public void open() {
+    public void open() {
         if (this.typeObstacle == 1) {
             this.setHeight(0);
             this.setWidth(0);
@@ -69,9 +74,4 @@ public class Obstacle extends GameElement {
         }
     }
 
-   
-
-    
-    
-    
 }
