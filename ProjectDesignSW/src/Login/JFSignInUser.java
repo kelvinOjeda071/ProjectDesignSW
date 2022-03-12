@@ -28,25 +28,29 @@ public class JFSignInUser extends javax.swing.JFrame {
     private Pattern patId = Pattern.compile("[0-9]{10}");
     private Pattern patPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
     JFLogInUserMono jfLoginUser;
+
     public JFSignInUser() {
+
         initComponents();
         this.setLocationRelativeTo(null);
         jfLoginUser = new JFLogInUserMono();
     }
-    public void setEmptyLabels(){
+
+    public void setEmptyLabels() {
         this.jTFFirstName.setText("");
         this.jTFLastName.setText("");
         this.jTFId.setText("");
         this.jPFPassword.setText("");
         this.jPFReplyPassword.setText("");
     }
-    
-    public void logIn(){
+
+    public void switchlogIn() {
         this.jfLoginUser.setVisible(true);
         this.setVisible(false);
     }
-    public void signIn(){
-         Matcher matFirstName = this.patName.matcher(this.jTFFirstName.getText());
+
+    public void signIn() {
+        Matcher matFirstName = this.patName.matcher(this.jTFFirstName.getText());
         Matcher matLastName = this.patName.matcher(this.jTFLastName.getText());
         Matcher matId = this.patId.matcher(this.jTFId.getText());
         Matcher matPassword = this.patPassword.matcher(
@@ -54,61 +58,54 @@ public class JFSignInUser extends javax.swing.JFrame {
         Matcher matReplyPassword = this.patPassword.matcher(
                 this.jPFReplyPassword.getText());
         boolean isFound = false;
-        try {
-            
-            if (matFirstName.matches() && matLastName.matches() && matId.matches()
-                    && matPassword.matches() && matReplyPassword.matches()) {
-                if (this.jPFPassword.getText().equals(jPFReplyPassword.getText())) {
-                    ArrayList<User> dataList = JSONParser.readField();
-                    int j = 0;
 
-                    System.out.println(dataList.size());
-                    for (int i = 0; i < dataList.size(); i++) {
-                        if (this.jTFId.getText().equals(dataList.get(i).getId())) {
-                            j++;
-                            if (j == 1) {
-                                JOptionPane.showMessageDialog(null, "The user is"
-                                        + " already registered");
-                                j = dataList.size();
-                                i=j;
-                                isFound = true;
-                            }
+        if (matFirstName.matches() && matLastName.matches() && matId.matches()
+                && matPassword.matches() && matReplyPassword.matches()) {
+            if (this.jPFPassword.getText().equals(jPFReplyPassword.getText())) {
+                ArrayList<User> dataList = readData();
+                int j = 0;
+                for (int i = 0; i < dataList.size(); i++) {
+                    if (this.jTFId.getText().equals(dataList.get(i).getId())) {
+                        j++;
+                        if (j == 1) {
+                            JOptionPane.showMessageDialog(null, "The user is"
+                                    + " already registered");
+                            j = dataList.size();
+                            i = j;
+                            isFound = true;
                         }
                     }
-
-                    if (isFound == false) {
-
-                        dataList.add(new User(this.jTFFirstName.getText().toUpperCase(),
-                                this.jTFLastName.getText().toUpperCase(),
-                                this.jTFId.getText(),
-                                this.jPFPassword.getText(),
-                                0, // Score
-                                0  // Current Active
-                        ));
-
-                        JSONParser.writeFile(dataList);
-                        JOptionPane.showMessageDialog(null, "Successfully"
-                                        + " registered user");
-                        setEmptyLabels();
-                        this.jfLoginUser.setVisible(true);
-                        this.setVisible(false);
-                        
-                    }
-
-                } else {
-                   
-                    JOptionPane.showMessageDialog(null,
-                            "Passwords are not the same");
                 }
+
+                if (isFound == false) {
+
+                    dataList.add(new User(this.jTFFirstName.getText().toUpperCase(),
+                            this.jTFLastName.getText().toUpperCase(),
+                            this.jTFId.getText(),
+                            this.jPFPassword.getText(),
+                            0, // Score
+                            0 // Current Active
+                    ));
+
+                    writeData(dataList);
+                    JOptionPane.showMessageDialog(null, "Successfully"
+                            + " registered user");
+                    setEmptyLabels();
+                    this.jfLoginUser.setVisible(true);
+                    this.setVisible(false);
+
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, "Enter the fields correctly");
+
+                JOptionPane.showMessageDialog(null,
+                        "Passwords are not the same");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(JFSignInUser.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Enter the fields correctly");
         }
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -350,13 +347,33 @@ public class JFSignInUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 
+    private boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
     private void jBSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSignInActionPerformed
-       this.signIn();
+        this.signIn();
     }//GEN-LAST:event_jBSignInActionPerformed
 
     private void jBLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogInActionPerformed
-       this.logIn();
+        this.switchlogIn();
     }//GEN-LAST:event_jBLogInActionPerformed
 
     private void jTFFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFFirstNameActionPerformed

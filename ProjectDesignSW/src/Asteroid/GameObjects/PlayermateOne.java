@@ -51,7 +51,7 @@ public class PlayermateOne extends Player {
             }
         }
         /* Shooting effect */
-        if (KeyBoard.SHOOT && !fireRate.isRunning() && !spawning) {
+        if (KeyBoard.SHOOT1 && !fireRate.isRunning() && !spawning) {
             gameState.getMovingObjects().add(0,
                     new Laser(
                             getCenter().add(heading.scale(width)),
@@ -68,18 +68,18 @@ public class PlayermateOne extends Player {
             fireRate.run(Constant.FIRERATE);
         }
 
-        /* Space ship moves to the RIGHT */
-        if (KeyBoard.RIGHT) {
+        /* Space ship moves to the RIGHT1 */
+        if (KeyBoard.RIGHT1) {
             angle += Constant.DELTAANGLE;
         }
 
-        /* Space ship moves to the LEFT */
-        if (KeyBoard.LEFT) {
+        /* Space ship moves to the LEFT1 */
+        if (KeyBoard.LEFT1) {
             angle -= Constant.DELTAANGLE;
         }
 
         /* Space ship moves to the TOP */
-        if (KeyBoard.UP) {
+        if (KeyBoard.UP1) {
             /* Moves the ship */
             acceleration = heading.scale(Constant.ACC);
             accelerating = true;

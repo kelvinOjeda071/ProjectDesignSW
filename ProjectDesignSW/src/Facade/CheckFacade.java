@@ -233,7 +233,7 @@ public class CheckFacade extends javax.swing.JFrame {
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
         tetris= new Tetris();
         tetris.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jBTetrisGameActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
