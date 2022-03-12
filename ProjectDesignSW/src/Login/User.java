@@ -142,7 +142,7 @@ public class User {
       jFSignInUser.signIn();
     }
     
-    public void logIn(JFLogIn jFLogIn){
+    public void logIn(JFLogInUserMono jFLogIn){
        jFLogIn.logIn(); 
     }
     

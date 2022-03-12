@@ -11,7 +11,8 @@ public class Asset {
     private String newPath;
     
     /* Ship texture attribute */
-    public static BufferedImage player;
+    public static BufferedImage player1;
+    public static BufferedImage player2;
     
     /* Movement texture attribute */
     public static BufferedImage speed;
@@ -35,6 +36,7 @@ public class Asset {
     
     /* Life */
     public static BufferedImage life;
+    public static BufferedImage life2;
     
     // fonts
 	public static Font fontBig;
@@ -44,7 +46,8 @@ public class Asset {
 	public static BufferedImage greyBtn;
     public static void init(){
         /* Ship texture */
-        player = Loader.ImageLoader("/Asteroid/Figure/Ships/player.png");
+        player1 = Loader.ImageLoader("/Asteroid/Figure/Ships/player1.png");
+        player2 = Loader.ImageLoader("/Asteroid/Figure/Ships/player2.png");
         
         /* Movement effect texture */
         speed= Loader.ImageLoader("/Asteroid/Figure/Effects/fire01.png");
@@ -57,6 +60,7 @@ public class Asset {
         
         /*Life texture*/
         life = Loader.ImageLoader("/Asteroid/Figure/Life/life.png");
+        life2 = Loader.ImageLoader("/Asteroid/Figure/Life/life2.png");
         
         //fond texture
         

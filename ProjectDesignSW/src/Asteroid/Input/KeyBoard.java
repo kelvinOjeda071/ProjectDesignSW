@@ -16,10 +16,13 @@ public class KeyBoard implements KeyListener{
     private boolean[] keys = new boolean[256];
     public static boolean UP, LEFT, RIGHT;
     public static boolean SHOOT;
+    public static boolean UP1, LEFT1, RIGHT1;
+    public static boolean SHOOT1;
     
     /* Keyboard constructor */
     public KeyBoard(){
         UP=LEFT=RIGHT=SHOOT=false;
+        UP1=LEFT1=RIGHT1=SHOOT1=false;
         
     }
     
@@ -29,7 +32,13 @@ public class KeyBoard implements KeyListener{
         UP=keys[KeyEvent.VK_UP];            // UP key code
         LEFT=keys[KeyEvent.VK_LEFT];        // LEFT key code
         RIGHT=keys[KeyEvent.VK_RIGHT];      // RIGHT key code
-        SHOOT = keys[KeyEvent.VK_Q];        // SHOOTING key code
+        SHOOT = keys[KeyEvent.VK_P];        // SHOOTING key code
+        UP1=keys[KeyEvent.VK_W];            // UP key code
+        LEFT1=keys[KeyEvent.VK_A];          // LEFT key code
+        RIGHT1=keys[KeyEvent.VK_D];         // RIGHT key code
+        SHOOT1 = keys[KeyEvent.VK_Q];        // SHOOTING key code
+        
+        
     }
 
     /* Key is pressed */

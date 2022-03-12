@@ -75,6 +75,7 @@ public class AsteroidGame extends JFrame implements Runnable {
     }
 
     
+//    public static void main(String[] args) {
     public void showWindow(){
         
         new AsteroidGame().start();
