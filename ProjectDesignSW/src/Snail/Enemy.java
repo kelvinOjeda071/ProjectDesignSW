@@ -28,8 +28,33 @@ public class Enemy extends GameElement {
         auxY = position.getY();
     }
 
-    public boolean attackSnail(Snail snail) {
+    @Override
+    public void draw(Graphics grafic, int width, int height) {
+        height = this.height;
+        width = this.width;
+        int posicionX = this.position.getX();
+        int posicionY = this.position.getY();
+        grafic.setColor(Color.yellow);
+        grafic.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
+    }
 
+    @Override
+    public void move() {
+
+        int x0 = this.position.getX();
+        int y0 = this.position.getY();
+
+        if ((y0 >= auxY) && (y0 < auxY + 200)) {
+            this.position.setY(y0 + 1);
+        }
+        if (y0 == auxY + 200) {
+            this.position.setY(auxY);
+
+        }
+    }
+
+    public int attackSnail(Snail snail, int contDie) {
+        //int contDie = 0;
         int posYSnail = snail.position.y;
         int posXSnail = snail.position.x;
         int heightSnail = snail.height;
@@ -48,7 +73,13 @@ public class Enemy extends GameElement {
                 && (posYSnail + speedSnailY < posYEnemy + heightEnemy)) {
             //this.snail.setPosicionX(posXEnemy - widthSnail );
             //System.out.println("ENTRO PRIMER IF");
-            return false;
+            contDie = contDie+1;
+            snail.setHeight(0);
+            snail.setWidth(0);
+            snail.setPosicionX(-10);
+            snail.setPosicionY(-10);
+            
+            //return contDie;
         } else {
             if ((posXSnail + widthSnail + speedSnailX > posXEnemy)
                     && (posXSnail + speedSnailX < posXEnemy + widthEnemy)
@@ -57,51 +88,19 @@ public class Enemy extends GameElement {
                 //snail.setPosicionY(posYEnemy - heightSnail );
                 //snail.setSpeedX(speedSnailY=0);
                 //System.out.println("ENTRO SEGUNDO IF");
-                return false;
+                contDie = contDie+1;
+                snail.setHeight(0);
+                snail.setWidth(0);
+                snail.setPosicionX(-10);
+                snail.setPosicionY(-10);
+               // return contDie;
             } else {
                 //System.out.println("NO ENTRO A NINGUN IF");
-                return true;
+                //return contDie;
             }
 
         }
-
-        /* if((posXSnail + widthSnail > posXEnemy)&&
-            (posXSnail < posXEnemy + widthEnemy ) &&
-            (posYSnail + heightSnail + speedSnailY > posYEnemy)&&
-            (posYSnail + speedSnailY < posYEnemy + heightEnemy)){
-            //snail.setPosicionY(posYEnemy - heightSnail );
-            //snail.setSpeedX(speedSnailY=0);
-            return false;
-        }
-        else{
-           return true;
-        }
-         */
-    }
-
-    @Override
-    public void draw(Graphics grafic, int width, int height) {
-        height = this.height;
-        width = this.width;
-        int posicionX = this.position.getX();
-        int posicionY = this.position.getY();
-        grafic.setColor(Color.yellow);
-        grafic.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
-    }
-
-    @Override
-    public void move() {
-        
-        int x0 = this.position.getX();
-        int y0 = this.position.getY();
-
-        if ((y0 >= auxY) && (y0 < auxY+200)) {
-            this.position.setY(y0 + 1);
-        }
-        if (y0 == auxY + 200) {
-            this.position.setY(auxY);
-            
-        }
+        return contDie;
     }
 
 }

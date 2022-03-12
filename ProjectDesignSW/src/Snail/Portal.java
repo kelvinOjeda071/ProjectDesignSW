@@ -51,8 +51,8 @@ public class Portal extends GameElement {
         int speedSnailX = snail.speedX;
         int speedSnailY = snail.speedY;
 
-        int posYPortal = this.position.y;
-        int posXPortal = this.position.x;
+        int posYPortal = this.position.y+20;
+        int posXPortal = this.position.x+40;
         int heightPortal = this.height;
         int widthPortal = this.width;
 

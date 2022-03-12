@@ -21,7 +21,7 @@ public class Collision {
     }
     
     public void checkCollisionX() {
-        int type = this.elementB.tipo;
+        int type = this.elementB.typeObject;
         if (type == 1) {
             int posYSnail = this.snail.position.y;
             int posXSnail = this.snail.position.x;
@@ -50,7 +50,7 @@ public class Collision {
     
     
     public void checkCollisionY() {
-        int type = this.elementB.tipo;
+        int type = this.elementB.typeObject;
         if (type == 1) {
             int posYSnail = this.snail.position.y;
             int posXSnail = this.snail.position.x;

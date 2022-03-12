@@ -8,22 +8,53 @@ import Snail.Input.Keyboard;
 import javax.swing.JFrame;
 
 public final class GameLevel {
-  
+
     Scene scene;
 
-    public GameLevel(JFrame frame) {
-        generateObjects(frame);
+    public GameLevel(JFrame frame, boolean mode) {
+        generateObjects(frame, mode);
         scene.setFocusable(true);
-        
+
     }
-    
-    public Scene getScene(){
+
+    public Scene getScene() {
         return scene;
     }
-    
-    public void generateObjects(JFrame frame){
-        
-        Position positionSnail = new Position(1, 1);
+
+    public void generateObjects(JFrame frame, boolean mode) {
+
+        ElementsList list = new ElementsList();
+
+        if (mode == true) {
+            Position positionSnail1 = new Position(1, 1);
+            Snail snail1 = new Snail(positionSnail1, 75, 75, 0);
+            list.addElement(snail1);
+        } else {
+            Position positionSnail1 = new Position(1, 1);
+            Position positionSnail2 = new Position(10, 1);
+
+            Position positionStar1Type2 = new Position(1110, 360);
+            Position positionStar2Type2 = new Position(30, 550);
+            Position positionStar3Type2 = new Position(990, 550);
+
+            Snail snail1 = new Snail(positionSnail1, 75, 75, 0);
+            Snail snail2 = new Snail(positionSnail2, 75, 75, 1);
+
+            Star star1Type2 = new Star(positionStar1Type2, 40, 40, 1);
+            Star star2Type2 = new Star(positionStar2Type2, 40, 40, 1);
+            Star star3Type2 = new Star(positionStar3Type2, 40, 40, 1);
+
+            list.addElement(snail1);
+            list.addElement(snail2);
+            list.addElement(star1Type2);
+            list.addElement(star2Type2);
+            list.addElement(star3Type2);
+            
+
+        }
+
+        //Position positionSnail1 = new Position(1, 1);
+        //Position positionSnail2 = new Position(2, 1);
         Position positionPlataform1 = new Position(0, 150);
         Position positionPlataform2 = new Position(600, 400);
         Position positionPlataform3 = new Position(850, 150);
@@ -32,7 +63,7 @@ public final class GameLevel {
         Position positionBox1 = new Position(1040, 0);
         Position positionBox2 = new Position(890, 0);
         Position positionBox3 = new Position(0, 250);
-        Position positionBox4 = new Position(150,250);
+        Position positionBox4 = new Position(150, 250);
         Position positionDoor1 = new Position(550, 0);
         Position positionDoor2 = new Position(875, 190);
         Position positionEnemy1 = new Position(250, 0);
@@ -41,11 +72,14 @@ public final class GameLevel {
         Position positionEnemy4 = new Position(150, 450);
         Position positionButton1 = new Position(450, 140);
         Position positionButton2 = new Position(790, 390);
+        Position positionStar1Type1 = new Position(1100, 360);
+        Position positionStar2Type1 = new Position(25, 550);
+        Position positionStar3Type1 = new Position(1000, 550);
+
         Position positionPortal = new Position(1025, 475);
-        Position positionStar1 = new Position(1100, 360);
-        Position positionStar2 = new Position(25, 550);
-        
-        Snail snail = new Snail(positionSnail, 75, 75);
+
+        //Snail snail1 = new Snail(positionSnail1, 75, 75, 0);
+        //Snail snail2 = new Snail(positionSnail2, 75, 75, 1);
         Obstacle plataform1 = new Obstacle(0, positionPlataform1, 600, 40);
         Obstacle plataform2 = new Obstacle(0, positionPlataform2, 600, 40);
         Obstacle plataform3 = new Obstacle(0, positionPlataform3, 350, 40);
@@ -63,12 +97,14 @@ public final class GameLevel {
         Enemy enemy2 = new Enemy(positionEnemy2, 50, 30);
         Enemy enemy3 = new Enemy(positionEnemy3, 50, 30);
         Enemy enemy4 = new Enemy(positionEnemy4, 50, 30);
+        Star star1Type1 = new Star(positionStar1Type1, 40, 40, 0);
+        Star star2Type1 = new Star(positionStar2Type1, 40, 40, 0);
+        Star star3Type1 = new Star(positionStar3Type1, 40, 40, 0);
         Portal portal = new Portal(positionPortal, 150, 150);
-        Star star1 =  new Star(positionStar1, 40, 40);
-        Star star2 =  new Star(positionStar2, 40, 40);
 
-        ElementsList list = new ElementsList();
-        list.addElement(snail);
+        //ElementsList list = new ElementsList();
+        //list.addElement(snail1);
+        //list.addElement(snail2);
         list.addElement(plataform1);
         list.addElement(plataform2);
         list.addElement(plataform3);
@@ -87,48 +123,119 @@ public final class GameLevel {
         list.addElement(portal);
         list.addElement(door1);
         list.addElement(door2);
-        list.addElement(star1);
-        list.addElement(star2);
+        list.addElement(star1Type1);
+        list.addElement(star2Type1);
+        list.addElement(star3Type1);
         scene = new Scene(list);
     }
-    
-    
+
     public boolean checkInteractions() {
         ElementsList list = scene.list;
         GameElement elementA;
+        GameElement elementB;
         Snail snail;
         Enemy enemy;
         Portal portal;
         Button button;
         Collision collision;
-        for (int i = 1; i < list.getLista().size(); i++) {
+        //int contDie = 0;
+        for (int i = 0; i < list.getLista().size(); i++) {
             elementA = list.getLista().get(i);
-            snail = (Snail) list.getLista().getFirst();
-            collision = new Collision(snail, elementA);
-            collision.checkCollision();
+            for (int j = list.getLista().size() - 1; j >= 0; j--) {
+                elementB = list.getLista().get(j);
+                if (elementA.typeObject == 0) {
+                    snail = (Snail) elementA;
 
-            if (elementA.tipo == 4) {
-                enemy = (Enemy) elementA;
-                if (enemy.attackSnail(snail) == false) {
-                    return false;
+                    collision = new Collision(snail, elementB); 
+                    collision.checkCollision();
+
+                   /* if (elementB.typeObject == 4) {
+                        enemy = (Enemy) elementB;
+                        contDie = enemy.attackSnail(snail, contDie);
+                        System.out.println("CONTDIE DE GAMELEVEL " + contDie);
+                        if (enemy.attackSnail(snail, contDie) == 2) {
+                            return false;
+                        } 
+                    }*/
+
+                    if (elementB.typeObject == 5) {
+                        portal = (Portal) elementB;
+                        if (portal.notifyEnd(snail) == false) {
+                            return false;
+                        }
+                    }
+
+                    if (elementB.typeObject == 2) {
+                        button = (Button) elementB;
+                        button.activate(snail);
+                    }
                 }
+
             }
 
-            if (elementA.tipo == 5) {
-                portal = (Portal) elementA;
-                if (portal.notifyEnd(snail) == false) {
-                    return false;
-                }
-            }
-
-            if (elementA.tipo == 2) {
-                button = (Button) elementA;
-                button.activate(snail);
-            }
         }
+
         
         return true;
     }
+
+    public int checkRecollection(int score0) {
+        ElementsList list = scene.list;
+        GameElement elementA;
+        GameElement elementB;
+        Snail snail;
+        Star star;
+        //int scoref = 0;
+
+        for (int i = 0; i < list.getLista().size(); i++) {
+            elementA = list.getLista().get(i);
+            for (int j = list.getLista().size() - 1; j >= 0; j--) {
+                elementB = list.getLista().get(j);
+                if (elementA.typeObject == 0) {
+                    snail = (Snail) elementA;
+                    if (elementB.typeObject == 6) {
+                        star = (Star) elementB;
+                        score0 = star.confirmRecollection(snail, score0);
+                    }
+                }
+
+            }
+
+        }
+
+        //System.out.println("SCORE DE GAMELEVEL " + score0);
+        return score0;
+
+    }
+    
+    public int checkDie(int contDie0) {
+        ElementsList list = scene.list;
+        GameElement elementA;
+        GameElement elementB;
+        Snail snail;
+        Enemy enemy;
+        //int scoref = 0;
+
+        for (int i = 0; i < list.getLista().size(); i++) {
+            elementA = list.getLista().get(i);
+            for (int j = list.getLista().size() - 1; j >= 0; j--) {
+                elementB = list.getLista().get(j);
+                if (elementA.typeObject == 0) {
+                    snail = (Snail) elementA;
+                    if (elementB.typeObject == 4) {
+                        enemy = (Enemy) elementB;
+                        contDie0 = enemy.attackSnail(snail, contDie0);
+                    }
+                }
+
+            }
+
+        }
+
+        return contDie0;
+
+    }
     
     
+
 }

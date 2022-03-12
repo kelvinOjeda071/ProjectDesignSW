@@ -19,13 +19,13 @@ public abstract class GameElement{
     Position position;
     int width;
     int height;
-    int tipo;
+    int typeObject;
 
     public GameElement(Position position, int height, int width, int tipo) {
         this.position = position;
         this.width = height;
         this.height = width;
-        this.tipo = tipo;
+        this.typeObject = tipo;
     }
 
     public void setPosicionX(int x) {
