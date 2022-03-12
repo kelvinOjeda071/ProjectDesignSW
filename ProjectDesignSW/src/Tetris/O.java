@@ -26,15 +26,7 @@ public class O extends Figure {
         
     }
     
-    public void draw(){
-        isStopped = false;
-        /*b1 = matrix1[dimx / 2][0];
-        b2 = matrix1[dimx / 2][1];
-        b3 = matrix1[dimx / 2 + 1][0];
-        b4 = matrix1[dimx / 2 + 1][1];
-        x = dimx / 2;
-        y = 1;*/
-        
+    public void paint(){
         b1.setBackground(Color.BLUE);
         b2.setBackground(Color.BLUE);
         b3.setBackground(Color.BLUE);
@@ -141,7 +133,7 @@ public class O extends Figure {
                 break;
         }
     }
-
+    
     public void rotate() {;
     }
 

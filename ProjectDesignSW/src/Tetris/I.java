@@ -25,18 +25,16 @@ public class I extends Figure {
         y = 3;
     }
     
-    @Override
-    public void draw(){
+    public void paint(){
         b1.setBackground(Color.red);
         b2.setBackground(Color.red);
         b3.setBackground(Color.red);
         b4.setBackground(Color.red);
     }
     
-    
     public void move(int n){
         switch (n) {
-            case 1://bajar
+            case 1://go down
                 if (isStopped) {
                     return;
                 } else if (y >= dimy - 1) {
@@ -78,7 +76,7 @@ public class I extends Figure {
                     b4.setBackground(Color.red);
                 }
                 break;
-            case 2://moverDerecha
+            case 2://move right
                 if (isStopped) {
                     return;
                 }
@@ -122,7 +120,7 @@ public class I extends Figure {
 
                 }
                 break;
-            case 3://moverIzquierda
+            case 3://move left
                 if (isStopped) {
             return;
         }
@@ -169,7 +167,7 @@ public class I extends Figure {
                 break;
         }
     }
-
+    
     public void rotate() {
         if (x + 1 > dimx - 1 || x - 2 < 0) {
             return;

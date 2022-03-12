@@ -9,7 +9,8 @@ import javax.swing.JButton;
 public abstract class Figure {
 
     JButton[][] matrix;
-    int dimx, dimy;
+    int dimx = 0; 
+    int dimy = 0;
     boolean isStopped;
 
     public Figure(JButton[][] matrix) {
@@ -18,11 +19,19 @@ public abstract class Figure {
         dimy = matrix[0].length;
         isStopped = false;
     }
+
+    public JButton[][] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(JButton[][] matrix) {
+        this.matrix = matrix;
+    }
     
-    public abstract void draw();
-
+    public abstract void paint();
+    
     public abstract void move(int mov);
-
+    
     public abstract void rotate();
 
 }
