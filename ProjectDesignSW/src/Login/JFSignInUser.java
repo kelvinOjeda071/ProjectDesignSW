@@ -27,11 +27,11 @@ public class JFSignInUser extends javax.swing.JFrame {
     private Pattern patName = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
     private Pattern patId = Pattern.compile("[0-9]{10}");
     private Pattern patPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
-    JFLogIn jfLoginUser;
+    JFLogInUserMono jfLoginUser;
     public JFSignInUser() {
         initComponents();
         this.setLocationRelativeTo(null);
-        jfLoginUser = new JFLogIn();
+        jfLoginUser = new JFLogInUserMono();
     }
     public void setEmptyLabels(){
         this.jTFFirstName.setText("");

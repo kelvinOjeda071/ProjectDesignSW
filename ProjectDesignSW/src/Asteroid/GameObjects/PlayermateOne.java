@@ -14,14 +14,14 @@ import java.awt.image.BufferedImage;
  *
  * @author KelvinOjeda
  */
-public class Player1 extends Player {
+public class PlayermateOne extends Player {
 
     /* Direction vector */
     protected Vector2D heading;
     /* Variation of acceleration */
     protected Vector2D acceleration;
 
-    public Player1(Vector2D position,
+    public PlayermateOne(Vector2D position,
             Vector2D velocity,
             double maxVelocity,
             BufferedImage texture,

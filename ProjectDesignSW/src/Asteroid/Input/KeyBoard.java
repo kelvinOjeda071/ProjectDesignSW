@@ -32,11 +32,11 @@ public class KeyBoard implements KeyListener{
         UP=keys[KeyEvent.VK_UP];            // UP key code
         LEFT=keys[KeyEvent.VK_LEFT];        // LEFT key code
         RIGHT=keys[KeyEvent.VK_RIGHT];      // RIGHT key code
-        SHOOT = keys[KeyEvent.VK_DOWN];        // SHOOTING key code
+        SHOOT = keys[KeyEvent.VK_P];        // SHOOTING key code
         UP1=keys[KeyEvent.VK_W];            // UP key code
         LEFT1=keys[KeyEvent.VK_A];          // LEFT key code
         RIGHT1=keys[KeyEvent.VK_D];         // RIGHT key code
-        SHOOT1 = keys[KeyEvent.VK_S];        // SHOOTING key code
+        SHOOT1 = keys[KeyEvent.VK_Q];        // SHOOTING key code
         
         
     }

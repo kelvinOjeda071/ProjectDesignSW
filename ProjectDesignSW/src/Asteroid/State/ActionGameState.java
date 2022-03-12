@@ -14,14 +14,14 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import Asteroid.GameObjects.Constant;
 import Asteroid.GameObjects.Message;
-import Asteroid.GameObjects.Player1;
-import Asteroid.GameObjects.Player2;
+import Asteroid.GameObjects.PlayermateOne;
+import Asteroid.GameObjects.PlayermateTwo;
 import Asteroid.GameObjects.Size;
 import Asteroid.GameObjects.Ufo;
 import Asteroid.Graphics.Animation;
 import Asteroid.IO.JSONParser;
 import Asteroid.IO.ScoreData;
-import Login.JFLogIn;
+import Login.JFLogInUserMono;
 import Login.User;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -57,47 +57,79 @@ public class ActionGameState extends GameState {
     private int score = 0;
     private int score2 = 0;
 
+    private int numberPlayer = 0;
+
     /*player1's life*/
     private int live1 = 3;
-    private int live2 = 3;
+    private int live2 = 0;
 
     //number of waves
     private int waves = 1;
     private Chronometer gameOverTimer;
     private boolean gameOver;
     private Chronometer ufoSpawner;
-    
+
 
     /* Constructor */
     public ActionGameState() {
-        
-        player1 = new Player1(
-                PLAYER_START_POSITION_P1,
-                new Vector2D(),
-                Constant.PLAYER_MAX_VEL,
-                Asset.player1,
-                this,
-                new Chronometer(),
-                new Chronometer(),
-                new Chronometer()
-        );
-        player2 = new Player2(
-                PLAYER_START_POSITION_P2,
-                new Vector2D(),
-                Constant.PLAYER_MAX_VEL,
-                Asset.player2,
-                this,
-                new Chronometer(),
-                new Chronometer(),
-                new Chronometer()
-        );
+        try {
+            ArrayList<User> dataList = JSONParser.readField();
+            for (int i = 0; i < dataList.size(); i++) {
+                if (dataList.get(i).getCurrentActive() == 1) {
+                    numberPlayer++;
+                }
+            }
+            JSONParser.writeFile(dataList);
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        if (numberPlayer == 1) {
+            player1 = new PlayermateOne(
+                    PLAYER_START_POSITION_P1,
+                    new Vector2D(),
+                    Constant.PLAYER_MAX_VEL,
+                    Asset.player1,
+                    this,
+                    new Chronometer(),
+                    new Chronometer(),
+                    new Chronometer()
+            );
+            movingObjects.add(player1);
+        } else {
+            this.live2 = 3;
+            player1 = new PlayermateOne(
+                    PLAYER_START_POSITION_P1,
+                    new Vector2D(),
+                    Constant.PLAYER_MAX_VEL,
+                    Asset.player1,
+                    this,
+                    new Chronometer(),
+                    new Chronometer(),
+                    new Chronometer()
+            );
+
+            player2 = new PlayermateTwo(
+                    PLAYER_START_POSITION_P2,
+                    new Vector2D(),
+                    Constant.PLAYER_MAX_VEL,
+                    Asset.player2,
+                    this,
+                    new Chronometer(),
+                    new Chronometer(),
+                    new Chronometer()
+            );
+            movingObjects.add(player1);
+            movingObjects.add(player2);
+        }
         gameOverTimer = new Chronometer();
         gameOver = false;
 
 
         /* Adds the player1 as a moving object */
-        movingObjects.add(player1);
-        movingObjects.add(player2);
+        
 
         /* Meteors quantity */
         asteroid = 1;
@@ -320,62 +352,94 @@ public class ActionGameState extends GameState {
     }
 
     private void drawLives(Graphics g) {
-        if (live1 < 1 && live2 < 1) {
-            return;
-        }
+        if (numberPlayer == 1) {
+            if (live1 < 1) {
 
-        Vector2D livePosition = new Vector2D(25, 25);
-
-        g.drawImage(Asset.life, (int) livePosition.getX(),
-                (int) livePosition.getY(), null);
-
-        g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
-                (int) livePosition.getY() + 5, null);
-
-        String livesToString = Integer.toString(live1);
-
-        Vector2D pos = new Vector2D(livePosition.getX(),
-                livePosition.getY());
-
-        for (int i = 0; i < livesToString.length(); i++) {
-            int number = Integer.parseInt(livesToString.
-                    substring(i, i + 1));
-
-            if (number < 0) {
-                break;
+                return;
             }
-            g.drawImage(Asset.numbers[number],
-                    (int) pos.getX() + 60,
-                    (int) pos.getY() + 5, null);
-            pos.setX(pos.getX() + 20);
-        }
 
-        Vector2D livePosition2 = new Vector2D(25, 75);
+            Vector2D livePosition = new Vector2D(25, 25);
 
-        g.drawImage(Asset.life2, (int) livePosition2.getX(),
-                (int) livePosition2.getY(), null);
+            g.drawImage(Asset.life, (int) livePosition.getX(),
+                    (int) livePosition.getY(), null);
 
-        g.drawImage(Asset.numbers[10], (int) livePosition2.getX() + 40,
-                (int) livePosition2.getY() + 5, null);
+            g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
+                    (int) livePosition.getY() + 5, null);
 
-        String livesToString2 = Integer.toString(live2);
+            String livesToString = Integer.toString(live1);
 
-        Vector2D pos2 = new Vector2D(livePosition2.getX(),
-                livePosition2.getY());
+            Vector2D pos = new Vector2D(livePosition.getX(),
+                    livePosition.getY());
 
-        for (int i = 0; i < livesToString2.length(); i++) {
-            int number = Integer.parseInt(livesToString2.
-                    substring(i, i + 1));
+            for (int i = 0; i < livesToString.length(); i++) {
+                int number = Integer.parseInt(livesToString.
+                        substring(i, i + 1));
 
-            if (number < 0) {
-                break;
+                if (number <= 0) {
+                    break;
+                }
+                g.drawImage(Asset.numbers[number],
+                        (int) pos.getX() + 60,
+                        (int) pos.getY() + 5, null);
+                pos.setX(pos.getX() + 20);
             }
-            g.drawImage(Asset.numbers[number],
-                    (int) pos2.getX() + 60,
-                    (int) pos2.getY() + 5, null);
-            pos2.setX(pos2.getX() + 20);
-        }
+        } else {
+            if (live1 < 1 && live2 < 1) {
+                return;
+            }
 
+            Vector2D livePosition = new Vector2D(25, 25);
+
+            g.drawImage(Asset.life, (int) livePosition.getX(),
+                    (int) livePosition.getY(), null);
+
+            g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
+                    (int) livePosition.getY() + 5, null);
+
+            String livesToString = Integer.toString(live1);
+
+            Vector2D pos = new Vector2D(livePosition.getX(),
+                    livePosition.getY());
+
+            for (int i = 0; i < livesToString.length(); i++) {
+                int number = Integer.parseInt(livesToString.
+                        substring(i, i + 1));
+
+                if (number < 0) {
+                    break;
+                }
+                g.drawImage(Asset.numbers[number],
+                        (int) pos.getX() + 60,
+                        (int) pos.getY() + 5, null);
+                pos.setX(pos.getX() + 20);
+            }
+
+            Vector2D livePosition2 = new Vector2D(25, 75);
+
+            g.drawImage(Asset.life2, (int) livePosition2.getX(),
+                    (int) livePosition2.getY(), null);
+
+            g.drawImage(Asset.numbers[10], (int) livePosition2.getX() + 40,
+                    (int) livePosition2.getY() + 5, null);
+
+            String livesToString2 = Integer.toString(live2);
+
+            Vector2D pos2 = new Vector2D(livePosition2.getX(),
+                    livePosition2.getY());
+
+            for (int i = 0; i < livesToString2.length(); i++) {
+                int number = Integer.parseInt(livesToString2.
+                        substring(i, i + 1));
+
+                if (number < 0) {
+                    break;
+                }
+                g.drawImage(Asset.numbers[number],
+                        (int) pos2.getX() + 60,
+                        (int) pos2.getY() + 5, null);
+                pos2.setX(pos2.getX() + 20);
+            }
+        }
     }
 
     /* Draws the desired object */
