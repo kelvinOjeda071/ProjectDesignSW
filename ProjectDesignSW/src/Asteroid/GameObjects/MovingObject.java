@@ -108,6 +108,18 @@ public abstract class MovingObject extends GameObject {
         if (secondO instanceof Player && ((Player) secondO).isSpawning()) {
             return;
         }
+        if(firstO instanceof Laser &&  secondO instanceof Player && 
+                !((Player)secondO).isSpawning()){
+            if(((Laser)firstO).getObjectBelongType()==1 || ((Laser)firstO).getObjectBelongType()==2){
+                return;
+            }
+        }
+        if(firstO instanceof Player &&  secondO instanceof Laser && 
+                !((Player)firstO).isSpawning()){
+            if(((Laser)secondO).getObjectBelongType()==1 || ((Laser)secondO).getObjectBelongType()==2){
+                return;
+            }
+        }
                 
         if(!(firstO instanceof Asteroid && secondO instanceof Asteroid)){
             /* Plays the explosion animation */

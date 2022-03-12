@@ -14,6 +14,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import Asteroid.GameObjects.Constant;
 import Asteroid.GameObjects.Message;
+import Asteroid.GameObjects.Player1;
+import Asteroid.GameObjects.Player2;
 import Asteroid.GameObjects.Size;
 import Asteroid.GameObjects.Ufo;
 import Asteroid.Graphics.Animation;
@@ -34,23 +36,30 @@ import java.util.logging.Logger;
  *
  * @author KelvinOjeda
  */
-public class ActionGameState extends GameState{
-    
-    public static final Vector2D PLAYER_START_POSITION =  new Vector2D(
-    Constant.WIDTH / 2 - Asset.player.getWidth() / 2,
-    Constant.HEIGHT / 2 - Asset.player.getHeight() / 2);
+public class ActionGameState extends GameState {
+
+    public static final Vector2D PLAYER_START_POSITION_P1 = new Vector2D(
+            Constant.WIDTH / 4 - Asset.player1.getWidth() / 2,
+            Constant.HEIGHT / 2 - Asset.player1.getHeight() / 2);
+
+    public static final Vector2D PLAYER_START_POSITION_P2 = new Vector2D(
+            3 * Constant.WIDTH / 4 - Asset.player2.getWidth() / 2,
+            Constant.HEIGHT / 2 - Asset.player2.getHeight() / 2);
 
     /* Attributes */
-    private Player player;
+    private Player player1;
+    private Player player2;
     private ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
     private int asteroid;
     private ArrayList<Animation> explosions = new ArrayList<Animation>();
     private ArrayList<Message> message = new ArrayList<Message>();
 
     private int score = 0;
+    private int score2 = 0;
 
-    /*player's life*/
-    private int lives = 3;
+    /*player1's life*/
+    private int live1 = 3;
+    private int live2 = 3;
 
     //number of waves
     private int waves = 1;
@@ -58,21 +67,37 @@ public class ActionGameState extends GameState{
     private boolean gameOver;
     private Chronometer ufoSpawner;
     
+
     /* Constructor */
     public ActionGameState() {
-
-        player = new Player(
-                PLAYER_START_POSITION,
+        
+        player1 = new Player1(
+                PLAYER_START_POSITION_P1,
                 new Vector2D(),
                 Constant.PLAYER_MAX_VEL,
-                Asset.player, 
-                this);
+                Asset.player1,
+                this,
+                new Chronometer(),
+                new Chronometer(),
+                new Chronometer()
+        );
+        player2 = new Player2(
+                PLAYER_START_POSITION_P2,
+                new Vector2D(),
+                Constant.PLAYER_MAX_VEL,
+                Asset.player2,
+                this,
+                new Chronometer(),
+                new Chronometer(),
+                new Chronometer()
+        );
         gameOverTimer = new Chronometer();
-        gameOver= false;
-        
+        gameOver = false;
 
-        /* Adds the player as a moving object */
-        movingObjects.add(player);
+
+        /* Adds the player1 as a moving object */
+        movingObjects.add(player1);
+        movingObjects.add(player2);
 
         /* Meteors quantity */
         asteroid = 1;
@@ -87,7 +112,7 @@ public class ActionGameState extends GameState{
     public void addScore(int value, Vector2D pos) {
         score += value;
         /*Pos is the position of the object that was destroyed */
-        message.add(new Message(pos, true, "+"+value+" score", Color.WHITE, false, Asset.fontMed));
+        message.add(new Message(pos, true, "+" + value + " score", Color.WHITE, false, Asset.fontMed));
     }
 
     /* Increases the number of asteroids if destroyed */
@@ -119,7 +144,6 @@ public class ActionGameState extends GameState{
         /* Ateroids split iteration */
         int i = 0;
 
-
         for (i = 0; i < size.quantity; i++) {
             movingObjects.add(
                     new Asteroid(
@@ -137,9 +161,9 @@ public class ActionGameState extends GameState{
     /* Deploys the asteroids */
     private void changeDifficulty() {
         /*draw the message*/
-         message.add(new Message(new Vector2D(Constant.WIDTH/2, 
-                 Constant.HEIGHT/2), false, "WAVE "+waves, 
-                 Color.WHITE, true, Asset.fontBig));
+        message.add(new Message(new Vector2D(Constant.WIDTH / 2,
+                Constant.HEIGHT / 2), false, "WAVE " + waves,
+                Color.WHITE, true, Asset.fontBig));
         /* Asteroid position */
         double x;
         double y;
@@ -171,7 +195,8 @@ public class ActionGameState extends GameState{
 
         /* Increases game difficulty */
         asteroid++;
-        
+        waves++;
+
     }
 
     /* Plays the explosion animation */
@@ -212,7 +237,7 @@ public class ActionGameState extends GameState{
                 new Vector2D(),
                 Constant.UFO_MAX_VEL,
                 Asset.ufo,
-                path, 
+                path,
                 this));
     }
 
@@ -224,7 +249,7 @@ public class ActionGameState extends GameState{
         for (i = 0; i < movingObjects.size(); i++) {
             MovingObject auxMovinObject = movingObjects.get(i);
             auxMovinObject.update();
-            if(auxMovinObject.isDead()){
+            if (auxMovinObject.isDead()) {
                 movingObjects.remove(i);
                 i--;
             }
@@ -234,39 +259,38 @@ public class ActionGameState extends GameState{
         for (i = 0; i < explosions.size(); i++) {
             Animation myAnimation = explosions.get(i);
             myAnimation.update();
-            
+
             /* Checks if animation is still running */
             if (!myAnimation.isIsRunning()) {
                 /* Deletes the animation */
                 explosions.remove(i);
             }
         }
-        if(gameOver && !gameOverTimer.isRunning()){
-            boolean isFound= false;
+        if (gameOver && !gameOverTimer.isRunning()) {
+            boolean isFound = false;
             // Save the new Score for the User Login
             try {
-                ArrayList <User> dataList = JSONParser.readField();
+                ArrayList<User> dataList = JSONParser.readField();
                 int z = 0;
-                for ( int j = 0; j < dataList.size(); j++){
-                    if(dataList.get(j).getCurrentActive() == 1 ){
-                        
-                        if(dataList.get(j).getAsteroidGameScore() < 
-                                score){
-                                dataList.get(j).setAsteroidGameScore(score);
-                                JSONParser.writeFile(dataList);
+                for (int j = 0; j < dataList.size(); j++) {
+                    if (dataList.get(j).getCurrentActive() == 1) {
+
+                        if (dataList.get(j).getAsteroidGameScore()
+                                < score) {
+                            dataList.get(j).setAsteroidGameScore(score);
+                            JSONParser.writeFile(dataList);
                         }
                     }
-                        
+
                 }
-                
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(ActionGameState.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             GameState.changeState(new MenuState());
         }
-        if(!ufoSpawner.isRunning()){
+        if (!ufoSpawner.isRunning()) {
             ufoSpawner.run(Constant.UFO_SPAWN_RATE);
             artificialIntelligenceAction();
         }
@@ -296,8 +320,7 @@ public class ActionGameState extends GameState{
     }
 
     private void drawLives(Graphics g) {
-        if (lives < 1){
-           
+        if (live1 < 1 && live2 < 1) {
             return;
         }
 
@@ -309,7 +332,7 @@ public class ActionGameState extends GameState{
         g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
                 (int) livePosition.getY() + 5, null);
 
-        String livesToString = Integer.toString(lives);
+        String livesToString = Integer.toString(live1);
 
         Vector2D pos = new Vector2D(livePosition.getX(),
                 livePosition.getY());
@@ -318,7 +341,7 @@ public class ActionGameState extends GameState{
             int number = Integer.parseInt(livesToString.
                     substring(i, i + 1));
 
-            if (number <= 0) {
+            if (number < 0) {
                 break;
             }
             g.drawImage(Asset.numbers[number],
@@ -327,11 +350,37 @@ public class ActionGameState extends GameState{
             pos.setX(pos.getX() + 20);
         }
 
+        Vector2D livePosition2 = new Vector2D(25, 75);
+
+        g.drawImage(Asset.life2, (int) livePosition2.getX(),
+                (int) livePosition2.getY(), null);
+
+        g.drawImage(Asset.numbers[10], (int) livePosition2.getX() + 40,
+                (int) livePosition2.getY() + 5, null);
+
+        String livesToString2 = Integer.toString(live2);
+
+        Vector2D pos2 = new Vector2D(livePosition2.getX(),
+                livePosition2.getY());
+
+        for (int i = 0; i < livesToString2.length(); i++) {
+            int number = Integer.parseInt(livesToString2.
+                    substring(i, i + 1));
+
+            if (number < 0) {
+                break;
+            }
+            g.drawImage(Asset.numbers[number],
+                    (int) pos2.getX() + 60,
+                    (int) pos2.getY() + 5, null);
+            pos2.setX(pos2.getX() + 20);
+        }
+
     }
 
     /* Draws the desired object */
     public void draw(Graphics g) {
-        
+
         /* Anti aliasing */
         Graphics2D g2d = (Graphics2D) g;
 
@@ -344,18 +393,19 @@ public class ActionGameState extends GameState{
         /* Draws the object */
         int i = 0;
         //Draw the message
-        for(i = 0; i < message.size(); i++){
+        for (i = 0; i < message.size(); i++) {
             message.get(i).draw(g2d);
-            if(message.get(i).isDead())
+            if (message.get(i).isDead()) {
                 message.remove(i);
+            }
         }
-        
+
         for (i = 0; i < movingObjects.size(); i++) {
             movingObjects.get(i).draw(g);
         }
 
         /* Draws the animation */
-        /* Updates the explosions animation */
+ /* Updates the explosions animation */
         for (i = 0; i < explosions.size(); i++) {
             Animation myAnimation = explosions.get(i);
             g2d.drawImage(
@@ -375,24 +425,43 @@ public class ActionGameState extends GameState{
     public ArrayList<MovingObject> getMovingObjects() {
         return movingObjects;
     }
+
     //array of possible messages
     public ArrayList<Message> getMessage() {
         return message;
     }
 
-    /* For getting the position of the player in Ufo*/
-    public Player getPlayer() {
-        return player;
+    /* For getting the position of the player1 in Ufo*/
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public int getLive1() {
+        return live1;
+    }
+
+    public int getLive2() {
+        return live2;
     }
 
     //subtract one life from the ship
-    public boolean subtractLife() {
-        lives--;
-        return lives > 0;
+    public boolean subtractLife1() {
+        live1--;
+        return live1 > 0;
     }
+
+    public boolean subtractLife2() {
+        live2--;
+        return live2 > 0;
+    }
+
     public void gameOver() {
         Message gameOverMsg = new Message(
-                PLAYER_START_POSITION,
+                PLAYER_START_POSITION_P1,
                 true,
                 "GAME OVER",
                 Color.WHITE,
@@ -405,6 +474,6 @@ public class ActionGameState extends GameState{
     }
 
     public ArrayList<Message> getMessages() {
-		return message;
-	}
+        return message;
+    }
 }

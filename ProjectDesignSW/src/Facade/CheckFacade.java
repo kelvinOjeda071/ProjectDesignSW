@@ -60,11 +60,11 @@ public class CheckFacade extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPBackGroud.setBackground(new java.awt.Color(0, 0, 0));
+        jPBackGroud.setBackground(new java.awt.Color(255, 255, 255));
 
-        jBAsteroidGame.setBackground(new java.awt.Color(53, 186, 243));
-        jBAsteroidGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBAsteroidGame.setForeground(new java.awt.Color(0, 0, 0));
+        jBAsteroidGame.setBackground(new java.awt.Color(0, 0, 0));
+        jBAsteroidGame.setFont(new java.awt.Font("KenVector Future Thin", 1, 18)); // NOI18N
+        jBAsteroidGame.setForeground(new java.awt.Color(255, 255, 255));
         jBAsteroidGame.setText("Asteroid Game");
         jBAsteroidGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,9 +72,9 @@ public class CheckFacade extends javax.swing.JFrame {
             }
         });
 
-        jBSnailGame.setBackground(new java.awt.Color(53, 186, 243));
-        jBSnailGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBSnailGame.setForeground(new java.awt.Color(0, 0, 0));
+        jBSnailGame.setBackground(new java.awt.Color(0, 0, 0));
+        jBSnailGame.setFont(new java.awt.Font("KenVector Future Thin", 1, 18)); // NOI18N
+        jBSnailGame.setForeground(new java.awt.Color(255, 255, 255));
         jBSnailGame.setText("Snail Game");
         jBSnailGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,9 +82,9 @@ public class CheckFacade extends javax.swing.JFrame {
             }
         });
 
-        jBTetrisGame.setBackground(new java.awt.Color(53, 186, 243));
-        jBTetrisGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBTetrisGame.setForeground(new java.awt.Color(0, 0, 0));
+        jBTetrisGame.setBackground(new java.awt.Color(0, 0, 0));
+        jBTetrisGame.setFont(new java.awt.Font("KenVector Future Thin", 1, 18)); // NOI18N
+        jBTetrisGame.setForeground(new java.awt.Color(255, 255, 255));
         jBTetrisGame.setText("Tetris Game");
         jBTetrisGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,9 +92,9 @@ public class CheckFacade extends javax.swing.JFrame {
             }
         });
 
-        jBSnakeGame.setBackground(new java.awt.Color(53, 186, 243));
-        jBSnakeGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBSnakeGame.setForeground(new java.awt.Color(0, 0, 0));
+        jBSnakeGame.setBackground(new java.awt.Color(0, 0, 0));
+        jBSnakeGame.setFont(new java.awt.Font("KenVector Future Thin", 1, 18)); // NOI18N
+        jBSnakeGame.setForeground(new java.awt.Color(255, 255, 255));
         jBSnakeGame.setText("Snake Game");
         jBSnakeGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,22 +102,27 @@ public class CheckFacade extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/SnailGameIcon.gif"))); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/snail.png"))); // NOI18N
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/TestrisGameIcon_2.gif"))); // NOI18N
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/tetris.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/AsteroidGameIcon_3.gif"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/asteroids.jpg"))); // NOI18N
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/SnakeGameIcon.gif"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asteroid/Figure/IconFacade/snake.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("KenVector Future Thin", 0, 24)); // NOI18N
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("KenVector Future Thin", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("My Games");
 
-        jBExit.setBackground(new java.awt.Color(255, 0, 51));
-        jBExit.setFont(new java.awt.Font("KenVector Future Thin", 0, 36)); // NOI18N
-        jBExit.setForeground(new java.awt.Color(0, 0, 0));
-        jBExit.setText("EXIT");
+        jBExit.setBackground(new java.awt.Color(0, 0, 0));
+        jBExit.setFont(new java.awt.Font("KenVector Future Thin", 1, 24)); // NOI18N
+        jBExit.setForeground(new java.awt.Color(255, 255, 255));
+        jBExit.setText("X");
         jBExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExitActionPerformed(evt);
@@ -129,62 +134,59 @@ public class CheckFacade extends javax.swing.JFrame {
         jPBackGroudLayout.setHorizontalGroup(
             jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackGroudLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(255, 255, 255)
+                .addComponent(jBExit, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBAsteroidGame)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBSnailGame, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBTetrisGame, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSnakeGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
-            .addGroup(jPBackGroudLayout.createSequentialGroup()
-                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jBAsteroidGame, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jBSnailGame, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPBackGroudLayout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBTetrisGame, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBSnakeGame, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
                     .addGroup(jPBackGroudLayout.createSequentialGroup()
-                        .addGap(347, 347, 347)
-                        .addComponent(jBExit, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel5)
+                        .addGap(40, 40, 40))))
         );
         jPBackGroudLayout.setVerticalGroup(
             jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPBackGroudLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
-                                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(34, 34, 34))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(43, 43, 43))))
-                    .addGroup(jPBackGroudLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBExit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackGroudLayout.createSequentialGroup()
+                        .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63)))
                 .addGroup(jPBackGroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBTetrisGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSnakeGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBSnailGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBAsteroidGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSnakeGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jBExit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                    .addComponent(jBAsteroidGame, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(131, 131, 131))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +197,7 @@ public class CheckFacade extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackGroud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPBackGroud, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

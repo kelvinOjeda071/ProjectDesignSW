@@ -16,9 +16,11 @@ import java.awt.image.BufferedImage;
  * @author Jonathan Puglla
  */
 public class Laser extends MovingObject {
+
     /* Attributes */
     Vector2D myHeading;
-    
+    int objectBelongType;
+
     /* Constructor */
     public Laser(
             Vector2D position,
@@ -26,18 +28,20 @@ public class Laser extends MovingObject {
             double maxVelocity,
             double angle,
             BufferedImage texture,
-            ActionGameState gameState
+            ActionGameState gameState,
+            int objectBelongType
     ) {
         /* Parent attributes */
         super(position, velocity, maxVelocity, texture, gameState);
 
         /* Sets the attributes of the constructor */
         this.angle = angle;
+        this.objectBelongType = objectBelongType;
         this.velocity = velocity.scale(maxVelocity);
     }
 
     /* Methods */
-    /* Obtains the center of the Laser */
+ /* Obtains the center of the Laser */
     @Override
     protected Vector2D getCenter() {
         /* Local attributes */
@@ -47,6 +51,15 @@ public class Laser extends MovingObject {
         /* Returns the center */
         return new Vector2D(posX, posY);
     }
+
+    public int getObjectBelongType() {
+        return objectBelongType;
+    }
+
+    public void setObjectBelongType(int objectBelongType) {
+        this.objectBelongType = objectBelongType;
+    }
+    
 
     /* Update the position */
     @Override
