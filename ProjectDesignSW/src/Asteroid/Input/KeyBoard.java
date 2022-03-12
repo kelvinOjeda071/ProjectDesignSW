@@ -14,29 +14,29 @@ import java.awt.event.KeyListener;
 public class KeyBoard implements KeyListener{
     /* Attributes */
     private boolean[] keys = new boolean[256];
-    public static boolean UP, LEFT, RIGHT;
-    public static boolean SHOOT;
     public static boolean UP1, LEFT1, RIGHT1;
     public static boolean SHOOT1;
+    public static boolean UP2, LEFT2, RIGHT2;
+    public static boolean SHOOT2;
     
     /* Keyboard constructor */
     public KeyBoard(){
-        UP=LEFT=RIGHT=SHOOT=false;
         UP1=LEFT1=RIGHT1=SHOOT1=false;
+        UP2=LEFT2=RIGHT2=SHOOT2=false;
         
     }
     
     /* Methods */
     /* Updates the scenario */
     public void update(){
-        UP=keys[KeyEvent.VK_UP];            // UP key code
-        LEFT=keys[KeyEvent.VK_LEFT];        // LEFT key code
-        RIGHT=keys[KeyEvent.VK_RIGHT];      // RIGHT key code
-        SHOOT = keys[KeyEvent.VK_P];        // SHOOTING key code
-        UP1=keys[KeyEvent.VK_W];            // UP key code
-        LEFT1=keys[KeyEvent.VK_A];          // LEFT key code
-        RIGHT1=keys[KeyEvent.VK_D];         // RIGHT key code
-        SHOOT1 = keys[KeyEvent.VK_Q];        // SHOOTING key code
+        UP2=keys[KeyEvent.VK_UP];            // UP1 key code
+        LEFT2=keys[KeyEvent.VK_LEFT];        // LEFT1 key code
+        RIGHT2=keys[KeyEvent.VK_RIGHT];      // RIGHT1 key code
+        SHOOT2 = keys[KeyEvent.VK_DOWN];        // SHOOTING key code
+        UP1=keys[KeyEvent.VK_W];            // UP1 key code
+        LEFT1=keys[KeyEvent.VK_A];          // LEFT1 key code
+        RIGHT1=keys[KeyEvent.VK_D];         // RIGHT1 key code
+        SHOOT1 = keys[KeyEvent.VK_S];        // SHOOTING key code
         
         
     }

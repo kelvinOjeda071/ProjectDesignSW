@@ -29,6 +29,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,20 +74,14 @@ public class ActionGameState extends GameState {
 
     /* Constructor */
     public ActionGameState() {
-        try {
-            ArrayList<User> dataList = JSONParser.readField();
-            for (int i = 0; i < dataList.size(); i++) {
-                if (dataList.get(i).getCurrentActive() == 1) {
-                    numberPlayer++;
-                }
-            }
-            JSONParser.writeFile(dataList);
 
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
+        ArrayList<User> dataList = readData();
+        for (int i = 0; i < dataList.size(); i++) {
+            if (dataList.get(i).getCurrentActive() == 1) {
+                numberPlayer++;
+            }
         }
+
         if (numberPlayer == 1) {
             player1 = new PlayermateOne(
                     PLAYER_START_POSITION_P1,
@@ -129,9 +125,7 @@ public class ActionGameState extends GameState {
 
 
         /* Adds the player1 as a moving object */
-        
-
-        /* Meteors quantity */
+ /* Meteors quantity */
         asteroid = 1;
 
         /* Starts the asteroids wave */
@@ -301,25 +295,20 @@ public class ActionGameState extends GameState {
         if (gameOver && !gameOverTimer.isRunning()) {
             boolean isFound = false;
             // Save the new Score for the User Login
-            try {
-                ArrayList<User> dataList = JSONParser.readField();
-                int z = 0;
-                for (int j = 0; j < dataList.size(); j++) {
-                    if (dataList.get(j).getCurrentActive() == 1) {
 
-                        if (dataList.get(j).getAsteroidGameScore()
-                                < score) {
-                            dataList.get(j).setAsteroidGameScore(score);
-                            JSONParser.writeFile(dataList);
-                        }
+            ArrayList<User> dataList = readData();
+            int z = 0;
+            for (int j = 0; j < dataList.size(); j++) {
+                if (dataList.get(j).getCurrentActive() == 1) {
+                    if (dataList.get(j).getAsteroidGameScore()
+                            < score) {
+                        dataList.get(j).setAsteroidGameScore(score);
+                        dataList.get(i).setDate(setDateNow());
+                        writeData(dataList);
                     }
-
                 }
 
-            } catch (IOException ex) {
-                Logger.getLogger(ActionGameState.class.getName()).log(Level.SEVERE, null, ex);
             }
-
             GameState.changeState(new MenuState());
         }
         if (!ufoSpawner.isRunning()) {
@@ -352,68 +341,10 @@ public class ActionGameState extends GameState {
     }
 
     private void drawLives(Graphics g) {
-        if (numberPlayer == 1) {
-            if (live1 < 1) {
-
+        if (numberPlayer != 1) {
+            if (live2 < 1) {
                 return;
             }
-
-            Vector2D livePosition = new Vector2D(25, 25);
-
-            g.drawImage(Asset.life, (int) livePosition.getX(),
-                    (int) livePosition.getY(), null);
-
-            g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
-                    (int) livePosition.getY() + 5, null);
-
-            String livesToString = Integer.toString(live1);
-
-            Vector2D pos = new Vector2D(livePosition.getX(),
-                    livePosition.getY());
-
-            for (int i = 0; i < livesToString.length(); i++) {
-                int number = Integer.parseInt(livesToString.
-                        substring(i, i + 1));
-
-                if (number <= 0) {
-                    break;
-                }
-                g.drawImage(Asset.numbers[number],
-                        (int) pos.getX() + 60,
-                        (int) pos.getY() + 5, null);
-                pos.setX(pos.getX() + 20);
-            }
-        } else {
-            if (live1 < 1 && live2 < 1) {
-                return;
-            }
-
-            Vector2D livePosition = new Vector2D(25, 25);
-
-            g.drawImage(Asset.life, (int) livePosition.getX(),
-                    (int) livePosition.getY(), null);
-
-            g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
-                    (int) livePosition.getY() + 5, null);
-
-            String livesToString = Integer.toString(live1);
-
-            Vector2D pos = new Vector2D(livePosition.getX(),
-                    livePosition.getY());
-
-            for (int i = 0; i < livesToString.length(); i++) {
-                int number = Integer.parseInt(livesToString.
-                        substring(i, i + 1));
-
-                if (number < 0) {
-                    break;
-                }
-                g.drawImage(Asset.numbers[number],
-                        (int) pos.getX() + 60,
-                        (int) pos.getY() + 5, null);
-                pos.setX(pos.getX() + 20);
-            }
-
             Vector2D livePosition2 = new Vector2D(25, 75);
 
             g.drawImage(Asset.life2, (int) livePosition2.getX(),
@@ -439,7 +370,38 @@ public class ActionGameState extends GameState {
                         (int) pos2.getY() + 5, null);
                 pos2.setX(pos2.getX() + 20);
             }
+
         }
+        if (live1 < 1) {
+            return;
+        }
+
+        Vector2D livePosition = new Vector2D(25, 25);
+
+        g.drawImage(Asset.life, (int) livePosition.getX(),
+                (int) livePosition.getY(), null);
+
+        g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
+                (int) livePosition.getY() + 5, null);
+
+        String livesToString = Integer.toString(live1);
+
+        Vector2D pos = new Vector2D(livePosition.getX(),
+                livePosition.getY());
+
+        for (int i = 0; i < livesToString.length(); i++) {
+            int number = Integer.parseInt(livesToString.
+                    substring(i, i + 1));
+
+            if (number < 0) {
+                break;
+            }
+            g.drawImage(Asset.numbers[number],
+                    (int) pos.getX() + 60,
+                    (int) pos.getY() + 5, null);
+            pos.setX(pos.getX() + 20);
+        }
+
     }
 
     /* Draws the desired object */
@@ -539,5 +501,33 @@ public class ActionGameState extends GameState {
 
     public ArrayList<Message> getMessages() {
         return message;
+    }
+
+    private ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    private boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
+
+    private String setDateNow() {
+        Date today = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(today);
     }
 }

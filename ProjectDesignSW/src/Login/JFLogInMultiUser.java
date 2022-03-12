@@ -47,69 +47,76 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
                 || id2.equals("")) {
             JOptionPane.showMessageDialog(null, "Complete all the fields correctly");
         } else {
-            try {
-                ArrayList<User> dataList = JSONParser.readField();
+            ArrayList<User> dataList = readData();
+            boolean isFound[] = new boolean[2];
+            for (int i = 0; i < dataList.size(); i++) {
 
-                boolean isFound[] = new boolean[2];
+                if (id1.equals(dataList.get(i).getId())) {
 
-                for (int i = 0; i < dataList.size(); i++) {
+                    if (password1.equals(dataList.get(i).getPassword())) {
+                        
+                        this.logInUser = dataList.get(i);
+                        dataList.get(i).setCurrentActive(1);
+                        isFound[0] = true;
 
-                    if (id1.equals(dataList.get(i).getId())) {
-
-                        if (password1.equals(
-                                dataList.get(i).getPassword())) {
-
-                            this.logInUser = dataList.get(i);
-                            dataList.get(i).setCurrentActive(1);
-                            try {
-                                JSONParser.writeFile(dataList);
-                            } catch (IOException ex) {
-                                Logger.getLogger(JFLogInUserMono.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            isFound[0] = true;
-
-                        }
-
-                    }
-                    if (id2.equals(dataList.get(i).getId())) {
-
-                        if (password2.equals(
-                                dataList.get(i).getPassword())) {
-                            this.logInUser = dataList.get(i);
-                            dataList.get(i).setCurrentActive(1);
-                            try {
-                                JSONParser.writeFile(dataList);
-                            } catch (IOException ex) {
-                                Logger.getLogger(JFLogInUserMono.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            isFound[1] = true;
-                        }
                     }
 
                 }
-                if (isFound[0] && isFound[1]) {
-                    JOptionPane.showMessageDialog(null, "Your "
-                                        + "credentials are correct");
-                    new CheckFacade().setVisible(true);
-                    setEmptyLabels();
-                } else {
-                    JOptionPane.showMessageDialog(null, "The usernames or passwords are incorrect");
+                if (id2.equals(dataList.get(i).getId())) {
+
+                    if (password2.equals(dataList.get(i).getPassword())) {
+                        this.logInUser = dataList.get(i);
+                        dataList.get(i).setCurrentActive(1);
+                        isFound[1] = true;
+                    }
                 }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(JFLogInUserMono.class.getName()).log(Level.SEVERE, null, ex);
+
             }
+            if (isFound[0] && isFound[1]) {
+                writeData(dataList);
+                JOptionPane.showMessageDialog(null, "Your "
+                        + "credentials are correct");
+                new CheckFacade().setVisible(true);
+                setEmptyLabels();
+            } else {
+                JOptionPane.showMessageDialog(null, "The usernames or passwords are incorrect");
+            }
+
         }
 
     }
+
+    private ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    private boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
+
     public void switchSignIn() {
         new JFSignInUser().setVisible(true);
         this.setVisible(false);
     }
+
     public void switchLogIn() {
         new JFLogInUserMono().setVisible(true);
         this.setVisible(false);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,6 +145,7 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
         jBLogInMultiPlayer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));

@@ -108,6 +108,8 @@ public abstract class MovingObject extends GameObject {
         if (secondO instanceof Player && ((Player) secondO).isSpawning()) {
             return;
         }
+        if (firstO instanceof Player && secondO instanceof Player)
+            return;
         if(firstO instanceof Laser &&  secondO instanceof Player && 
                 !((Player)secondO).isSpawning()){
             if(((Laser)firstO).getObjectBelongType()==1 || ((Laser)firstO).getObjectBelongType()==2){
