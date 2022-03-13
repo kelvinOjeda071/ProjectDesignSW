@@ -1,6 +1,5 @@
 package Snail;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -10,46 +9,40 @@ import java.util.LinkedList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author User
  */
 public class ElementsList {
-    
-    private LinkedList <GameElement> lista;
+
+    private LinkedList<GameElement> list;
     //private GameElement elemento;
 
     public ElementsList() {
-        lista = new LinkedList<GameElement>();
+        list = new LinkedList<GameElement>();
     }
 
-    public LinkedList<GameElement> getLista() {
-        return lista;
+    public LinkedList<GameElement> getList() {
+        return list;
     }
-    
-  
 
-    public void setLista(LinkedList<GameElement> lista) {
-        this.lista = lista;
+    public void setList(LinkedList<GameElement> list) {
+        this.list = list;
     }
-    
-    public void agregarElemento (GameElement elemento){
+
+    public void addElement(GameElement element) {
         //this.elemento = elemento;
-        lista.add(elemento);
+        list.add(element);
     }
-     
-    public void eliminarElemento(Position posicion){
-        Iterator <GameElement> it = getLista().iterator();
-        while(it.hasNext()){
+
+    public void deleteElement(Position position) {
+        Iterator<GameElement> it = getList().iterator();
+        while (it.hasNext()) {
             Position pos = it.next().getPosition();
-            if((pos.getX() == posicion.getX()) && (pos.getY() == posicion.getY())){
+            if ((pos.getX() == position.getX()) && (pos.getY() == position.getY())) {
                 it.remove();
             }
         }
     }
-    
-    
-    
-    
+
 }
