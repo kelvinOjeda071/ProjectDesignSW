@@ -46,7 +46,7 @@ public class JFSignInUser extends javax.swing.JFrame {
 
     public void switchlogIn() {
         this.jfLoginUser.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     public void signIn() {
@@ -92,7 +92,7 @@ public class JFSignInUser extends javax.swing.JFrame {
                             + " registered user");
                     setEmptyLabels();
                     this.jfLoginUser.setVisible(true);
-                    this.setVisible(false);
+                    this.dispose();
 
                 }
 

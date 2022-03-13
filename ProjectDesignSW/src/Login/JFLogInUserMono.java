@@ -58,7 +58,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Your "
                                     + "credentials are correct");
                             new CheckFacade().setVisible(true);
-                            this.setVisible(false);
+                            this.dispose();
                             i = dataList.size();
                     } else {
                         JOptionPane.showMessageDialog(null, "The username "
@@ -79,12 +79,12 @@ public class JFLogInUserMono extends javax.swing.JFrame {
 
     public void switchSignInTwoPlayers() {
         new JFLogInMultiUser().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     public void switchSignIn() {
         new JFSignInUser().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     private ArrayList<User> readData() {
@@ -287,7 +287,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogInActionPerformed
-        this.logInUser.logIn(this);
+        logIn();
     }//GEN-LAST:event_jBLogInActionPerformed
 
     private void jBSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSignInActionPerformed
