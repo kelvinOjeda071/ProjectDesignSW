@@ -1,12 +1,18 @@
 package Tetris;
 
+import Asteroid.IO.JSONParser;
 import Facade.CheckFacade;
+import Login.User;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +22,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class Manager {
 
@@ -63,6 +70,7 @@ public class Manager {
                     exit.setEnabled(true);
                     step.cancel();
                     counter = 0;
+                    updateScore((int) score);
                     return;
                 }
                 // Función para saber si 
@@ -200,6 +208,63 @@ public class Manager {
             figure.rotate();
         }
     }
+    
+    public void updateScore(int score) {
+        int i = 0;
+        // Save the new Score for the User Login
+
+        ArrayList<User> dataList = readData();
+        for (int j = 0; j < dataList.size(); j++) {
+            if (dataList.get(j).getCurrentActive() == 1) {
+                if (dataList.get(j).getTetrisGameScore()
+                        < score) {
+                    dataList.get(j).setTetrisGameScore(score);
+                    dataList.get(i).setDate(setDateNow());
+                    writeData(dataList);
+                }
+            }
+
+        }
+    }
+    
+    public void showScores(JTextArea scoresArea){
+        String scores = "Username\t\tScore\t\tDate\n\n";
+        ArrayList<User> users = readData();
+        for(int i = 0; i < users.size(); i++){
+            scores += users.get(i).getFirstName() + " " + users.get(i).getLastName()
+                    + "\t" + users.get(i).getTetrisGameScore() +
+                    "\t\t" + users.get(i).getDate() + "\n";
+        }
+        scoresArea.setText(scores);
+    }
+    
+    public ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
+    public boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
+
+    public String setDateNow() {
+        Date today = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(today);
+    }
 
     public void start(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore, JButton exit) {
         step.cancel();
@@ -229,6 +294,7 @@ public class Manager {
                     exit.setEnabled(true);
                     step.cancel();
                     counter = 0;
+                    updateScore((int) score);
                     return;
                 }
 

@@ -7,6 +7,7 @@ package Tetris;
 
 import Facade.CheckFacade;
 import Tetris.State.TetrisMenuState;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,8 +19,9 @@ public class TetrisMenu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public TetrisMenu() {
-        setLocationRelativeTo(null);
         initComponents();
+        
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -38,7 +40,11 @@ public class TetrisMenu extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 153, 255));
+        setLocation(new java.awt.Point(0, 0));
+        setLocationByPlatform(true);
 
+        btnPlay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPlay.setText("PLAY");
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,8 +52,15 @@ public class TetrisMenu extends javax.swing.JFrame {
             }
         });
 
+        btnScores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnScores.setText("SCORES");
+        btnScores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScoresActionPerformed(evt);
+            }
+        });
 
+        btnExit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnExit.setText("EXIT");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,8 +77,8 @@ public class TetrisMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnScores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(btnPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +89,7 @@ public class TetrisMenu extends javax.swing.JFrame {
                 .addComponent(btnScores)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,6 +112,14 @@ public class TetrisMenu extends javax.swing.JFrame {
         newCF.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScoresActionPerformed
+        // TODO add your handling code here:
+        ScoresWindow newSW = new ScoresWindow();
+        newSW.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btnScoresActionPerformed
 
     /**
      * @param args the command line arguments

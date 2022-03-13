@@ -253,7 +253,6 @@ public abstract class GameModeState extends GameState {
             // Save the new Score for the User Login
 
             ArrayList<User> dataList = readData();
-            int z = 0;
             for (int j = 0; j < dataList.size(); j++) {
                 if (dataList.get(j).getCurrentActive() == 1) {
                     if (dataList.get(j).getAsteroidGameScore()
