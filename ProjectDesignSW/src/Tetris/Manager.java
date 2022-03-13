@@ -38,7 +38,7 @@ public class Manager {
 
     }
 
-    public void Manager(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore) {
+    public void Manager(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore, JButton exit) {
         figure = new L(matrix);
         figure.paint();
         figure.move(1);
@@ -60,13 +60,7 @@ public class Manager {
                 if (counter > 5) {
                     javax.swing.JOptionPane.showMessageDialog(null, "You lost\n"
                             + "END.\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
-                    /*int confirm = javax.swing.JOptionPane.OK_OPTION;
-                    if (confirm == 0) {
-                        Tetris newTetris = new Tetris(0);
-                        newTetris.setVisible(false);
-                        TetrisMenu newTMenu = new TetrisMenu();
-                        newTMenu.setVisible(true);
-                    }*/
+                    exit.setEnabled(true);
                     step.cancel();
                     counter = 0;
                     return;
@@ -207,7 +201,7 @@ public class Manager {
         }
     }
 
-    public void start(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore) {
+    public void start(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore, JButton exit) {
         step.cancel();
         score = 0;
         figure = new L(matrix);
@@ -232,13 +226,7 @@ public class Manager {
                 if (counter > 5) {
                     javax.swing.JOptionPane.showMessageDialog(null, "You lost\n"
                             + "END!\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
-                    /*int confirm = javax.swing.JOptionPane.OK_OPTION;
-                    if (confirm == 0) {
-                        Tetris newTetris = new Tetris(0);
-                        newTetris.setVisible(false);
-                        TetrisMenu newTMenu = new TetrisMenu();
-                        newTMenu.setVisible(true);
-                    }*/
+                    exit.setEnabled(true);
                     step.cancel();
                     counter = 0;
                     return;

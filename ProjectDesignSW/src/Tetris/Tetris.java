@@ -54,7 +54,7 @@ public class Tetris extends javax.swing.JFrame {
             Table newTable = new Table(matrixes1, Table1);
             JButton[][] matrix1 = newTable.drawT();
 
-            manager1.Manager(matrix, matrix1, Table1, jLScore);
+            manager1.Manager(matrix, matrix1, Table1, jLScore, btnExit);
         } else {
             jLScore.setText("0.0");
             jLScore2.setText("0.0");
@@ -73,8 +73,8 @@ public class Tetris extends javax.swing.JFrame {
             Table newTable2 = new Table(matrixes12, Table2);
             JButton[][] matrix12 = newTable2.drawT();
 
-            manager1.Manager(matrix, matrix1, Table1, jLScore);
-            manager2.Manager(matrix2, matrix12, Table2, jLScore2);
+            manager1.Manager(matrix, matrix1, Table1, jLScore, btnExit);
+            manager2.Manager(matrix2, matrix12, Table2, jLScore2, btnExit);
         }
 
     }
@@ -245,7 +245,7 @@ public class Tetris extends javax.swing.JFrame {
             Table newTable = new Table(matrixes1, Table1);
             JButton[][] matrix1 = newTable.drawT();
 
-            manager1.start(matrix, matrix1, Table1, jLScore);
+            manager1.start(matrix, matrix1, Table1, jLScore, btnExit);
         } else {
             jLScore.setText("0.0");
             jLScore2.setText("0.0");
@@ -264,8 +264,8 @@ public class Tetris extends javax.swing.JFrame {
             Table newTable2 = new Table(matrixes12, Table2);
             JButton[][] matrix12 = newTable2.drawT();
 
-            manager1.start(matrix, matrix1, Table1, jLScore);
-            manager2.start(matrix2, matrix12, Table2, jLScore2);
+            manager1.start(matrix, matrix1, Table1, jLScore, btnExit);
+            manager2.start(matrix2, matrix12, Table2, jLScore2, btnExit);
         }
 
         // TODO add your handling code here:
@@ -273,11 +273,9 @@ public class Tetris extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(false);
         TetrisMenu newTM = new TetrisMenu();
         newTM.setVisible(true);
-        newTM.dispose();
         /*CheckFacade newFacade = new CheckFacade();
         newFacade.setVisible(true);*/
     }//GEN-LAST:event_btnExitActionPerformed

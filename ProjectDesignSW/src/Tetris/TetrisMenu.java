@@ -5,6 +5,7 @@
  */
 package Tetris;
 
+import Facade.CheckFacade;
 import Tetris.State.TetrisMenuState;
 
 /**
@@ -17,8 +18,9 @@ public class TetrisMenu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public TetrisMenu() {
+        setLocationRelativeTo(null);
         initComponents();
-        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -47,6 +49,11 @@ public class TetrisMenu extends javax.swing.JFrame {
         btnScores.setText("SCORES");
 
         btnExit.setText("EXIT");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,6 +92,13 @@ public class TetrisMenu extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        CheckFacade newCF = new CheckFacade();
+        newCF.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
