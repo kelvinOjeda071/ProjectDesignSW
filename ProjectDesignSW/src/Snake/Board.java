@@ -40,10 +40,19 @@ public class Board extends javax.swing.JFrame{
         checkOffscreenImage();
         paintOffscreen(OSC.getGraphics(), OSC.getGraphics(), Color.GREEN);//COLOR SERPIENTE
         g.drawImage(OSC, 0, 0, null);
-        jLabel1.setText("Puntaje Jugador A ---> "+snake.score.getSnakeScore());
-        jLabel2.setText("Puntaje Jugador B ---> "+enemy.score.getEnemyScore());
+        jLabel1.setText("Score A ---> "+snake.score.getSnakeScore());
+        jLabel2.setText("Score B ---> "+enemy.score.getEnemyScore());
         
         jP1.paint(g);
+    }
+    
+    public int boardGetEnemyScore(){
+        return enemy.score.getEnemyScore();
+        
+    }
+    
+    public int boardGetSnakeScore(){
+        return snake.score.getSnakeScore();
     }
 
 

@@ -48,7 +48,8 @@ public class Game {
     }
     
     public void finishGame(){
-        System.exit(0);
+
+        
         
     }
     

@@ -5,6 +5,8 @@
  */
 package Snake;
 
+import Facade.CheckFacade;
+
 public class Dead extends javax.swing.JFrame {
 
     Game game;
@@ -12,7 +14,8 @@ public class Dead extends javax.swing.JFrame {
     public Dead() {
         initComponents();
         game = new Game();
-        this.setLocation(1030, 50);
+        //this.setLocation(1030, 50);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -31,7 +34,8 @@ public class Dead extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBVJugar.setText("Volver a jugar");
+        jBVJugar.setFont(new java.awt.Font("KenVector Future Thin", 0, 12)); // NOI18N
+        jBVJugar.setText("PLAY");
         jBVJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBVJugarActionPerformed(evt);
@@ -39,7 +43,8 @@ public class Dead extends javax.swing.JFrame {
         });
         jPanel1.add(jBVJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
-        jBFinalizar.setText("Finalizar");
+        jBFinalizar.setFont(new java.awt.Font("KenVector Future Thin", 0, 12)); // NOI18N
+        jBFinalizar.setText("return");
         jBFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBFinalizarActionPerformed(evt);
@@ -49,7 +54,7 @@ public class Dead extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Wide Latin", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("Ha perdido!");
+        jLabel1.setText("You lost!");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/slither.jpg"))); // NOI18N
@@ -71,6 +76,8 @@ public class Dead extends javax.swing.JFrame {
 
     private void jBFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarActionPerformed
         game.finishGame();
+        new CheckFacade().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBFinalizarActionPerformed
 
     private void jBVJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVJugarActionPerformed

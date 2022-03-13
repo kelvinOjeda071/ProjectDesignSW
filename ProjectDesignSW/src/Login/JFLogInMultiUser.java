@@ -78,6 +78,7 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
                         + "credentials are correct");
                 new CheckFacade().setVisible(true);
                 setEmptyLabels();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "The usernames or passwords are incorrect");
             }
@@ -110,12 +111,12 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
 
     public void switchSignIn() {
         new JFSignInUser().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     public void switchLogIn() {
         new JFLogInUserMono().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     /**
