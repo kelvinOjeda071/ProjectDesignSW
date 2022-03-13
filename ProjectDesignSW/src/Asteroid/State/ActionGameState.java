@@ -14,8 +14,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import Asteroid.GameObjects.Constant;
 import Asteroid.GameObjects.Message;
-import Asteroid.GameObjects.PlayermateOne;
-import Asteroid.GameObjects.PlayermateTwo;
+import Asteroid.GameObjects.MateOne;
+import Asteroid.GameObjects.MateTwo;
 import Asteroid.GameObjects.Size;
 import Asteroid.GameObjects.Ufo;
 import Asteroid.Graphics.Animation;
@@ -83,7 +83,7 @@ public class ActionGameState extends GameState {
         }
 
         if (numberPlayer == 1) {
-            player1 = new PlayermateOne(
+            player1 = new MateOne(
                     PLAYER_START_POSITION_P1,
                     new Vector2D(),
                     Constant.PLAYER_MAX_VEL,
@@ -96,7 +96,7 @@ public class ActionGameState extends GameState {
             movingObjects.add(player1);
         } else {
             this.live2 = 3;
-            player1 = new PlayermateOne(
+            player1 = new MateOne(
                     PLAYER_START_POSITION_P1,
                     new Vector2D(),
                     Constant.PLAYER_MAX_VEL,
@@ -107,7 +107,7 @@ public class ActionGameState extends GameState {
                     new Chronometer()
             );
 
-            player2 = new PlayermateTwo(
+            player2 = new MateTwo(
                     PLAYER_START_POSITION_P2,
                     new Vector2D(),
                     Constant.PLAYER_MAX_VEL,
