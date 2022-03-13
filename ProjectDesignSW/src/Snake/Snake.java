@@ -6,21 +6,23 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 
 public class Snake extends Entity {
 
+    Dead dead = new Dead();
     ArrayList<Point> snake;
-    
+    int point;
+    int lifeSn=0;
     PointerInfo a = MouseInfo.getPointerInfo();
-    int count = 0;
 
     @Override
     public void run() {
         crash = new Crash();
+        score = new Score();
         while (true) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -31,6 +33,7 @@ public class Snake extends Entity {
         }
     }
 
+    @Override
     public void generate() {
         a = MouseInfo.getPointerInfo();
         Point p = a.getLocation();
@@ -40,29 +43,45 @@ public class Snake extends Entity {
         move(snake, last, p, n);
     }
 
-    public void drop() {
+    @Override
+    public boolean drop() {
+        boolean state = false;
         if (crash.checkSnakeCrash(snake, board.enemy.getEnemy()) == true) {
             for (int i = 0; i < snake.size(); i++) {
                 Point dead = new Point();
                 dead = snake.get(i);
                 board.food.food.add(dead);
             }
+            lifeSn++;
+            board.settLbel(lifeSn+"X");
+            //dead.setVisible(true);
+            //this.stop();
             snake.clear();
             size = 10;
-            count = 0;
             snake.add(new Point(r.nextInt(900), r.nextInt(900)));
         }
+
         if (crash.checkEnemyCrash(snake, board.enemy.getEnemy()) == true) {
             for (int i = 0; i < board.enemy.enemy.size(); i++) {
                 Point dead = new Point();
                 dead = board.enemy.enemy.get(i);
                 board.food.food.add(dead);
             }
+            board.enemy.lifeEn++;
+            board.settLbel2(board.enemy.lifeEn+"X");
+            //enemy.stop();
             board.enemy.enemy.clear();
             board.enemy.size = 10;
-            count = 0;
             board.enemy.enemy.add(new Point(r.nextInt(900), r.nextInt(900)));
+
         }
+        if(lifeSn>2 || board.enemy.lifeEn>2){
+            dead.setVisible(true);
+            this.stop();
+            
+        }
+        
+        return state;
     }
 
     public void checkOutOfBorder() {
@@ -101,12 +120,11 @@ public class Snake extends Entity {
             }
         }
         board.repaint();
-        super.eatFood(n);
+        point = super.eatFood(n);
+        score.setSnakeScore(point);
+
     }
 
-    /*public void showLocationHead(Point last){
-            System.out.println(last.x +" | "+last.y);
-        }*/
     public ArrayList<Point> getSnake() {
         return snake;
     }
@@ -116,4 +134,3 @@ public class Snake extends Entity {
     }
 
 }
-
