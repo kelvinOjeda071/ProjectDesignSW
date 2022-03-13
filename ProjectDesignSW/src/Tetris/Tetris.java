@@ -29,16 +29,46 @@ public class Tetris extends javax.swing.JFrame {
     Manager manager1 = new Manager();
     Manager manager2 = new Manager();
 
-    int numPlayers = 1;
+    int numPlayers = 2;
 
     public Tetris() {
         initComponents();
+        this.setLocationRelativeTo(null);
 
         if (numPlayers == 1) {
             setSize(510, 750);
+            jLScore.setText("0.0");
+
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            manager1.Manager(matrix, matrix1, Table1, jLScore);
+        } else {
+            jLScore.setText("0.0");
+            jLScore2.setText("0.0");
+
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            //Game 2
+            Board newBoard2 = new Board(matrixes2, Board2);
+            JButton[][] matrix2 = newBoard2.drawB();
+
+            Table newTable2 = new Table(matrixes12, Table2);
+            JButton[][] matrix12 = newTable2.drawT();
+
+            manager1.Manager(matrix, matrix1, Table1, jLScore);
+            manager2.Manager(matrix2, matrix12, Table2, jLScore2);
         }
 
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -134,27 +164,28 @@ public class Tetris extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLScore, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStart)
-                    .addComponent(btnExit))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnStart)
+                            .addComponent(btnExit))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(21, 21, 21)
@@ -182,7 +213,6 @@ public class Tetris extends javax.swing.JFrame {
     private void btnStartKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnStartKeyPressed
         manager1.movementsControl(evt);
         manager2.movementsControl2(evt);
-
     }//GEN-LAST:event_btnStartKeyPressed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -192,31 +222,29 @@ public class Tetris extends javax.swing.JFrame {
 
         Table1.removeAll();//Gamer1
         Table2.removeAll();//Gamer2
-        
-        this.setLocationRelativeTo(null);
-        
+
         if (numPlayers == 1) {
+            setSize(510, 750);
             jLScore.setText("0.0");
 
             //Game 1
-            Board newBoard1 = new Board(matrixes, Board1);
-            JButton[][] matrix = newBoard1.drawB();
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
 
-            Table newTable1 = new Table(matrixes1, Table1);
-            JButton[][] matrix1 = newTable1.drawT();
-            
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
             manager1.start(matrix, matrix1, Table1, jLScore);
-
         } else {
             jLScore.setText("0.0");
             jLScore2.setText("0.0");
 
             //Game 1
-            Board newBoard1 = new Board(matrixes, Board1);
-            JButton[][] matrix = newBoard1.drawB();
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
 
-            Table newTable1 = new Table(matrixes1, Table1);
-            JButton[][] matrix1 = newTable1.drawT();
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
 
             //Game 2
             Board newBoard2 = new Board(matrixes2, Board2);
@@ -226,7 +254,7 @@ public class Tetris extends javax.swing.JFrame {
             JButton[][] matrix12 = newTable2.drawT();
 
             manager1.start(matrix, matrix1, Table1, jLScore);
-            manager2.Manager(matrix2, matrix12, Table2, jLScore2);
+            manager2.start(matrix2, matrix12, Table2, jLScore2);
         }
 
         // TODO add your handling code here:
