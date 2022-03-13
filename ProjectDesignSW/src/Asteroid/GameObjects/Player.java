@@ -8,7 +8,7 @@ import Asteroid.Graphics.Asset;
 import Asteroid.Input.KeyBoard;
 import Asteroid.Main.AsteroidGame;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -29,17 +29,16 @@ public abstract class Player extends MovingObject {
     protected boolean visible;
     //control the change between visible and not visible
     protected Chronometer spawnTime, flickerTime;
-    
-    protected boolean accelerating = false;
-    
-    /* Constructor */
 
+    protected boolean accelerating = false;
+
+    /* Constructor */
     public Player(
             Vector2D position,
             Vector2D velocity,
             double maxVelocity,
             BufferedImage texture,
-            ActionGameState gameState,
+            GameModeState gameState,
             Chronometer fireRate,
             Chronometer spawnTime,
             Chronometer flikerTime
@@ -52,11 +51,8 @@ public abstract class Player extends MovingObject {
         this.spawnTime = spawnTime;
         this.flickerTime = flikerTime;
     }
-    
-    
+
     /*Cuando se destruya reaparezca pero titilando*/
-    
-    
     @Override
     public void draw(Graphics g) {
         //In the case when visible is false
@@ -94,9 +90,12 @@ public abstract class Player extends MovingObject {
         g2d.drawImage(texture, at, null);
     }
 
-    //Para que los demas objetos no disparen
+    // Reset ship position values
+    protected abstract void resetValues();
+
+    // Posibility to start shooting
     public boolean isSpawning() {
         return spawning;
     }
-    
+
 }

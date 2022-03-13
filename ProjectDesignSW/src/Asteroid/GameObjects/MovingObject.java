@@ -5,7 +5,9 @@
 package Asteroid.GameObjects;
 
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
+import Asteroid.State.GameState;
+import Asteroid.State.MultiplayerState;
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -32,13 +34,13 @@ public abstract class MovingObject extends GameObject {
     protected int height;
     
     /* Game State object */
-    protected ActionGameState gameState;
+    protected GameModeState gameState;
     protected boolean dead;
     
     /* Constructor */
     public MovingObject(Vector2D position, Vector2D velocity, 
             double maxVelocity,BufferedImage texture, 
-            ActionGameState gameState) {
+            GameModeState gameState) {
         super(position, texture);
 
         this.velocity=velocity;
@@ -138,5 +140,7 @@ public abstract class MovingObject extends GameObject {
     public boolean isDead() {
         return dead;
     }
+    
+    
 
 }

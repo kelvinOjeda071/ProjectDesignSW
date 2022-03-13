@@ -36,32 +36,32 @@ import java.util.logging.Logger;
  *
  * @author KelvinOjeda
  */
-public class ActionGameState extends GameState {
+public abstract class GameModeState extends GameState {
 
-    public static final Vector2D PLAYER_START_POSITION_P1 = new Vector2D(
+    protected static final Vector2D PLAYER_START_POSITION_P1 = new Vector2D(
             Constant.WIDTH / 4 - Asset.player1.getWidth() / 2,
             Constant.HEIGHT / 2 - Asset.player1.getHeight() / 2);
 
-    public static final Vector2D PLAYER_START_POSITION_P2 = new Vector2D(
+    protected static final Vector2D PLAYER_START_POSITION_P2 = new Vector2D(
             3 * Constant.WIDTH / 4 - Asset.player2.getWidth() / 2,
             Constant.HEIGHT / 2 - Asset.player2.getHeight() / 2);
 
     /* Attributes */
-    private Player player1;
-    private Player player2;
-    private ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
-    private int asteroid;
-    private ArrayList<Animation> explosions = new ArrayList<Animation>();
-    private ArrayList<Message> message = new ArrayList<Message>();
+    
+    protected ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
+    protected int asteroid;
+    protected ArrayList<Animation> explosions = new ArrayList<Animation>();
+    protected ArrayList<Message> message = new ArrayList<Message>();
 
     private int score = 0;
-    private int score2 = 0;
 
-    private int numberPlayer = 0;
+    protected int numberPlayer = 0;
+    protected Player player1;
+    protected Player player2;
 
     /*player1's life*/
-    private int live1 = 3;
-    private int live2 = 0;
+    protected int live1 ;
+    protected int live2 ;
 
     //number of waves
     private int waves = 1;
@@ -71,7 +71,7 @@ public class ActionGameState extends GameState {
 
 
     /* Constructor */
-    public ActionGameState() {
+    public GameModeState() {
 
         ArrayList<User> dataList = readData();
         for (int i = 0; i < dataList.size(); i++) {
@@ -79,53 +79,11 @@ public class ActionGameState extends GameState {
                 numberPlayer++;
             }
         }
-
-        if (numberPlayer == 1) {
-            player1 = new MateOne(
-                    PLAYER_START_POSITION_P1,
-                    new Vector2D(),
-                    Constant.PLAYER_MAX_VEL,
-                    Asset.player1,
-                    this,
-                    new Chronometer(),
-                    new Chronometer(),
-                    new Chronometer()
-            );
-            movingObjects.add(player1);
-        } else {
-            this.live2 = 3;
-            player1 = new MateOne(
-                    PLAYER_START_POSITION_P1,
-                    new Vector2D(),
-                    Constant.PLAYER_MAX_VEL,
-                    Asset.player1,
-                    this,
-                    new Chronometer(),
-                    new Chronometer(),
-                    new Chronometer()
-            );
-
-            player2 = new MateTwo(
-                    PLAYER_START_POSITION_P2,
-                    new Vector2D(),
-                    Constant.PLAYER_MAX_VEL,
-                    Asset.player2,
-                    this,
-                    new Chronometer(),
-                    new Chronometer(),
-                    new Chronometer()
-            );
-            movingObjects.add(player1);
-            movingObjects.add(player2);
-        }
         gameOverTimer = new Chronometer();
         gameOver = false;
 
-
-        /* Adds the player1 as a moving object */
- /* Meteors quantity */
+        /* Meteors quantity */
         asteroid = 1;
-
         /* Starts the asteroids wave */
         changeDifficulty();
         ufoSpawner = new Chronometer();
@@ -183,7 +141,7 @@ public class ActionGameState extends GameState {
     }
 
     /* Deploys the asteroids */
-    private void changeDifficulty() {
+    public void changeDifficulty() {
         /*draw the message*/
         message.add(new Message(new Vector2D(Constant.WIDTH / 2,
                 Constant.HEIGHT / 2), false, "WAVE " + waves,
@@ -234,7 +192,7 @@ public class ActionGameState extends GameState {
         );
     }
 
-    private void artificialIntelligenceAction() {
+    public void artificialIntelligenceAction() {
         int rand = (int) (Math.random() * 2);
         double x = rand % 2 == 0 ? Math.random() * Constant.WIDTH : 0;
         double y = rand % 2 == 0 ? 0 : Math.random() * Constant.HEIGHT;
@@ -327,7 +285,7 @@ public class ActionGameState extends GameState {
         changeDifficulty();
     }
 
-    private void drawScore(Graphics g) {
+    public void drawScore(Graphics g) {
         Vector2D pos = new Vector2D(850, 25);
         String scoreToString = Integer.toString(score);
         for (int i = 0; i < scoreToString.length(); i++) {
@@ -338,71 +296,10 @@ public class ActionGameState extends GameState {
         }
     }
 
-    private void drawLives(Graphics g) {
-        if (numberPlayer != 1) {
-            if (live1 < 1 && live2 < 1) {
-                return;
-            }
-            Vector2D livePosition2 = new Vector2D(25, 75);
-
-            g.drawImage(Asset.life2, (int) livePosition2.getX(),
-                    (int) livePosition2.getY(), null);
-
-            g.drawImage(Asset.numbers[10], (int) livePosition2.getX() + 40,
-                    (int) livePosition2.getY() + 5, null);
-
-            String livesToString2 = Integer.toString(live2);
-
-            Vector2D pos2 = new Vector2D(livePosition2.getX(),
-                    livePosition2.getY());
-
-            for (int i = 0; i < livesToString2.length(); i++) {
-                int number = Integer.parseInt(livesToString2.
-                        substring(i, i + 1));
-
-                if (number < 0) {
-                    break;
-                }
-                g.drawImage(Asset.numbers[number],
-                        (int) pos2.getX() + 60,
-                        (int) pos2.getY() + 5, null);
-                pos2.setX(pos2.getX() + 20);
-            }
-
-        }
-        if (live1 < 1 && live2 < 1) {
-            return;
-        }
-
-        Vector2D livePosition = new Vector2D(25, 25);
-
-        g.drawImage(Asset.life, (int) livePosition.getX(),
-                (int) livePosition.getY(), null);
-
-        g.drawImage(Asset.numbers[10], (int) livePosition.getX() + 40,
-                (int) livePosition.getY() + 5, null);
-
-        String livesToString = Integer.toString(live1);
-
-        Vector2D pos = new Vector2D(livePosition.getX(),
-                livePosition.getY());
-
-        for (int i = 0; i < livesToString.length(); i++) {
-            int number = Integer.parseInt(livesToString.
-                    substring(i, i + 1));
-
-            if (number < 0) {
-                break;
-            }
-            g.drawImage(Asset.numbers[number],
-                    (int) pos.getX() + 60,
-                    (int) pos.getY() + 5, null);
-            pos.setX(pos.getX() + 20);
-        }
-
-    }
-
+    protected abstract void drawLives(Graphics g);
+    
     /* Draws the desired object */
+    @Override
     public void draw(Graphics g) {
 
         /* Anti aliasing */
@@ -456,13 +353,7 @@ public class ActionGameState extends GameState {
     }
 
     /* For getting the position of the player1 in Ufo*/
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
+    
 
     public int getLive1() {
         return live1;
@@ -501,7 +392,7 @@ public class ActionGameState extends GameState {
         return message;
     }
 
-    private ArrayList<User> readData() {
+    public ArrayList<User> readData() {
         try {
             return JSONParser.readField();
         } catch (FileNotFoundException ex) {
@@ -510,7 +401,7 @@ public class ActionGameState extends GameState {
         return null;
     }
 
-    private boolean writeData(ArrayList<User> dataList) {
+    public boolean writeData(ArrayList<User> dataList) {
         boolean isWrited = false;
         try {
             JSONParser.writeFile(dataList);
@@ -523,9 +414,15 @@ public class ActionGameState extends GameState {
         return isWrited;
     }
 
-    private String setDateNow() {
+    public String setDateNow() {
         Date today = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(today);
+    }
+    public Player getPlayer1() {
+        return player1;
+    }
+    public Player getPlayer2() {
+        return player2;
     }
 }
