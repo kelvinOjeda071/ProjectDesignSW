@@ -68,9 +68,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jBSignIn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jBLogInMultiPlayer" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
                           <Component id="jBLogIn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       </Group>
@@ -98,11 +98,11 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jBSignIn" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jBLogIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBSignIn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBLogInMultiPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jBLogIn" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -392,7 +392,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Log in two Players"/>
+            <Property name="text" type="java.lang.String" value="MULTiplayer"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLogInMultiPlayerActionPerformed"/>
