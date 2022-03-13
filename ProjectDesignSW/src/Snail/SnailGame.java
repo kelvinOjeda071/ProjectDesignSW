@@ -1,8 +1,8 @@
 package Snail;
 
 import Asteroid.IO.JSONParser;
+import Asteroid.Input.KeyBoard;
 import Login.User;
-import Snail.Input.Keyboard;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
@@ -32,7 +32,7 @@ public class SnailGame extends JFrame implements Runnable {
 
     private boolean state = false;
     private Thread thread;
-    private Keyboard keyboard;
+    private KeyBoard keyboard;
     private GameLevel level;
     private int score;
     private int contDie;
@@ -43,6 +43,7 @@ public class SnailGame extends JFrame implements Runnable {
 
     public SnailGame() {
         setSize(1200, 800);
+        this.setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -69,7 +70,7 @@ public class SnailGame extends JFrame implements Runnable {
     @Override
     public void run() {
 
-        this.keyboard = new Keyboard();
+        this.keyboard = new KeyBoard();
 
         level = new GameLevel(this, mode);
 

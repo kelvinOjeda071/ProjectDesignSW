@@ -1,5 +1,6 @@
 package Snail;
 
+import Asteroid.Input.KeyBoard;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import Snail.Input.Keyboard;
 import java.awt.geom.AffineTransform;
 
 /*
@@ -87,7 +87,7 @@ public class Snail extends GameElement {
             }
 
             if ((x0 >= 0) && (x0 <= 1200)) {
-                if (Keyboard.RIGHT) {
+                if (KeyBoard.RIGHT2) {
 
                     this.position.setX(x0 + this.speedX);
                     //this.orientation = false;
@@ -97,7 +97,7 @@ public class Snail extends GameElement {
             }
 
             if ((x0 >= 0) && (x0 <= 1200)) {
-                if (Keyboard.LEFT) {
+                if (KeyBoard.LEFT2) {
                     //girar();
                     this.position.setX(x0 - this.speedX);
                     //this.orientation = false;
@@ -121,7 +121,7 @@ public class Snail extends GameElement {
             }
 
             if ((x0 >= 0) && (x0 <= 1200)) {
-                if (Keyboard.D) {
+                if (KeyBoard.RIGHT1) {
 
                     this.position.setX(x0 + this.speedX);
                     
@@ -130,7 +130,7 @@ public class Snail extends GameElement {
             }
 
             if ((x0 >= 0) && (x0 <= 1200)) {
-                if (Keyboard.A) {
+                if (KeyBoard.LEFT1) {
                     //girar();
                     this.position.setX(x0 - this.speedX);
                     

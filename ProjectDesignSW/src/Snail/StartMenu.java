@@ -47,12 +47,13 @@ public class StartMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Start Menu");
+        setUndecorated(true);
 
         Desk.setBackground(java.awt.Color.black);
 
-        start1Player.setBackground(new java.awt.Color(0, 102, 0));
-        start1Player.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
-        start1Player.setForeground(java.awt.Color.white);
+        start1Player.setBackground(new java.awt.Color(53, 186, 243));
+        start1Player.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
+        start1Player.setForeground(new java.awt.Color(0, 0, 0));
         start1Player.setText("START GAME");
         start1Player.setBorder(null);
         start1Player.setBorderPainted(false);
@@ -63,9 +64,9 @@ public class StartMenu extends javax.swing.JFrame {
             }
         });
 
-        Return.setBackground(new java.awt.Color(153, 0, 0));
-        Return.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
-        Return.setForeground(java.awt.Color.white);
+        Return.setBackground(new java.awt.Color(53, 186, 243));
+        Return.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
+        Return.setForeground(new java.awt.Color(0, 0, 0));
         Return.setText("RETURN");
         Return.setBorder(null);
         Return.setBorderPainted(false);
@@ -76,9 +77,9 @@ public class StartMenu extends javax.swing.JFrame {
             }
         });
 
-        jBScores.setBackground(new java.awt.Color(0, 102, 0));
-        jBScores.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
-        jBScores.setForeground(java.awt.Color.white);
+        jBScores.setBackground(new java.awt.Color(53, 186, 243));
+        jBScores.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
+        jBScores.setForeground(new java.awt.Color(0, 0, 0));
         jBScores.setText("High Scores");
         jBScores.setBorder(null);
         jBScores.setBorderPainted(false);
