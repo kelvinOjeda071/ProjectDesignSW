@@ -10,6 +10,7 @@ import Login.User;
 import Snail.SnailGame;
 import Snake.Game;
 import Snake.SnakeGame;
+import Tetris.State.TetrisMenuState;
 import Tetris.Tetris;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -217,14 +218,18 @@ public class CheckFacade extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSnakeGameActionPerformed
 
     private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
-        snailGame = new SnailGame();
+        /*snailGame = new SnailGame();
         snailGame.showWindow();
-        this.setVisible(false);
+        this.setVisible(false);*/
 
     }//GEN-LAST:event_jBSnailGameActionPerformed
 
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
-        tetris = new Tetris();
+        TetrisMenuState newMenuState = new TetrisMenuState();
+        int numPlayers;
+        numPlayers = newMenuState.playerManager();
+        System.out.println(numPlayers);
+        tetris = new Tetris(numPlayers);
         tetris.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBTetrisGameActionPerformed

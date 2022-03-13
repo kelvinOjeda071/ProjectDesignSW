@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import Facade.CheckFacade;
+import Tetris.State.TetrisMenuState;
 
 public class Tetris extends javax.swing.JFrame {
 
@@ -28,13 +29,20 @@ public class Tetris extends javax.swing.JFrame {
     Figure figure1;
     Manager manager1 = new Manager();
     Manager manager2 = new Manager();
+    
+    
+    int numPlayers;
+    
+    static int a;
 
-    int numPlayers = 2;
-
-    public Tetris() {
+    public Tetris(int numberPlayers) {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        
+        numPlayers = numberPlayers;
+        
+        System.out.println(numPlayers);
+        
         if (numPlayers == 1) {
             setSize(510, 750);
             jLScore.setText("0.0");
@@ -300,7 +308,7 @@ public class Tetris extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Tetris().setVisible(true);
+                new Tetris(a).setVisible(true);
             }
         });
     }
