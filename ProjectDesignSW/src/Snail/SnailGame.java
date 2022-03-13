@@ -1,10 +1,18 @@
 package Snail;
 
+import Asteroid.IO.JSONParser;
+import Login.User;
 import Snail.Input.Keyboard;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -20,145 +28,179 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class SnailGame extends JFrame {
+public class SnailGame extends JFrame implements Runnable {
 
-    private boolean state;
-    //private Player jugador;
-    private Escene nivel;
+    private boolean state = false;
+    private Thread thread;
     private Keyboard keyboard;
-    private Collision colision;
-    private float t0;
-    private float tf;
+    private GameLevel level;
+    private int score;
+    private int contDie;
+    private Player player;
+    private StartMenu startMenu;
+    private boolean mode;
+    private int numPlayer = 0;
 
     public SnailGame() {
-        keyboard = new Keyboard();
-        //startGame();
-    }
-
-    public void startGame() {
-        Position posicionCaracol = new Position(1, 1);
-        Position posicionPlataforma1 = new Position(0, 150);
-        Position posicionPlataforma2 = new Position(500, 400);
-        Position posicionPuerta1 = new Position(400, 1);
-        Position positionEnemy = new Position(180, 0);
-        Position positionButon = new Position(300, 140);
-        Position positionPortal = new Position(900, 340);
-
+        setSize(1200, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
         this.setTitle("Snail");
 
-        Snail caracol = new Snail(posicionCaracol, 100, 100);
-        Obstacle plataforma1 = new Obstacle(0, posicionPlataforma1, 400, 50);
-        Obstacle plataforma2 = new Obstacle(0, posicionPlataforma2, 400, 50);
-        Obstacle puerta1 = new Obstacle(1, posicionPuerta1, 50, 200);
-        Button boton1 = new Button(positionButon, 10, 10, puerta1);
-        Enemy enemy = new Enemy(positionEnemy, 80, 80);
-        Portal portal = new Portal(positionPortal, 100, 100);
-
-        ElementsList lista = new ElementsList();
-        lista.agregarElemento(caracol);
-        lista.agregarElemento(plataforma1);
-        lista.agregarElemento(plataforma2);
-        lista.agregarElemento(enemy);
-        lista.agregarElemento(boton1);
-        lista.agregarElemento(portal);
-        lista.agregarElemento(puerta1);
-
-        //this.keyboard = new Keyboard();
-        nivel = new Escene(lista);
-
-        nivel.addKeyListener(keyboard);
-        this.state = true;
-        this.add(nivel);
-        this.setSize(1200, 800);
         this.setVisible(state);
-        this.setLocation(100, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.nivel.update();
-        keyboard.update();
-        this.repaint();
-        boton1.activate(caracol);
-
-        while (state) {
-            this.run(boton1, caracol, lista, enemy, portal);
-            break;
-        }
-        
-        //t0 = System.nanoTime();
-        //System.out.print("TIEMPO INICIAL" + t0);
-        /*while (state) 
-        {
-        
-        this.nivel.update();
-        keyboard.update();
-        this.repaint();
-        boton1.activate(caracol);
-        
-        for(int i = 1; i<lista.getLista().size(); i++){
-            GameElement element = lista.getLista().get(i);
-            colision = new Collision(caracol, element);
-            colision.checkCollision();
+        ArrayList<User> dataList = readData();
+        for (int i = 0; i < dataList.size(); i++) {
+            if (dataList.get(i).getCurrentActive() == 1) {
+                numPlayer++;
+            }
         }
 
-        if((enemy.attackSnail(caracol) == false)||(portal.notifyEnd(caracol) == false)){
-            
-            //tf =System.nanoTime();
-            //System.out.print("TIEMPO FINAL" + tf);
-            state = false;
-            
-            
-        } 
-        
-        Thread.sleep(10);
-        
-        checkState();
-        
+        if (numPlayer == 1) {
+            this.mode = true;
+        }
 
-        }*/
+        if (numPlayer == 2) {
+            this.mode = false;
+        }
     }
 
-    public void run(Button boton1, Snail caracol, ElementsList lista, Enemy enemy, Portal portal) {
+    @Override
+    public void run() {
 
-        for (int i = 1; i < lista.getLista().size(); i++) {
-            GameElement element = lista.getLista().get(i);
-            colision = new Collision(caracol, element);
-            colision.checkCollision();
+        this.keyboard = new Keyboard();
+
+        level = new GameLevel(this, mode);
+
+        level.scene.addKeyListener(keyboard);
+        state = true;
+        this.add(level.getScene());
+        this.setSize(1200, 700);
+        this.setVisible(state);
+        this.setLocation(100, 25);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        while (state) {
+
+            refresh();
+            state = level.checkInteractions();
+            score = level.checkRecollection(score);
+            contDie = level.checkDie(contDie);
+            if (mode == false) {
+                if (contDie == 2) {
+                    state = false;
+                }
+            }
+
+            if (mode == true) {
+                if (contDie == 1) {
+                    state = false;
+                }
+            }
+
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            endGame(this.state);
+
         }
+        stop();
+    }
 
-        if ((enemy.attackSnail(caracol) == false) || (portal.notifyEnd(caracol) == false)) {
-
-            //tf =System.nanoTime();
-            //System.out.print("TIEMPO FINAL" + tf);
-            state = false;
-        }
-
-        try {
-            Thread.sleep(10);
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void refresh() {
+        this.level.getScene().update();
+        keyboard.update();
+        this.repaint();
 
     }
 
     public void endGame(boolean state) {
         if (state == false) {
-            int punctuation = (int) ((tf - t0) / 1000);
-            JOptionPane.showMessageDialog(null, "Tu puntuación: " + punctuation + "\nTIEMPO FINAL: " + tf
-                    + "\nTIEMPO INICIAL: " + t0, "GAME OVER", 1);
+            startMenu = new StartMenu();
+            //int punctuation = (int) ((tf - t0) / 1000);
+            JOptionPane.showMessageDialog(null, "Tu puntuación: " + score, "GAME OVER", 1);
+            //player.updateScore(score);
+            this.setVisible(false);
+            //startMenu.setVisible(true);
+            //boolean isFound= false;
+            // Save the new Score for the User Login
+            try {
+                ArrayList<User> dataList = JSONParser.readField();
+                int z = 0;
+                for (int j = 0; j < dataList.size(); j++) {
+                    if (dataList.get(j).getCurrentActive() == 1) {
+                        if (dataList.get(j).getSnailGameScore()
+                                < score) {
+                            dataList.get(j).setSnailGameScore(score);
+                            dataList.get(j).setDate(setDateNow());
+                            writeData(dataList);
+                        }
+                    }
 
-            exitMenu();
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(SnailGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            startMenu.setVisible(true);
+
         }
     }
 
-    public void checkState() {
-        endGame(this.state);
-        startGame();
+    public void start() {
+
+        thread = new Thread(this);
+        thread.start();
+        state = true;
+
     }
 
-    public void exitMenu() {
-        this.setVisible(false);
+    private void stop() {
+        try {
+            thread.join();
+            state = false;
+        } catch (InterruptedException e) {
+            /* Prints the error */
+            e.printStackTrace();
+        }
+    }
 
+    public void showWindow() {
+        startMenu = new StartMenu();
+        startMenu.setVisible(true);
+
+    }
+
+    private ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    private boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
+
+    private String setDateNow() {
+        Date today = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(today);
     }
 
 }

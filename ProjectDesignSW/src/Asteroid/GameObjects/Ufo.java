@@ -6,7 +6,7 @@ package Asteroid.GameObjects;
 
 import Asteroid.Graphics.Asset;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -34,7 +34,7 @@ public class Ufo extends MovingObject {
             double maxVelocity,
             BufferedImage texture, 
             ArrayList<Vector2D> path, 
-            ActionGameState gameState) {
+            GameModeState gameState) {
         super(position, velocity, maxVelocity, texture, gameState);
         this.path = path;
         index = 0;
