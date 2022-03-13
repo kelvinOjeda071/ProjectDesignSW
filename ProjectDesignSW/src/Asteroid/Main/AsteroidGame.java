@@ -3,7 +3,6 @@ package Asteroid.Main;
 import Asteroid.State.MenuState;
 import Asteroid.Graphics.Asset;
 import Asteroid.Input.KeyBoard;
-import Asteroid.State.ActionGameState;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +12,6 @@ import Asteroid.GameObjects.Constant;
 import Asteroid.Input.MouseInput;
 import Asteroid.State.GameState;
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 public class AsteroidGame extends JFrame implements Runnable {
     /* Attributes */

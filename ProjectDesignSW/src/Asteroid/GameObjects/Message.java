@@ -6,7 +6,7 @@ package Asteroid.GameObjects;
 
 import Asteroid.Graphics.Text;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
