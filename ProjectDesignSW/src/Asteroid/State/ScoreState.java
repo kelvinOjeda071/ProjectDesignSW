@@ -8,7 +8,6 @@ import Asteroid.GameObjects.Constant;
 import Asteroid.Graphics.Asset;
 import Asteroid.Graphics.Text;
 import Asteroid.IO.JSONParser;
-import Asteroid.IO.ScoreData;
 import Asteroid.Math.Vector2D;
 import Asteroid.UI.Action;
 import Asteroid.UI.Button;

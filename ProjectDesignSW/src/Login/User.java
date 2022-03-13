@@ -1,8 +1,6 @@
-
 package Login;
 
 import Asteroid.IO.JSONParser;
-import Asteroid.IO.ScoreData;
 import Facade.CheckFacade;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -16,6 +14,7 @@ import java.util.logging.Logger;
  * @author KelvinOjeda
  */
 public class User {
+
     private String firstName;
     private String lastName;
     private String id;
@@ -26,10 +25,8 @@ public class User {
     private int tetrisGameScore;
     private int snakeGameScore;
     private int currentActive;
-    
 
-
-    public User(String firstName, String lastName, String id,String password, int scoreSignIn, int currentActive) {
+    public User(String firstName, String lastName, String id, String password, int scoreSignIn, int currentActive) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
@@ -41,12 +38,11 @@ public class User {
         Date today = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         this.date = format.format(today);
-        this.currentActive= currentActive;
+        this.currentActive = currentActive;
     }
 
     public User() {
     }
-    
 
     public String getFirstName() {
         return firstName;
@@ -71,8 +67,6 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-
-    
 
     public String getPassword() {
         return password;
@@ -121,10 +115,7 @@ public class User {
     public void setCurrentActive(int currentActive) {
         this.currentActive = currentActive;
     }
-    
-    
-    
-    
+
     public String getDate() {
         return date;
     }
@@ -133,21 +124,16 @@ public class User {
         this.date = date;
     }
 
-    
-    public void addScore(ScoreData scoreData, String gameType){
-        
+    public void signIn(JFSignInUser jFSignInUser) {
+        jFSignInUser.signIn();
     }
-    
-    public void signIn(JFSignInUser jFSignInUser){
-      jFSignInUser.signIn();
+
+    public void logIn(JFLogInUserMono jFLogIn) {
+        jFLogIn.logIn();
     }
-    
-    public void logIn(JFLogInUserMono jFLogIn){
-       jFLogIn.logIn(); 
-    }
-    
-    public void playGame(CheckFacade checkFacade){
+
+    public void playGame(CheckFacade checkFacade) {
         checkFacade.setVisible(true);
     }
-    
+
 }

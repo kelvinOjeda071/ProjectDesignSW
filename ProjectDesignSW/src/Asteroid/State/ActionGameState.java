@@ -20,8 +20,6 @@ import Asteroid.GameObjects.Size;
 import Asteroid.GameObjects.Ufo;
 import Asteroid.Graphics.Animation;
 import Asteroid.IO.JSONParser;
-import Asteroid.IO.ScoreData;
-import Login.JFLogInUserMono;
 import Login.User;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -342,7 +340,7 @@ public class ActionGameState extends GameState {
 
     private void drawLives(Graphics g) {
         if (numberPlayer != 1) {
-            if (live2 < 1) {
+            if (live1 < 1 && live2 < 1) {
                 return;
             }
             Vector2D livePosition2 = new Vector2D(25, 75);
@@ -372,7 +370,7 @@ public class ActionGameState extends GameState {
             }
 
         }
-        if (live1 < 1) {
+        if (live1 < 1 && live2 < 1) {
             return;
         }
 

@@ -5,7 +5,6 @@
 package Login;
 
 import Asteroid.IO.JSONParser;
-import Asteroid.IO.ScoreData;
 import Facade.CheckFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
