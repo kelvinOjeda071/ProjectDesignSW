@@ -57,8 +57,8 @@ public class Manager {
                 }
                 // Funcion para saber si se perdió en el juego
                 if (counter > 5) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Has perdido\n"
-                            + "Fin.\n", "Fin del juego", javax.swing.JOptionPane.OK_OPTION);
+                    javax.swing.JOptionPane.showMessageDialog(null, "You lost!\n"
+                            + "END.\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
                     step.cancel();
                     
                     counter = 0;

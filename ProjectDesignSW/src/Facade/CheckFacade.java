@@ -64,7 +64,6 @@ public class CheckFacade extends javax.swing.JFrame {
 
         jBAsteroidGame.setBackground(new java.awt.Color(53, 186, 243));
         jBAsteroidGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBAsteroidGame.setForeground(new java.awt.Color(0, 0, 0));
         jBAsteroidGame.setText("Asteroid Game");
         jBAsteroidGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +73,6 @@ public class CheckFacade extends javax.swing.JFrame {
 
         jBSnailGame.setBackground(new java.awt.Color(53, 186, 243));
         jBSnailGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBSnailGame.setForeground(new java.awt.Color(0, 0, 0));
         jBSnailGame.setText("Snail Game");
         jBSnailGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +82,6 @@ public class CheckFacade extends javax.swing.JFrame {
 
         jBTetrisGame.setBackground(new java.awt.Color(53, 186, 243));
         jBTetrisGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBTetrisGame.setForeground(new java.awt.Color(0, 0, 0));
         jBTetrisGame.setText("Tetris Game");
         jBTetrisGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +91,6 @@ public class CheckFacade extends javax.swing.JFrame {
 
         jBSnakeGame.setBackground(new java.awt.Color(53, 186, 243));
         jBSnakeGame.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
-        jBSnakeGame.setForeground(new java.awt.Color(0, 0, 0));
         jBSnakeGame.setText("Snake Game");
         jBSnakeGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +112,6 @@ public class CheckFacade extends javax.swing.JFrame {
 
         jBExit.setBackground(new java.awt.Color(255, 0, 51));
         jBExit.setFont(new java.awt.Font("KenVector Future Thin", 0, 36)); // NOI18N
-        jBExit.setForeground(new java.awt.Color(0, 0, 0));
         jBExit.setText("EXIT");
         jBExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,9 +224,9 @@ public class CheckFacade extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSnailGameActionPerformed
 
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
+        this.setVisible(false);
         tetris= new Tetris();
         tetris.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_jBTetrisGameActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
