@@ -37,14 +37,14 @@ public class Tetris extends javax.swing.JFrame {
 
     public Tetris(int numberPlayers) {
         initComponents();
+        
         this.setLocationRelativeTo(null);
         
         numPlayers = numberPlayers;
         
-        System.out.println(numPlayers);
-        
         if (numPlayers == 1) {
             setSize(510, 750);
+            this.setLocationRelativeTo(null);
             jLScore.setText("0.0");
 
             //Game 1
@@ -58,7 +58,7 @@ public class Tetris extends javax.swing.JFrame {
         } else {
             jLScore.setText("0.0");
             jLScore2.setText("0.0");
-
+            this.setLocationRelativeTo(null);
             //Game 1
             Board newBoard = new Board(matrixes, Board1);
             JButton[][] matrix = newBoard.drawB();
@@ -136,6 +136,7 @@ public class Tetris extends javax.swing.JFrame {
         jLabel2.setText("Score");
 
         btnExit.setText("Exit");
+        btnExit.setEnabled(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -204,6 +205,7 @@ public class Tetris extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
 
         Board1.setBackground(new java.awt.Color(255, 200, 236));
+        Board1.setEnabled(false);
         Board1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(Board1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 320, 610));
 
@@ -233,6 +235,7 @@ public class Tetris extends javax.swing.JFrame {
 
         if (numPlayers == 1) {
             setSize(510, 750);
+            this.setLocationRelativeTo(null);
             jLScore.setText("0.0");
 
             //Game 1
@@ -246,7 +249,7 @@ public class Tetris extends javax.swing.JFrame {
         } else {
             jLScore.setText("0.0");
             jLScore2.setText("0.0");
-
+            this.setLocationRelativeTo(null);
             //Game 1
             Board newBoard = new Board(matrixes, Board1);
             JButton[][] matrix = newBoard.drawB();
@@ -270,10 +273,13 @@ public class Tetris extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(false);
-        CheckFacade newFacade = new CheckFacade();
-        newFacade.setVisible(true);
-
+        TetrisMenu newTM = new TetrisMenu();
+        newTM.setVisible(true);
+        newTM.dispose();
+        /*CheckFacade newFacade = new CheckFacade();
+        newFacade.setVisible(true);*/
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

@@ -1,5 +1,6 @@
 package Tetris;
 
+import Facade.CheckFacade;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.util.Timer;
@@ -50,7 +51,6 @@ public class Manager {
         down = new TimerTask() {
             @Override
             public void run() {
-
                 for (int x = 0; x < dimx; x++) {
                     if (!matrix[x][0].getBackground().equals(new Color(240, 240, 240))) {
                         counter++;
@@ -60,8 +60,14 @@ public class Manager {
                 if (counter > 5) {
                     javax.swing.JOptionPane.showMessageDialog(null, "You lost\n"
                             + "END.\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
+                    /*int confirm = javax.swing.JOptionPane.OK_OPTION;
+                    if (confirm == 0) {
+                        Tetris newTetris = new Tetris(0);
+                        newTetris.setVisible(false);
+                        TetrisMenu newTMenu = new TetrisMenu();
+                        newTMenu.setVisible(true);
+                    }*/
                     step.cancel();
-
                     counter = 0;
                     return;
                 }
@@ -225,7 +231,14 @@ public class Manager {
 
                 if (counter > 5) {
                     javax.swing.JOptionPane.showMessageDialog(null, "You lost\n"
-                            + "END!.\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
+                            + "END!\n", "GAME OVER", javax.swing.JOptionPane.OK_OPTION);
+                    /*int confirm = javax.swing.JOptionPane.OK_OPTION;
+                    if (confirm == 0) {
+                        Tetris newTetris = new Tetris(0);
+                        newTetris.setVisible(false);
+                        TetrisMenu newTMenu = new TetrisMenu();
+                        newTMenu.setVisible(true);
+                    }*/
                     step.cancel();
                     counter = 0;
                     return;
