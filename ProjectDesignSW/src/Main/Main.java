@@ -5,7 +5,8 @@
 package Main;
 
 import Facade.CheckFacade;
-import Login.JFLogIn;
+import Login.JFLogInMultiUser;
+import Login.JFLogInUserMono;
 
 /**
  *
@@ -17,8 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JFLogIn jfLogin = new JFLogIn();
-        jfLogin.setVisible(true);
+        JFLogInMultiUser jfLoginMultiUser = new JFLogInMultiUser();
+        jfLoginMultiUser.setVisible(true);
     }
     
 }

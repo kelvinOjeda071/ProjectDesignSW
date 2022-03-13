@@ -5,13 +5,12 @@ package Snail;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author User
  */
 public class Collision {
-    
+
     Snail snail;
     GameElement elementB;
 
@@ -19,7 +18,7 @@ public class Collision {
         this.snail = snail;
         this.elementB = element;
     }
-    
+
     public void checkCollisionX() {
         int type = this.elementB.typeObject;
         if (type == 1) {
@@ -46,9 +45,7 @@ public class Collision {
         }
 
     }
-    
-    
-    
+
     public void checkCollisionY() {
         int type = this.elementB.typeObject;
         if (type == 1) {
@@ -74,13 +71,11 @@ public class Collision {
             }
         }
 
-        
     }
-    
-    
-    public void checkCollision(){
+
+    public void checkCollision() {
         checkCollisionY();
         checkCollisionX();
     }
-    
+
 }

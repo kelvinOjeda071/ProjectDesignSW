@@ -46,25 +46,24 @@ public class Scene extends JPanel {
     }
 
     void update() {
-        GameElement elemento;
-        for (int i = 0; i < list.getLista().size(); i++) {
-            elemento = list.getLista().get(i);
-            elemento.move();
+        GameElement gameElement;
+        for (int i = 0; i < list.getList().size(); i++) {
+            gameElement = list.getList().get(i);
+            gameElement.move();
         }
 
     }
-    
 
     public void paint(Graphics g) {
         super.paint(g);
         image = new ImageIcon(getClass().getResource("/SnailImages/background.jpg")).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
-        GameElement elemento;
-        for (int i = 0; i < list.getLista().size(); i++) {
-            elemento = list.getLista().get(i);
-            elemento.draw(g, elemento.getHeight(), elemento.getWidth());
-            elemento = null;
+        GameElement gameElement;
+        for (int i = 0; i < list.getList().size(); i++) {
+            gameElement = list.getList().get(i);
+            gameElement.draw(g, gameElement.getHeight(), gameElement.getWidth());
+            gameElement = null;
 
         }
     }

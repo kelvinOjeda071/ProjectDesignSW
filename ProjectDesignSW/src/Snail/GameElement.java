@@ -21,11 +21,11 @@ public abstract class GameElement{
     int height;
     int typeObject;
 
-    public GameElement(Position position, int height, int width, int tipo) {
+    public GameElement(Position position, int height, int width, int type) {
         this.position = position;
         this.width = height;
         this.height = width;
-        this.typeObject = tipo;
+        this.typeObject = type;
     }
 
     public void setPosicionX(int x) {

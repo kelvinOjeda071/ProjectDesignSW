@@ -1,6 +1,5 @@
 package Snail;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -11,13 +10,12 @@ import javax.swing.ImageIcon;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author User
  */
 public class Button extends GameElement {
-    
+
     private Obstacle obstacle;
     private final ImageIcon image;
 
@@ -26,8 +24,8 @@ public class Button extends GameElement {
         this.obstacle = obstacle;
         this.image = new ImageIcon(getClass().getResource("/SnailImages/button.png"));
     }
-    
-    public void activate(Snail snail){
+
+    public void activate(Snail snail) {
         int posYSnail = snail.position.y;
         int posXSnail = snail.position.x;
         int heightSnail = snail.height;
@@ -62,9 +60,7 @@ public class Button extends GameElement {
 
         }
 
-        
     }
-
 
     @Override
     public void draw(Graphics grafic, int width, int height) {
@@ -79,7 +75,7 @@ public class Button extends GameElement {
     }
 
     public void move() {
-        
+
     }
 
 }

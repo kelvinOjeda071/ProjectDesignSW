@@ -8,14 +8,27 @@ import Facade.CheckFacade;
 
 public class StartMenu extends javax.swing.JFrame {
 
-    
     private SnailGame snailGame;
     private CheckFacade checkFacade;
     boolean mode;
-    
+
     public StartMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public void startGame() {
+        new SnailGame().start();
+    }
+
+    public void exitGame() {
+        this.setVisible(false);
+        checkFacade = new CheckFacade();
+    }
+
+    public void viewScores() {
+        ScoreView score = new ScoreView();
+        score.setVisible(true);
     }
 
     /**
@@ -29,8 +42,7 @@ public class StartMenu extends javax.swing.JFrame {
 
         Desk = new javax.swing.JPanel();
         start1Player = new javax.swing.JButton();
-        start2Players = new javax.swing.JButton();
-        Exit = new javax.swing.JButton();
+        Return = new javax.swing.JButton();
         jBScores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -41,7 +53,7 @@ public class StartMenu extends javax.swing.JFrame {
         start1Player.setBackground(new java.awt.Color(0, 102, 0));
         start1Player.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
         start1Player.setForeground(java.awt.Color.white);
-        start1Player.setText("START 1 PLAYER");
+        start1Player.setText("START GAME");
         start1Player.setBorder(null);
         start1Player.setBorderPainted(false);
         start1Player.setFocusPainted(false);
@@ -51,29 +63,16 @@ public class StartMenu extends javax.swing.JFrame {
             }
         });
 
-        start2Players.setBackground(new java.awt.Color(0, 102, 0));
-        start2Players.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
-        start2Players.setForeground(java.awt.Color.white);
-        start2Players.setText("START 2 PLAYERS");
-        start2Players.setBorder(null);
-        start2Players.setBorderPainted(false);
-        start2Players.setFocusPainted(false);
-        start2Players.addActionListener(new java.awt.event.ActionListener() {
+        Return.setBackground(new java.awt.Color(153, 0, 0));
+        Return.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
+        Return.setForeground(java.awt.Color.white);
+        Return.setText("RETURN");
+        Return.setBorder(null);
+        Return.setBorderPainted(false);
+        Return.setFocusPainted(false);
+        Return.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                start2PlayersActionPerformed(evt);
-            }
-        });
-
-        Exit.setBackground(new java.awt.Color(153, 0, 0));
-        Exit.setFont(new java.awt.Font("Digital-7 Mono", 1, 18)); // NOI18N
-        Exit.setForeground(java.awt.Color.white);
-        Exit.setText("EXIT");
-        Exit.setBorder(null);
-        Exit.setBorderPainted(false);
-        Exit.setFocusPainted(false);
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                ReturnActionPerformed(evt);
             }
         });
 
@@ -97,8 +96,7 @@ public class StartMenu extends javax.swing.JFrame {
                 .addContainerGap(166, Short.MAX_VALUE)
                 .addGroup(DeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBScores, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(start2Players, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Return, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(start1Player, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(152, 152, 152))
         );
@@ -107,12 +105,10 @@ public class StartMenu extends javax.swing.JFrame {
             .addGroup(DeskLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(start1Player, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(start2Players, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addComponent(jBScores, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(Return, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
@@ -132,30 +128,20 @@ public class StartMenu extends javax.swing.JFrame {
 
     private void start1PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start1PlayerActionPerformed
         // TODO add your handling code here:
-        mode = true;
-        new SnailGame().start(mode);
+        //mode = true;
+        startGame();
         this.setVisible(false);
-        
     }//GEN-LAST:event_start1PlayerActionPerformed
 
-    private void start2PlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start2PlayersActionPerformed
+    private void ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnActionPerformed
         // TODO add your handling code here:
-        mode = false;
-        new SnailGame().start(mode);
-        this.setVisible(false);
-    }//GEN-LAST:event_start2PlayersActionPerformed
-
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        checkFacade = new CheckFacade();
+        exitGame();
         checkFacade.setVisible(true);
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_ReturnActionPerformed
 
     private void jBScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBScoresActionPerformed
-    
-        ScoreView score = new ScoreView();
-        score.setVisible(true);
+
+        viewScores();
     }//GEN-LAST:event_jBScoresActionPerformed
 
     /**
@@ -195,9 +181,8 @@ public class StartMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Desk;
-    private javax.swing.JButton Exit;
+    private javax.swing.JButton Return;
     private javax.swing.JButton jBScores;
     private javax.swing.JButton start1Player;
-    private javax.swing.JButton start2Players;
     // End of variables declaration//GEN-END:variables
 }

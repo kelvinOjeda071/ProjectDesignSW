@@ -7,9 +7,11 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +39,7 @@ public class SnailGame extends JFrame implements Runnable {
     private Player player;
     private StartMenu startMenu;
     private boolean mode;
+    private int numPlayer = 0;
 
     public SnailGame() {
         setSize(1200, 800);
@@ -44,9 +47,23 @@ public class SnailGame extends JFrame implements Runnable {
         setResizable(false);
         setLocationRelativeTo(null);
         this.setTitle("Snail");
-        level = new GameLevel(this, mode);
+
         this.setVisible(state);
 
+        ArrayList<User> dataList = readData();
+        for (int i = 0; i < dataList.size(); i++) {
+            if (dataList.get(i).getCurrentActive() == 1) {
+                numPlayer++;
+            }
+        }
+
+        if (numPlayer == 1) {
+            this.mode = true;
+        }
+
+        if (numPlayer == 2) {
+            this.mode = false;
+        }
     }
 
     @Override
@@ -54,7 +71,7 @@ public class SnailGame extends JFrame implements Runnable {
 
         this.keyboard = new Keyboard();
 
-        level.generateObjects(this, mode);
+        level = new GameLevel(this, mode);
 
         level.scene.addKeyListener(keyboard);
         state = true;
@@ -75,9 +92,9 @@ public class SnailGame extends JFrame implements Runnable {
                     state = false;
                 }
             }
-            
-            if(mode == true){
-                 if (contDie == 1) {
+
+            if (mode == true) {
+                if (contDie == 1) {
                     state = false;
                 }
             }
@@ -118,7 +135,8 @@ public class SnailGame extends JFrame implements Runnable {
                         if (dataList.get(j).getSnailGameScore()
                                 < score) {
                             dataList.get(j).setSnailGameScore(score);
-                            JSONParser.writeFile(dataList);
+                            dataList.get(j).setDate(setDateNow());
+                            writeData(dataList);
                         }
                     }
 
@@ -133,8 +151,8 @@ public class SnailGame extends JFrame implements Runnable {
         }
     }
 
-    public void start(boolean mode) {
-        this.mode = mode;
+    public void start() {
+
         thread = new Thread(this);
         thread.start();
         state = true;
@@ -155,6 +173,34 @@ public class SnailGame extends JFrame implements Runnable {
         startMenu = new StartMenu();
         startMenu.setVisible(true);
 
+    }
+
+    private ArrayList<User> readData() {
+        try {
+            return JSONParser.readField();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    private boolean writeData(ArrayList<User> dataList) {
+        boolean isWrited = false;
+        try {
+            JSONParser.writeFile(dataList);
+            isWrited = true;
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            isWrited = false;
+        }
+        return isWrited;
+    }
+
+    private String setDateNow() {
+        Date today = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(today);
     }
 
 }

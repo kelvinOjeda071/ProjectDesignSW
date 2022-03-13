@@ -23,14 +23,12 @@ import javax.swing.JPanel;
  */
 public class ScoreManager extends JPanel {
 
-    private Button returnButton;
     private PriorityQueue<User> highScores;
     private Comparator<User> scoreComparator;
     private User[] auxArrayScoreDataUser;
-    private Position position;
+    //private Position position;
 
     public ScoreManager() {
-        
 
         scoreComparator = new Comparator<User>() {
             @Override
@@ -56,7 +54,7 @@ public class ScoreManager extends JPanel {
     }
 
     public static void drawText(Graphics g, String string, Position position,
-            boolean center, Color color, Font font) {
+        boolean center, Color color, Font font) {
         g.setColor(color);
         g.setFont(font);
         position = new Position(position.getX(), position.getY());
@@ -91,19 +89,17 @@ public class ScoreManager extends JPanel {
             User auxScoreDataUser = auxArrayScoreDataUser[i];
 
             drawText(g, auxScoreDataUser.getFirstName() + "  " + auxScoreDataUser.getLastName(),
-                     positionName, true, Color.black, font);
+                    positionName, true, Color.black, font);
             drawText(g, Integer.toString(auxScoreDataUser.getSnailGameScore()),
-                     positionScore, true, Color.black, font);
+                    positionScore, true, Color.black, font);
             drawText(g, auxScoreDataUser.getDate(),
-                     positionDate, true, Color.black, font);
+                    positionDate, true, Color.black, font);
 
             positionName.setY(positionName.getY() + 50);
             positionScore.setY(positionScore.getY() + 50);
             positionDate.setY(positionDate.getY() + 50);
         }
 
-        
     }
 
 }
-

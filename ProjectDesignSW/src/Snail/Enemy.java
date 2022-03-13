@@ -20,12 +20,12 @@ import javax.swing.ImageIcon;
 public class Enemy extends GameElement {
 
     private final ImageIcon image;
-    int auxY;
+    int Y0move;
 
     public Enemy(Position position, int height, int width) {
         super(position, height, width, 4);
         this.image = new ImageIcon(getClass().getResource("/SnailImages/spider.png"));
-        auxY = position.getY();
+        Y0move = position.getY();
     }
 
     @Override
@@ -44,11 +44,11 @@ public class Enemy extends GameElement {
         int x0 = this.position.getX();
         int y0 = this.position.getY();
 
-        if ((y0 >= auxY) && (y0 < auxY + 200)) {
+        if ((y0 >= Y0move) && (y0 < Y0move + 200)) {
             this.position.setY(y0 + 1);
         }
-        if (y0 == auxY + 200) {
-            this.position.setY(auxY);
+        if (y0 == Y0move + 200) {
+            this.position.setY(Y0move);
 
         }
     }
@@ -73,12 +73,12 @@ public class Enemy extends GameElement {
                 && (posYSnail + speedSnailY < posYEnemy + heightEnemy)) {
             //this.snail.setPosicionX(posXEnemy - widthSnail );
             //System.out.println("ENTRO PRIMER IF");
-            contDie = contDie+1;
+            contDie = contDie + 1;
             snail.setHeight(0);
             snail.setWidth(0);
             snail.setPosicionX(-10);
             snail.setPosicionY(-10);
-            
+
             //return contDie;
         } else {
             if ((posXSnail + widthSnail + speedSnailX > posXEnemy)
@@ -88,12 +88,12 @@ public class Enemy extends GameElement {
                 //snail.setPosicionY(posYEnemy - heightSnail );
                 //snail.setSpeedX(speedSnailY=0);
                 //System.out.println("ENTRO SEGUNDO IF");
-                contDie = contDie+1;
+                contDie = contDie + 1;
                 snail.setHeight(0);
                 snail.setWidth(0);
                 snail.setPosicionX(-10);
                 snail.setPosicionY(-10);
-               // return contDie;
+                // return contDie;
             } else {
                 //System.out.println("NO ENTRO A NINGUN IF");
                 //return contDie;

@@ -21,9 +21,9 @@ public class Obstacle extends GameElement {
     private final ImageIcon image2;
     private final ImageIcon image3;
 
-    public Obstacle(int tipoObstaculo, Position posicion, int height, int width) {
-        super(posicion, height, width, 1);
-        this.typeObstacle = tipoObstaculo;
+    public Obstacle(int typeObstacle, Position position, int height, int width) {
+        super(position, height, width, 1);
+        this.typeObstacle = typeObstacle;
         this.image1 = new ImageIcon(getClass().getResource("/SnailImages/platform.png"));
         this.image2 = new ImageIcon(getClass().getResource("/SnailImages/box.png"));
         this.image3 = new ImageIcon(getClass().getResource("/SnailImages/wall.png"));
@@ -34,8 +34,8 @@ public class Obstacle extends GameElement {
 
         height = this.height;
         width = this.width;
-        int posicionX = this.position.getX();
-        int posicionY = this.position.getY();
+        int positionX = this.position.getX();
+        int positionY = this.position.getY();
         height = this.height;
         width = this.width;
 
@@ -43,20 +43,20 @@ public class Obstacle extends GameElement {
 
         if (typeObstacle == 0) { //Plataforma
             graphics.setColor(Color.black);
-            graphics.drawImage(this.image1.getImage(), posicionX, posicionY, width, height, null);
+            graphics.drawImage(this.image1.getImage(), positionX, positionY, width, height, null);
             //grafico.fillRect(posicionX, posicionY, width, height);
 
         }
 
         if (typeObstacle == 2) { //Caja
             graphics.setColor(Color.black);
-            graphics.drawImage(this.image2.getImage(), posicionX, posicionY, width, height, null);
+            graphics.drawImage(this.image2.getImage(), positionX, positionY, width, height, null);
 
         }
         
         if (typeObstacle == 1) {//Muro
             graphics.setColor(Color.black);
-            graphics.drawImage(this.image3.getImage(), posicionX, posicionY, width, height, null);
+            graphics.drawImage(this.image3.getImage(), positionX, positionY, width, height, null);
         }
     }
 
