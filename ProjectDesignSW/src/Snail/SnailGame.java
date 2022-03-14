@@ -121,7 +121,7 @@ public class SnailGame extends JFrame implements Runnable {
         if (state == false) {
             startMenu = new StartMenu();
             //int punctuation = (int) ((tf - t0) / 1000);
-            JOptionPane.showMessageDialog(null, "Tu puntuación: " + score, "GAME OVER", 1);
+            JOptionPane.showMessageDialog(null, "Your score is " + score, "GAME OVER", 1);
             //player.updateScore(score);
             this.setVisible(false);
             //startMenu.setVisible(true);
