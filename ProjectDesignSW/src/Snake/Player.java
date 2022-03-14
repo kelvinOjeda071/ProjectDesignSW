@@ -5,23 +5,25 @@ import java.awt.Point;
 import java.util.Iterator;
 import java.util.Random;
 
-public abstract class Entity extends Thread {
+public abstract class Player extends Thread {
     Score score;
     Board board;
     Crash crash;
     Snake snake;
     Enemy enemy;
-    int size = 10; // entity size
+    int size = 10; // player size
     int speed = 10;
+    int point;
     Color color = Color.BLUE;
+    Dead dead= new Dead();
     static final Random r = new Random();
     int count = 0;
 
     public abstract void generate();
-
     public abstract boolean drop();
+    public abstract Color checkSpeed();
 
-    //n= entity head
+    //n= player head
     public int eatFood(Point n){
         Iterator<Point> i = board.food.food.iterator();
         while (i.hasNext()) {
@@ -32,14 +34,13 @@ public abstract class Entity extends Thread {
                 size++;
             }
         }
-        //System.out.println("Puntaje por Comida"+count);
         board.repaint();
         return count;
     }
-
+/*
     public int score() {
         return count;
-    }
+    }*/
     
     //Calculate direction betwen 2 points
     public Point calculateCoord(Point last, Point mouse) {

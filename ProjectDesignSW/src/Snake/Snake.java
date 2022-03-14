@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class Snake extends Entity {
+public class Snake extends Player {
 
-    Dead dead = new Dead();
     ArrayList<Point> snake;
-    int point;
     int lifeSn = 0;
     PointerInfo a = MouseInfo.getPointerInfo();
 
@@ -44,8 +42,7 @@ public class Snake extends Entity {
         a = MouseInfo.getPointerInfo();
         Point p = a.getLocation();
         Point last = snake.get(snake.size() - 1);
-        Point n = new Point();
-        //showLocationHead(last); 
+        Point n = new Point(); 
         move(snake, last, p, n);
     }
 
@@ -60,8 +57,6 @@ public class Snake extends Entity {
             }
             lifeSn++;
             board.settLbel(lifeSn + "X");
-            //dead.setVisible(true);
-            //this.stop();
             snake.clear();
             size = 10;
             snake.add(new Point(r.nextInt(900), r.nextInt(900)));
@@ -75,13 +70,14 @@ public class Snake extends Entity {
             }
             board.enemy.lifeEn++;
             board.settLbel2(board.enemy.lifeEn + "X");
-            //enemy.stop();
             board.enemy.enemy.clear();
             board.enemy.size = 10;
             board.enemy.enemy.add(new Point(r.nextInt(900), r.nextInt(900)));
 
         }
         if (lifeSn > 2 || board.enemy.lifeEn > 2) {
+            board.setVisible(false);
+            dead.setVisible(true);
             ArrayList<User> dataList = readData();
             int highScore = 0;
             if (this.board.boardGetEnemyScore() > this.board.boardGetSnakeScore()) {
@@ -115,10 +111,12 @@ public class Snake extends Entity {
     public void checkOutOfBorder() {
         if (snake.get(snake.size() - 1).x < 15 || snake.get(snake.size() - 1).y < 44
                 || snake.get(snake.size() - 1).x > 996 || snake.get(snake.size() - 1).y > 985) {
-            System.exit(0);
+            //System.exit(0);
+            //drop();
         }
     }
 
+    @Override
     public Color checkSpeed() {
         board.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -153,6 +151,45 @@ public class Snake extends Entity {
 
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public ArrayList<Point> getSnake() {
         return snake;
     }

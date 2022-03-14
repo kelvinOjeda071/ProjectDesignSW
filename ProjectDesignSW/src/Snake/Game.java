@@ -15,7 +15,7 @@ public class Game {
     Snake snake; 
     Food food;
     Enemy enemy;
-    Entity entity;
+    Player entity;
 
     public void startGame(){
         snake = new Snake();    
@@ -42,10 +42,10 @@ public class Game {
         food.start();
         enemy.start();
     }
-    
+    /*
     public void getScore(){
         System.out.println("Puntaje por comida" + enemy.score.getSnakeScore());
-    }
+    }*/
     
     public void finishGame(){
 

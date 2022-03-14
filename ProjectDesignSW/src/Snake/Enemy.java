@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Enemy extends Entity {
+public class Enemy extends Player {
 
     ArrayList<Point> enemy;
-    int point;
-    PointerInfo a = MouseInfo.getPointerInfo();
     int lifeEn=0;
+    
+    PointerInfo a = MouseInfo.getPointerInfo();
     Point last;
     Point newPoint;
 
@@ -48,6 +48,7 @@ public class Enemy extends Entity {
         //keyPressed();
     }
 
+    @Override
     public Color checkSpeed() {
         board.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -102,13 +103,6 @@ public class Enemy extends Entity {
         return newPoint;
     }
 
-    public Point getPoint() {
-        int index = (int) (Math.random() * (enemy.size() - 1));
-
-        Point p = board.food.food.get(index);
-        return p;
-    }
-
     public void move(ArrayList b, Point last, Point p, Point n) {
         if (last.distance(p) > 1) {
             n = super.calculateCoord(last, p);
@@ -138,6 +132,11 @@ public class Enemy extends Entity {
         return true;
     }
 
+    
+    
+    
+    
+    
     public ArrayList<Point> getEnemy() {
         return enemy;
     }

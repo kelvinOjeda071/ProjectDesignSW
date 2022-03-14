@@ -5,8 +5,8 @@
  */
 package Snake;
 public class Score {
-    int snakeScore;
-    int enemyScore;
+    int snakeScore=0;
+    int enemyScore=0;
 
     public int getSnakeScore() {
         return snakeScore;

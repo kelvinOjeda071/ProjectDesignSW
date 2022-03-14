@@ -21,5 +21,4 @@ public class Main {
         JFLogInMultiUser jfLoginMultiUser = new JFLogInMultiUser();
         jfLoginMultiUser.setVisible(true);
     }
-    
 }

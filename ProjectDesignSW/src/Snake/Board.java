@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Snake;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,17 +13,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
-import java.net.URL;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Board extends javax.swing.JFrame{
+public class Board extends javax.swing.JFrame {
+
     Food food;
-    Entity entity;
-    Snake snake;
-    Enemy enemy;
+    Player player;
+
     Image OSC;
 
     public Board() {
@@ -33,28 +30,18 @@ public class Board extends javax.swing.JFrame{
         this.setBackground(Color.black);//Color Fondo
         this.setVisible(true);
         jP1.setBackground(Color.black);
+        this.setLocationRelativeTo(null);
     }
-    
+
     public void paint(Graphics g) {
         Dimension d = getSize();
         checkOffscreenImage();
         paintOffscreen(OSC.getGraphics(), OSC.getGraphics(), Color.GREEN);//COLOR SERPIENTE
         g.drawImage(OSC, 0, 0, null);
-        jLabel1.setText("Score A ---> "+snake.score.getSnakeScore());
-        jLabel2.setText("Score B ---> "+enemy.score.getEnemyScore());
-        
+        jLabel1.setText("Score A ---> " + snake.score.getSnakeScore());
+        jLabel2.setText("Score B ---> " + enemy.score.getEnemyScore());
         jP1.paint(g);
     }
-    
-    public int boardGetEnemyScore(){
-        return enemy.score.getEnemyScore();
-        
-    }
-    
-    public int boardGetSnakeScore(){
-        return snake.score.getSnakeScore();
-    }
-
 
     private void checkOffscreenImage() {
         Dimension d = getSize();
@@ -73,7 +60,6 @@ public class Board extends javax.swing.JFrame{
         gSn.setColor(snake.checkSpeed());
 
         //enemy.keyPressed();
-        
         //enemy
         Point firstEn = new Point();
         Point lastEn = enemy.enemy.get(0);
@@ -103,17 +89,31 @@ public class Board extends javax.swing.JFrame{
             g2.fillOval(food.food.get(i).x, food.food.get(i).y, 20, 20); //ancho y alto de la comida
         }
     }
+
     
     
     
     
-    public void settLbel( String text){
+    public int boardGetEnemyScore() {
+        return enemy.score.getEnemyScore();
+
+    }
+
+    public int boardGetSnakeScore() {
+        return snake.score.getSnakeScore();
+    }
+
+    public void settLbel(String text) {
         jLPlayer1W.setText(text);
     }
-    public void settLbel2( String text){
+
+    public void settLbel2(String text) {
         jLPlayer2W.setText(text);
     }
     
+    
+    Snake snake;
+    Enemy enemy;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
