@@ -8,7 +8,7 @@ import Asteroid.IO.JSONParser;
 import Asteroid.Main.AsteroidGame;
 import Login.User;
 import Snail.SnailGame;
-import Snake.StartGame;
+import Snake.SnakeGame;
 import Tetris.Tetris;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class CheckFacade extends javax.swing.JFrame {
      */
     private AsteroidGame asteroidGame;
     private SnailGame snailGame;
-    private StartGame snakeGame;
+    private SnakeGame snakeGame;
     private Tetris tetris;
 
     public CheckFacade() {
@@ -201,7 +201,7 @@ public class CheckFacade extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAsteroidGameActionPerformed
 
     private void jBSnakeGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeGameActionPerformed
-        snakeGame = new StartGame();
+        snakeGame = new SnakeGame();
         snakeGame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jBSnakeGameActionPerformed

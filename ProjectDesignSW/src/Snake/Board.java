@@ -19,7 +19,6 @@ public class Board extends javax.swing.JFrame {
 
     Food food;
     Player player;
-
     Image OSC;
 
     public Board() {
@@ -30,7 +29,6 @@ public class Board extends javax.swing.JFrame {
         this.setBackground(Color.black);//Color Fondo
         this.setVisible(true);
         jP1.setBackground(Color.black);
-        this.setLocationRelativeTo(null);
     }
 
     public void paint(Graphics g) {
@@ -142,7 +140,7 @@ public class Board extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Wide Latin", 3, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Press SPACE for increase speed");
+        jLabel3.setText("Press SPACE / E for increase speed");
 
         jLabel4.setFont(new java.awt.Font("Wide Latin", 3, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +194,7 @@ public class Board extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

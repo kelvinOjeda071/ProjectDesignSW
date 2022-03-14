@@ -15,6 +15,7 @@ public class Enemy extends Player {
     int lifeEn=0;
     
     PointerInfo a = MouseInfo.getPointerInfo();
+    
     Point last;
     Point newPoint;
 
@@ -36,8 +37,6 @@ public class Enemy extends Player {
     }
 
     public void generate() {
-
-        a = MouseInfo.getPointerInfo();
         Point lastEn = enemy.get(enemy.size() - 1);
         Point pEn = new Point(r.nextInt(900), r.nextInt(900));
         //Point pEn= a.getLocation();

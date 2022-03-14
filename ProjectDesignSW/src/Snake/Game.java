@@ -42,14 +42,12 @@ public class Game {
         food.start();
         enemy.start();
     }
-    /*
+    
     public void getScore(){
         System.out.println("Puntaje por comida" + enemy.score.getSnakeScore());
-    }*/
+    }
     
     public void finishGame(){
-
-        
         
     }
     

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public abstract class Player extends Thread {
+    //Player atributes
     Score score;
     Board board;
     Crash crash;
@@ -16,9 +17,12 @@ public abstract class Player extends Thread {
     int point;
     Color color = Color.BLUE;
     Dead dead= new Dead();
+    
+    
     static final Random r = new Random();
     int count = 0;
 
+    
     public abstract void generate();
     public abstract boolean drop();
     public abstract Color checkSpeed();

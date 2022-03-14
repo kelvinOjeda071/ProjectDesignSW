@@ -18,6 +18,8 @@ public class Snake extends Player {
 
     ArrayList<Point> snake;
     int lifeSn = 0;
+    
+    //Mouse pointer
     PointerInfo a = MouseInfo.getPointerInfo();
 
     @Override
@@ -137,14 +139,15 @@ public class Snake extends Player {
     public void move(ArrayList b, Point last, Point p, Point n) {
         if (last.distance(p) > 1) {
             n = super.calculateCoord(last, p);
+            //Increase head
             b.add(n);
-            //count++;
             if (b.size() >= size) {
                 for (int i = 0; i < b.size() - size; i++) {
+                    //Remove tail
                     b.remove(i);
                 }
             }
-        }
+        }   
         board.repaint();
         point = super.eatFood(n);
         score.setSnakeScore(point);
