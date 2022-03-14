@@ -128,6 +128,7 @@ public class Board extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setUndecorated(true);
 
         jP1.setForeground(new java.awt.Color(102, 255, 255));
 
