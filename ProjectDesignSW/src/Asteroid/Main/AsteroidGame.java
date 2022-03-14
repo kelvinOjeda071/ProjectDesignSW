@@ -165,6 +165,7 @@ public class AsteroidGame extends JFrame implements Runnable {
         try {
             thread.join();
             running = false;
+            this.dispose();
         } catch (InterruptedException e) {
             /* Prints the error */
             e.printStackTrace();

@@ -35,6 +35,7 @@ public class MenuState extends GameState {
                 numberPlayer++;
             }
         }
+        dataList.clear();
         if (numberPlayer != 1) {
             buttons.add(new Button(
                     Asset.greyBtn,
@@ -91,6 +92,7 @@ public class MenuState extends GameState {
                 new Action() {
             @Override
             public void doAction() {
+                
                 GameState.changeState(new ScoreState());
             }
         }

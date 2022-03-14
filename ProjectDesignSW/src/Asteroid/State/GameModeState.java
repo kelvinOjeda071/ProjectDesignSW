@@ -262,6 +262,10 @@ public abstract class GameModeState extends GameState {
                 }
 
             }
+            dataList.clear();
+            message.clear();
+            movingObjects.clear();
+            
             GameState.changeState(new MenuState());
         }
         if (!ufoSpawner.isRunning()) {

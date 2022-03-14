@@ -40,7 +40,7 @@ public class Collision {
                 //this.snail.setPosicionX(posXElement - widthSnail );
                 this.snail.setSpeedX(speedSnailX *= -1);
             } else {
-                this.snail.setSpeedX(2);
+                this.snail.setSpeedX(6);
             }
         }
 
@@ -67,7 +67,7 @@ public class Collision {
                 this.snail.setPosicionY(posYElement - heightSnail);
                 this.snail.setSpeedX(speedSnailY = 0);
             } else {
-                this.snail.setSpeedY(1);
+                this.snail.setSpeedY(3);
             }
         }
 
