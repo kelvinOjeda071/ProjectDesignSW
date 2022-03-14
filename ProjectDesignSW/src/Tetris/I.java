@@ -26,13 +26,19 @@ public class I extends Figure {
     }
     
     @Override
-    public void draw(){
+    public void paint(){
         b1.setBackground(Color.red);
         b2.setBackground(Color.red);
         b3.setBackground(Color.red);
         b4.setBackground(Color.red);
     }
     
+    public void resetColor(){
+        b1.setBackground(Color.white);
+        b2.setBackground(Color.white);
+        b3.setBackground(Color.white);
+        b4.setBackground(Color.white);
+    }
     
     public void move(int n){
         switch (n) {
