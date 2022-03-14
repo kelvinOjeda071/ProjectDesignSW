@@ -14,29 +14,69 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
-import Facade.CheckFacade;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 
+import Facade.CheckFacade;
+import Tetris.State.TetrisMenuState;
 
 public class Tetris extends javax.swing.JFrame {
-    
-    private CheckFacade mainMenu;
-    
-    JButton[][] matrixes;
-    JButton[][] matrixes1;
-    Timer step;
-    Figure figure1;
 
-    Manager manager= new Manager();
-    public Tetris() {
-        
+    JButton[][] matrixes = new JButton[3][3];//Game 1
+    JButton[][] matrixes1 = new JButton[3][3];
+    JButton[][] matrixes2 = new JButton[3][3];//Game 2
+    JButton[][] matrixes12 = new JButton[3][3];
+    Figure figure1;
+    Manager manager1 = new Manager();
+    Manager manager2 = new Manager();
+    
+    
+    int numPlayers;
+    
+    static int a;
+
+    public Tetris(int numberPlayers) {
         initComponents();
+        
         this.setLocationRelativeTo(null);
-        Board newBoard = new Board(matrixes, board);
-        JButton[][] matrix = newBoard.draw();
         
-        manager.Manager(matrix, table1, jLScore);
+        numPlayers = numberPlayers;
         
-        //this.setLocationRelativeTo(null);
+        if (numPlayers == 1) {
+            setSize(510, 750);
+            this.setLocationRelativeTo(null);
+            jLScore.setText("0.0");
+
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            manager1.Manager(matrix, matrix1, Table1, jLScore, btnExit);
+        } else {
+            jLScore.setText("0.0");
+            jLScore2.setText("0.0");
+            this.setLocationRelativeTo(null);
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            //Game 2
+            Board newBoard2 = new Board(matrixes2, Board2);
+            JButton[][] matrix2 = newBoard2.drawB();
+
+            Table newTable2 = new Table(matrixes12, Table2);
+            JButton[][] matrix12 = newTable2.drawT();
+
+            manager1.Manager(matrix, matrix1, Table1, jLScore, btnExit);
+            manager2.Manager(matrix2, matrix12, Table2, jLScore2, btnExit);
+        }
+
     }
 
     /**
@@ -48,148 +88,193 @@ public class Tetris extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        board = new javax.swing.JPanel();
+        Table1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnBegin = new javax.swing.JButton();
+        btnStart = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLScore2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnExit = new javax.swing.JButton();
         jLScore = new javax.swing.JLabel();
-        table1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+        Board1 = new javax.swing.JPanel();
+        Board2 = new javax.swing.JPanel();
+        Table2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(200, 640));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        board.setBackground(new java.awt.Color(255, 200, 236));
-        board.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(board, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 320, 610));
+        Table1.setBackground(new java.awt.Color(204, 0, 204));
+        Table1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(Table1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 160, 160));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnBegin.setText("Start");
-        btnBegin.addActionListener(new java.awt.event.ActionListener() {
+        btnStart.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBeginActionPerformed(evt);
+                btnStartActionPerformed(evt);
             }
         });
-        btnBegin.addKeyListener(new java.awt.event.KeyAdapter() {
+        btnStart.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnBeginKeyPressed(evt);
+                btnStartKeyPressed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 24)); // NOI18N
         jLabel1.setText("Score");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLScore2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        jLScore.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 24)); // NOI18N
+        jLabel2.setText("Score");
+
+        btnExit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnExit.setText("Exit");
+        btnExit.setEnabled(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
-        jLScore.setText("0");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLScore, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(402, 402, 402)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnBegin)
-                        .addGap(285, 285, 285)
-                        .addComponent(btnExit)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addComponent(btnStart)
+                        .addGap(184, 184, 184)
+                        .addComponent(btnExit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLScore, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(214, 214, 214)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(890, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLScore, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnStart)
+                            .addComponent(btnExit)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLScore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBegin)
-                    .addComponent(btnExit))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jLabel2)
+                    .addContainerGap(49, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
 
-        table1.setBackground(new java.awt.Color(153, 0, 153));
+        Board1.setBackground(new java.awt.Color(255, 200, 236));
+        Board1.setEnabled(false);
+        Board1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(Board1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 320, 610));
 
-        javax.swing.GroupLayout table1Layout = new javax.swing.GroupLayout(table1);
-        table1.setLayout(table1Layout);
-        table1Layout.setHorizontalGroup(
-            table1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        table1Layout.setVerticalGroup(
-            table1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
+        Board2.setBackground(new java.awt.Color(255, 200, 236));
+        Board2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(Board2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 320, 610));
 
-        getContentPane().add(table1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, 160));
+        Table2.setBackground(new java.awt.Color(204, 0, 204));
+        Table2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(Table2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 160, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBeginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBeginKeyPressed
-        manager.movementsControl(evt);
-        
+    private void btnStartKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnStartKeyPressed
+        manager1.movementsControl(evt);
+        manager2.movementsControl2(evt);
+    }//GEN-LAST:event_btnStartKeyPressed
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+
+        Board1.removeAll();//Gamer1
+        Board2.removeAll();//Gamer2
+
+        Table1.removeAll();//Gamer1
+        Table2.removeAll();//Gamer2
+
+        if (numPlayers == 1) {
+            setSize(510, 750);
+            this.setLocationRelativeTo(null);
+            jLScore.setText("0.0");
+
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            manager1.start(matrix, matrix1, Table1, jLScore, btnExit);
+        } else {
+            jLScore.setText("0.0");
+            jLScore2.setText("0.0");
+            this.setLocationRelativeTo(null);
+            //Game 1
+            Board newBoard = new Board(matrixes, Board1);
+            JButton[][] matrix = newBoard.drawB();
+
+            Table newTable = new Table(matrixes1, Table1);
+            JButton[][] matrix1 = newTable.drawT();
+
+            //Game 2
+            Board newBoard2 = new Board(matrixes2, Board2);
+            JButton[][] matrix2 = newBoard2.drawB();
+
+            Table newTable2 = new Table(matrixes12, Table2);
+            JButton[][] matrix12 = newTable2.drawT();
+
+            manager1.start(matrix, matrix1, Table1, jLScore, btnExit);
+            manager2.start(matrix2, matrix12, Table2, jLScore2, btnExit);
+        }
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBeginKeyPressed
-
-    private void btnBeginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginActionPerformed
-
-        board.removeAll();
-        table1.removeAll();
-        
-        //cont = 0;
-        
-        Board newBoard = new Board(matrixes, board);
-        JButton[][] matrix = newBoard.draw();
-        
-        //Tabla nuevaTabla = new Tabla(matrixes1, table1);
-        //JButton[][] matrix1 = nuevaTabla.draw();
-        manager.start(matrix, table1, jLScore);
-        
-        this.setLocationRelativeTo(null);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBeginActionPerformed
+    }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        this.dispose();
-        mainMenu = new CheckFacade();
-        mainMenu.setVisible(true);
-        /*this.getContentPane().add(btnExit);*/
-        
+        TetrisMenu newTM = new TetrisMenu();
+        newTM.setVisible(true);
+        /*CheckFacade newFacade = new CheckFacade();
+        newFacade.setVisible(true);*/
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**
@@ -219,27 +304,31 @@ public class Tetris extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Tetris().setVisible(true);
+                new Tetris(a).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel board;
-    private javax.swing.JButton btnBegin;
+    private javax.swing.JPanel Board1;
+    private javax.swing.JPanel Board2;
+    private javax.swing.JPanel Table1;
+    private javax.swing.JPanel Table2;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLScore;
+    private javax.swing.JLabel jLScore2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel table1;
     // End of variables declaration//GEN-END:variables
 
 }
-
