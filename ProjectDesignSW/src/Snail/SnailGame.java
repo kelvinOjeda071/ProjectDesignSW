@@ -43,6 +43,7 @@ public class SnailGame extends JFrame implements Runnable {
 
     public SnailGame() {
         setSize(1200, 800);
+        this.setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
