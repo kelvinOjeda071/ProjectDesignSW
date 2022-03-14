@@ -31,6 +31,7 @@ public class Dead extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CHOQUE");
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -52,10 +53,11 @@ public class Dead extends javax.swing.JFrame {
         });
         jPanel1.add(jBFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Wide Latin", 1, 24)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(53, 173, 65));
+        jLabel1.setFont(new java.awt.Font("KenVector Future Thin", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("You lost!");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/slither.jpg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 279));
