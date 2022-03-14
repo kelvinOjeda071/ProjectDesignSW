@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Game {
     Board board;
@@ -15,9 +16,10 @@ public class Game {
     Food food;
     Enemy enemy;
     Entity entity;
+
     public void startGame(){
         snake = new Snake();    
-        board = new Board("Slither.io");
+        board = new Board();
         food = new Food();
         enemy = new Enemy();
 
@@ -35,24 +37,20 @@ public class Game {
         
         snake.snake.add(new Point(500, 500));
         enemy.enemy.add(new Point(r.nextInt(900), r.nextInt(900)));
-
+        
         snake.start();
         food.start();
         enemy.start();
-        //finishGame();
-        while(true){
-             getScore();
-        }
-       
     }
     
     public void getScore(){
-        System.out.println("Puntaje por comida" + snake.score());
+        System.out.println("Puntaje por comida" + enemy.score.getSnakeScore());
     }
     
-    /*
-    public void finishGame()
-        board.controlSize();
-    }*/
+    public void finishGame(){
+
+        
+        
+    }
     
 }

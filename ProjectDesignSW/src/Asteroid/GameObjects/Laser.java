@@ -6,7 +6,7 @@ package Asteroid.GameObjects;
 
 import java.awt.Graphics;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -28,7 +28,7 @@ public class Laser extends MovingObject {
             double maxVelocity,
             double angle,
             BufferedImage texture,
-            ActionGameState gameState,
+            GameModeState gameState,
             int objectBelongType
     ) {
         /* Parent attributes */

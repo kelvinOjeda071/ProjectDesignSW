@@ -9,8 +9,8 @@ import Asteroid.Main.AsteroidGame;
 import Login.User;
 import Snail.SnailGame;
 import Snake.Game;
-import Snake.SnakeGame;
 import Tetris.Tetris;
+import Tetris.TetrisMenu;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,10 +29,11 @@ public class CheckFacade extends javax.swing.JFrame {
     private AsteroidGame asteroidGame;
     private SnailGame snailGame;
     private Game snakeGame;
-    private Tetris tetris;
+    private TetrisMenu tetris;
+
     public CheckFacade() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
     }
 
@@ -203,63 +204,71 @@ public class CheckFacade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBAsteroidGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsteroidGameActionPerformed
-        asteroidGame= new AsteroidGame();
+    public void playAsteroidGame(){
+        asteroidGame = new AsteroidGame();
         asteroidGame.showWindow();
+        this.dispose();
+    }
+    
+    public void playSnailGame(){
+        snailGame = new SnailGame();
+        snailGame.showWindow();
         this.setVisible(false);
+        this.dispose();
+    }
+    
+    public void playTetrisGame(){
+        tetris = new TetrisMenu();
+        tetris.setVisible(true);
+        this.dispose();
+    }
+    
+    public void playSnakeGame(){
+        snakeGame = new Game();
+        snakeGame.startGame();
+        this.setVisible(false);
+        this.dispose();
+    }
+    private void jBAsteroidGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsteroidGameActionPerformed
+        this.playAsteroidGame();
     }//GEN-LAST:event_jBAsteroidGameActionPerformed
 
     private void jBSnakeGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeGameActionPerformed
-        snakeGame= new Game();
-        snakeGame.startGame();
-        this.setVisible(false);
+        this.playSnakeGame();
     }//GEN-LAST:event_jBSnakeGameActionPerformed
 
     private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
-        
-//       snailGame= new SnailGame(true);
-//       this.setVisible(false);
-//        
-//        try {
-//            snailGame.iniciarJuego();
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
+        this.playSnailGame();
+
     }//GEN-LAST:event_jBSnailGameActionPerformed
 
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
-        tetris= new Tetris();
-        tetris.setVisible(true);
-        this.dispose();
+        this.playTetrisGame();
     }//GEN-LAST:event_jBTetrisGameActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
-       
+
         try {
             ArrayList<User> dataList = JSONParser.readField();
             for (int i = 0; i < dataList.size(); i++) {
-               if(dataList.get(i).getCurrentActive() == 1){
-                   dataList.get(i).setCurrentActive(0);
-               }
+                if (dataList.get(i).getCurrentActive() == 1) {
+                    dataList.get(i).setCurrentActive(0);
+                }
             }
             JSONParser.writeFile(dataList);
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CheckFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.exit(0);
-       
+
     }//GEN-LAST:event_jBExitActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

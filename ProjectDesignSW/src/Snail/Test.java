@@ -24,7 +24,8 @@ public class Test {
         // TODO code application l
         
         SnailGame juego = new SnailGame();
-        juego.startGame();
+        juego.showWindow();
+        
         
         /*Posicion posicion = new Posicion(1, 1);
         Caracol caracol = new Caracol(1, posicion, 100, 100);

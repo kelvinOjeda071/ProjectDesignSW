@@ -7,7 +7,7 @@ package Asteroid.GameObjects;
 import Asteroid.Graphics.Asset;
 import Asteroid.Input.KeyBoard;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.image.BufferedImage;
 
 /**
@@ -25,7 +25,7 @@ public class MateOne extends Player {
             Vector2D velocity,
             double maxVelocity,
             BufferedImage texture,
-            ActionGameState gameState,
+            GameModeState gameState,
             Chronometer fireRate,
             Chronometer spawTime,
             Chronometer flikerTime) {
@@ -128,7 +128,8 @@ public class MateOne extends Player {
 
     }
     
-    //reset ship position values
+    // reset ship position values
+    @Override
     public void resetValues() {
         angle = 0;
         velocity = new Vector2D();
@@ -136,7 +137,7 @@ public class MateOne extends Player {
             Constant.HEIGHT / 2 - Asset.player1.getHeight() / 2);
     }
 
-    /*Cuando se destruya reaparezca pero titilando*/
+    /*When it is destroyed it reappears but blinking*/
     @Override
     public void destroy() {
         //ship starts flashing

@@ -18,25 +18,24 @@ import javax.swing.ImageIcon;
  */
 public class Portal extends GameElement {
 
-    private int tipo;
     private Snail snail;
-    private final ImageIcon imagen;
+    private final ImageIcon image;
 
-    public Portal(Position posicion, int ancho, int largo) {
-        super(posicion, ancho, largo, 5);
-        this.imagen = new ImageIcon(getClass().getResource("/SnailImagenes/portal.png"));
+    public Portal(Position position, int height, int width) {
+        super(position, height, width, 5);
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/portal.png"));
 
     }
 
     @Override
-    public void draw(Graphics grafico, int ancho, int largo) {
+    public void draw(Graphics graphics, int width, int height) {
         height = this.height;
         width = this.width;
         int posicionX = this.position.getX();
         int posicionY = this.position.getY();
-        Graphics2D g2d = (Graphics2D) grafico;
+        Graphics2D g2d = (Graphics2D) graphics;
         g2d.setColor(Color.red);
-        g2d.drawImage(this.imagen.getImage(), posicionX, posicionY, width, height, null);
+        g2d.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
     }
 
     public void move() {
@@ -52,8 +51,8 @@ public class Portal extends GameElement {
         int speedSnailX = snail.speedX;
         int speedSnailY = snail.speedY;
 
-        int posYPortal = this.position.y;
-        int posXPortal = this.position.x;
+        int posYPortal = this.position.y+20;
+        int posXPortal = this.position.x+40;
         int heightPortal = this.height;
         int widthPortal = this.width;
 

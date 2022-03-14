@@ -22,13 +22,13 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
     /**
      * Creates new form JFLogInMultiUser
      */
-    private User logInUser;
+    private ArrayList<User> arrayListUser;
 
     public JFLogInMultiUser() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        logInUser = new User();
+        arrayListUser = new ArrayList<>();
     }
 
     public void setEmptyLabels() {
@@ -49,15 +49,18 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
         } else {
             ArrayList<User> dataList = readData();
             boolean isFound[] = new boolean[2];
+            int positionFound[] = new int [2];
             for (int i = 0; i < dataList.size(); i++) {
 
                 if (id1.equals(dataList.get(i).getId())) {
 
                     if (password1.equals(dataList.get(i).getPassword())) {
                         
-                        this.logInUser = dataList.get(i);
-                        dataList.get(i).setCurrentActive(1);
+                        User user1 = dataList.get(i);
+                        arrayListUser.add(user1);
                         isFound[0] = true;
+                        positionFound[0]=1;
+                        
 
                     }
 
@@ -65,19 +68,26 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
                 if (id2.equals(dataList.get(i).getId())) {
 
                     if (password2.equals(dataList.get(i).getPassword())) {
-                        this.logInUser = dataList.get(i);
-                        dataList.get(i).setCurrentActive(1);
+                        User user2 = dataList.get(i);
+                        arrayListUser.add(user2);
                         isFound[1] = true;
+                        positionFound[0]=1;
                     }
                 }
 
             }
             if (isFound[0] && isFound[1]) {
+                for(User userAux: arrayListUser){
+                    userAux.setCurrentActive(1);
+                }
+                dataList.get(positionFound[0]).setCurrentActive(1);
+                dataList.get(positionFound[1]).setCurrentActive(1);
                 writeData(dataList);
                 JOptionPane.showMessageDialog(null, "Your "
                         + "credentials are correct");
                 new CheckFacade().setVisible(true);
                 setEmptyLabels();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "The usernames or passwords are incorrect");
             }
@@ -110,12 +120,12 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
 
     public void switchSignIn() {
         new JFSignInUser().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
-    public void switchLogIn() {
+    public void switchLogInMonoUser() {
         new JFLogInUserMono().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 
     /**
@@ -367,7 +377,7 @@ public class JFLogInMultiUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogInActionPerformed
-        switchLogIn();
+        switchLogInMonoUser();
     }//GEN-LAST:event_jBLogInActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed

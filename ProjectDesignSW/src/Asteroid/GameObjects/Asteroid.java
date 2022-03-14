@@ -6,7 +6,7 @@ package Asteroid.GameObjects;
 
 import Asteroid.Graphics.Asset;
 import Asteroid.Math.Vector2D;
-import Asteroid.State.ActionGameState;
+import Asteroid.State.GameModeState;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -27,7 +27,7 @@ public class Asteroid extends MovingObject {
             Vector2D velocity,
             double maxVelocity,
             BufferedImage texture,
-            ActionGameState gameState,
+            GameModeState gameState,
             Size size
     ) {
         /* Parent attributes */

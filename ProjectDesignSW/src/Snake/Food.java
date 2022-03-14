@@ -1,13 +1,7 @@
 package Snake;
 
-
-import java.awt.Color;
-import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Food extends Thread {

@@ -19,16 +19,16 @@ import javax.swing.JPanel;
  *
  * @author bryan
  */
-public class Escene extends JPanel {
+public class Scene extends JPanel {
 
     private Image image;
     ElementsList list;
     GameElement element;
 
-    public Escene() {
+    public Scene() {
     }
 
-    public Escene(String background) {
+    public Scene(String background) {
         if (background != null) {
 
         } else {
@@ -39,31 +39,31 @@ public class Escene extends JPanel {
 
     }
 
-    public Escene(ElementsList lista) {
-        this.list = lista;
+    public Scene(ElementsList list) {
+        this.list = list;
         setFocusable(true);
 
     }
 
     void update() {
-        GameElement elemento;
-        for (int i = 0; i < list.getLista().size(); i++) {
-            elemento = list.getLista().get(i);
-            elemento.move();
+        GameElement gameElement;
+        for (int i = 0; i < list.getList().size(); i++) {
+            gameElement = list.getList().get(i);
+            gameElement.move();
         }
 
     }
 
     public void paint(Graphics g) {
         super.paint(g);
-        image = new ImageIcon(getClass().getResource("/SnailImagenes/background.jpg")).getImage();
+        image = new ImageIcon(getClass().getResource("/SnailImages/background.jpg")).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
-        GameElement elemento;
-        for (int i = 0; i < list.getLista().size(); i++) {
-            elemento = list.getLista().get(i);
-            elemento.draw(g, elemento.getHeight(), elemento.getWidth());
-            elemento = null;
+        GameElement gameElement;
+        for (int i = 0; i < list.getList().size(); i++) {
+            gameElement = list.getList().get(i);
+            gameElement.draw(g, gameElement.getHeight(), gameElement.getWidth());
+            gameElement = null;
 
         }
     }

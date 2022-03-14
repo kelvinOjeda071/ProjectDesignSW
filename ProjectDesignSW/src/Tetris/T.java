@@ -12,12 +12,12 @@ public class T extends Figure {
     JButton b4;
     int x, y;
 
-    int pos;
+    int position;
 
     public T(JButton[][] matx) {
         super(matx);
 
-        pos = 0;
+        position = 0;
 
         isStopped = false;
         b1 = matx[dimx / 2][0];
@@ -29,11 +29,18 @@ public class T extends Figure {
         y = 1;
     }
 
-    public void draw() {
+    public void paint() {
         b1.setBackground(Color.GREEN);
         b2.setBackground(Color.GREEN);
         b3.setBackground(Color.GREEN);
         b4.setBackground(Color.GREEN);
+    }
+    
+    public void resetColor(){
+        b1.setBackground(Color.white);
+        b2.setBackground(Color.white);
+        b3.setBackground(Color.white);
+        b4.setBackground(Color.white);
     }
     
     public void move(int n){
@@ -43,24 +50,24 @@ public class T extends Figure {
                         return;
                     }
 
-                    if (pos == 0 && y >= dimy - 1) {
+                    if (position == 0 && y >= dimy - 1) {
                         isStopped = true;
                         return;
                     }
-                    if (pos == 1 && y + 1 >= dimy - 1) {
+                    if (position == 1 && y + 1 >= dimy - 1) {
                         isStopped = true;
                         return;
                     }
-                    if (pos == 3 && y + 1 >= dimy - 1) {
+                    if (position == 3 && y + 1 >= dimy - 1) {
                         isStopped = true;
                         return;
                     }
-                    if (pos == 2 && y >= dimy - 1) {
+                    if (position == 2 && y >= dimy - 1) {
                         isStopped = true;
                         return;
                     }
 
-                    if (pos == 0
+                    if (position == 0
                             && (!matrix[x][y].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 1][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 2][y].getBackground().equals(new Color(240, 240, 240)))) {
@@ -68,14 +75,14 @@ public class T extends Figure {
                         return;
                     }
 
-                    if (pos == 1
+                    if (position == 1
                             && (!matrix[x][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 1][y + 2].getBackground().equals(new Color(240, 240, 240)))) {
                         isStopped = true;
                         return;
                     }
 
-                    if (pos == 2
+                    if (position == 2
                             && (!matrix[x][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 1][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 2][y + 1].getBackground().equals(new Color(240, 240, 240)))) {
@@ -83,14 +90,14 @@ public class T extends Figure {
                         return;
                     }
 
-                    if (pos == 3
+                    if (position == 3
                             && (!matrix[x + 1][y + 2].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 2][y + 1].getBackground().equals(new Color(240, 240, 240)))) {
                         isStopped = true;
                         return;
                     }
 
-                    if (pos == 0) {
+                    if (position == 0) {
 
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
@@ -107,7 +114,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
                     }
 
-                    if (pos == 1) {
+                    if (position == 1) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -124,7 +131,7 @@ public class T extends Figure {
 
                     }
 
-                    if (pos == 2) {
+                    if (position == 2) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -140,7 +147,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
 
                     }
-                    if (pos == 3) {
+                    if (position == 3) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -162,19 +169,19 @@ public class T extends Figure {
                     if (isStopped) {
                         return;
                     }
-                    if (pos == 0 && x + 2 >= dimx - 1) {
+                    if (position == 0 && x + 2 >= dimx - 1) {
                         return;
                     }
-                    if (pos == 1 && x + 1 >= dimx - 1) {
+                    if (position == 1 && x + 1 >= dimx - 1) {
                         return;
                     }
-                    if (pos == 2 && x + 2 >= dimx - 1) {
+                    if (position == 2 && x + 2 >= dimx - 1) {
                         return;
                     }
-                    if (pos == 3 && x + 2 >= dimx - 1) {
+                    if (position == 3 && x + 2 >= dimx - 1) {
                         return;
                     }
-                    if (pos == 0) {
+                    if (position == 0) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -189,7 +196,7 @@ public class T extends Figure {
                         b3.setBackground(Color.GREEN);
                         b4.setBackground(Color.GREEN);
                     }
-                    if (pos == 1) {
+                    if (position == 1) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -205,7 +212,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
 
                     }
-                    if (pos == 2) {
+                    if (position == 2) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -221,7 +228,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
 
                     }
-                    if (pos == 3) {
+                    if (position == 3) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -243,20 +250,20 @@ public class T extends Figure {
                     if (isStopped) {
                         return;
                     }
-                    if (pos == 3 && x < 0) {
+                    if (position == 3 && x < 0) {
                         return;
                     }
-                    if (pos == 0 && x - 1 < 0) {
+                    if (position == 0 && x - 1 < 0) {
                         return;
                     }
-                    if (pos == 2 && x - 1 < 0) {
+                    if (position == 2 && x - 1 < 0) {
                         return;
                     }
-                    if (pos == 1 && x - 1 < 0) {
+                    if (position == 1 && x - 1 < 0) {
                         return;
                     }
 
-                    if (pos == 0) {
+                    if (position == 0) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -273,7 +280,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
                     }
 
-                    if (pos == 1) {
+                    if (position == 1) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -289,7 +296,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
 
                     }
-                    if (pos == 2) {
+                    if (position == 2) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -305,7 +312,7 @@ public class T extends Figure {
                         b4.setBackground(Color.GREEN);
 
                     }
-                    if (pos == 3) {
+                    if (position == 3) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -328,13 +335,13 @@ public class T extends Figure {
                 break;
         }
     }
-
+    
     public void rotate() {
         if (x + 2 > dimx - 1 || x < 0) {
             return;
         }
 
-        if (pos == 0) {
+        if (position == 0) {
             b1.setBackground(new Color(240, 240, 240));
             b2.setBackground(new Color(240, 240, 240));
             b3.setBackground(new Color(240, 240, 240));
@@ -349,8 +356,8 @@ public class T extends Figure {
             b3.setBackground(Color.GREEN);
             b4.setBackground(Color.GREEN);
 
-            pos = 1;
-        } else if (pos == 1) {
+            position = 1;
+        } else if (position == 1) {
             b1.setBackground(new Color(240, 240, 240));
             b2.setBackground(new Color(240, 240, 240));
             b3.setBackground(new Color(240, 240, 240));
@@ -365,8 +372,8 @@ public class T extends Figure {
             b3.setBackground(Color.GREEN);
             b4.setBackground(Color.GREEN);
 
-            pos = 2;
-        } else if (pos == 2) {
+            position = 2;
+        } else if (position == 2) {
             b1.setBackground(new Color(240, 240, 240));
             b2.setBackground(new Color(240, 240, 240));
             b3.setBackground(new Color(240, 240, 240));
@@ -381,9 +388,9 @@ public class T extends Figure {
             b3.setBackground(Color.GREEN);
             b4.setBackground(Color.GREEN);
 
-            pos = 3;
+            position = 3;
 
-        } else if (pos == 3) {
+        } else if (position == 3) {
             b1.setBackground(new Color(240, 240, 240));
             b2.setBackground(new Color(240, 240, 240));
             b3.setBackground(new Color(240, 240, 240));
@@ -398,7 +405,7 @@ public class T extends Figure {
             b2.setBackground(Color.GREEN);
             b3.setBackground(Color.GREEN);
             b4.setBackground(Color.GREEN);
-            pos = 0;
+            position = 0;
         }
 
     }

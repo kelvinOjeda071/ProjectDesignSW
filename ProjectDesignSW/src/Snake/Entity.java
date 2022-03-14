@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public abstract class Entity extends Thread {
-
+    Score score;
     Board board;
     Crash crash;
     Snake snake;
@@ -19,10 +19,10 @@ public abstract class Entity extends Thread {
 
     public abstract void generate();
 
-    public abstract void drop();
+    public abstract boolean drop();
 
     //n= entity head
-    public void eatFood(Point n) {
+    public int eatFood(Point n){
         Iterator<Point> i = board.food.food.iterator();
         while (i.hasNext()) {
             Point food = i.next();
@@ -32,8 +32,9 @@ public abstract class Entity extends Thread {
                 size++;
             }
         }
+        //System.out.println("Puntaje por Comida"+count);
         board.repaint();
-        //System.out.println("Puntaje por Comida  ent"+count);
+        return count;
     }
 
     public int score() {

@@ -1,22 +1,22 @@
-
 package Tetris;
 
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class Board {
+public class Board extends Figure {
+
     JButton[][] matrix;
     JPanel board;
-    int dimx = 10;
-    int dimy = 20;
 
-    public Board(JButton[][] matrix, JPanel board) {
-        this.matrix = matrix;
+    public Board(JButton[][] matrix, JPanel board) {//, JPanel board
+        super(matrix);
         this.board = board;
     }
-    
-    JButton[][] draw(){
+
+    public JButton[][] drawB() {
+        dimx = 10;
+        dimy = 20;
         JButton[][] matrix = new JButton[dimx][dimy];
         for (int x = 0; x < dimx; x++) {
             for (int y = 0; y < dimy; y++) {
@@ -27,5 +27,15 @@ public class Board {
         }
         return matrix;
     }
-    
+
+    public void paint() {
+    }
+
+    public void move(int mov) {
+    }
+
+    public void rotate() {
+    }
+    public void resetColor(){
+    }
 }

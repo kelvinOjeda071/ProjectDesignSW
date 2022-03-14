@@ -12,6 +12,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import Snail.Input.Keyboard;
+import java.awt.geom.AffineTransform;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,19 +25,23 @@ import Snail.Input.Keyboard;
  */
 public class Snail extends GameElement {
 
-    private final ImageIcon imagen;
+    public int typeSnail;
+    private final ImageIcon image;
+    private final ImageIcon image2;
     public int speedX;
     public int speedY;
-    private int tipo;
+    //public boolean orientation;
 
-    public Snail(Position posicion, int height, int width) {
-        super(posicion, height, width, 0);
+    public Snail(Position position, int height, int width, int type) {
+        super(position, height, width, 0);
         ///super.position.x = 1;
         //super.position.y = 1;
         //this.position.y = 1;
         //this.position.x = 1;
-        //this.speedX = 2;
-        this.imagen = new ImageIcon(getClass().getResource("/SnailImagenes/caracol.png"));
+        this.typeSnail = type;
+        //this.orientation = true;
+        this.image = new ImageIcon(getClass().getResource("/SnailImages/snail.png"));
+        this.image2 = new ImageIcon(getClass().getResource("/SnailImages/snail2.png"));
     }
 
     public void setSpeedX(int speedX) {
@@ -47,45 +52,92 @@ public class Snail extends GameElement {
         this.speedY = speedY;
     }
 
+    
     @Override
-    public void draw(Graphics grafico, int width, int height) {
+    public void draw(Graphics graphics, int width, int height) {
         height = this.height;
         width = this.width;
         int posicionX = this.position.getX();
         int posicionY = this.position.getY();
-        Graphics2D g2d = (Graphics2D) grafico;
-        g2d.setColor(Color.red);
-        g2d.drawImage(this.imagen.getImage(), posicionX, posicionY, width, height, null);
+        Graphics2D g2d = (Graphics2D) graphics;
+
+        if (typeSnail == 0) {
+            g2d.setColor(Color.red);
+            g2d.drawImage(this.image.getImage(), posicionX, posicionY, width, height, null);
+           
+        }
+        
+        if (typeSnail == 1) {
+            g2d.setColor(Color.red);
+            g2d.drawImage(this.image2.getImage(), posicionX, posicionY, width, height, null);
+            
+        }
 
     }
-
-    public void girar() {
-
-    }
-
 
     @Override
     public void move() {
 
-        int x0 = this.position.getX();
-        int y0 = this.position.getY();
+        if (typeSnail == 0) {
+            int x0 = this.position.getX();
+            int y0 = this.position.getY();
 
-        if ((0 < y0) && (y0 < 800)) {
-            this.position.setY(y0 + this.speedY);
-        }
-
-        if ((x0 >= 0) && (x0 <= 1200)) {
-            if (Keyboard.RIGHT) {
-
-                this.position.setX(x0 + this.speedX);
+            if ((0 < y0) && (y0 < 800)) {
+                this.position.setY(y0 + this.speedY);
             }
-            //this.position.setX(x0+2);
+
+            if ((x0 >= 0) && (x0 <= 1200)) {
+                if (Keyboard.RIGHT) {
+
+                    this.position.setX(x0 + this.speedX);
+                    //this.orientation = false;
+                    
+                }
+                //this.position.setX(x0+2);
+            }
+
+            if ((x0 >= 0) && (x0 <= 1200)) {
+                if (Keyboard.LEFT) {
+                    //girar();
+                    this.position.setX(x0 - this.speedX);
+                    //this.orientation = false;
+                    
+                }
+            }
+
+            if (x0 < 0) {
+                this.position.setX(0);
+            }
+
         }
 
-        if ((x0 >= 0) && (x0 <= 1200)) {
-            if (Keyboard.LEFT) {
-                //girar();
-                this.position.setX(x0 - this.speedX);
+        if (typeSnail == 1) {
+            int x0 = this.position.getX();
+            int y0 = this.position.getY();
+
+            if ((0 < y0) && (y0 < 800)) {
+                this.position.setY(y0 + this.speedY);
+                
+            }
+
+            if ((x0 >= 0) && (x0 <= 1200)) {
+                if (Keyboard.D) {
+
+                    this.position.setX(x0 + this.speedX);
+                    
+                }
+                //this.position.setX(x0+2);
+            }
+
+            if ((x0 >= 0) && (x0 <= 1200)) {
+                if (Keyboard.A) {
+                    //girar();
+                    this.position.setX(x0 - this.speedX);
+                    
+                }
+            }
+            if (x0 < 0) {
+                this.position.setX(0);
             }
         }
 

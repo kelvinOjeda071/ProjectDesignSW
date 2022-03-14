@@ -129,7 +129,7 @@ public class User {
     }
 
     public void logIn(JFLogInUserMono jFLogIn) {
-        jFLogIn.logIn();
+        jFLogIn.logInMonoPlayer();
     }
 
     public void playGame(CheckFacade checkFacade) {
