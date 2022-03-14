@@ -36,6 +36,7 @@ public class Board extends Figure {
 
     public void rotate() {
     }
+    
     public void resetColor(){
     }
 }

@@ -18,6 +18,8 @@ public class TetrisMenu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    TetrisMenuState newMenuState;
+    
     public TetrisMenu() {
         initComponents();
         
@@ -97,7 +99,7 @@ public class TetrisMenu extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         // TODO add your handling code here:
-        TetrisMenuState newMenuState = new TetrisMenuState();
+        newMenuState = new TetrisMenuState();
         int numPlayers;
         numPlayers = newMenuState.playerManager();
         Tetris newTetris = new Tetris(numPlayers);

@@ -27,7 +27,6 @@ import javax.swing.JTextArea;
 public class Manager {
 
     JButton[][] matrixes = new JButton[10][20];
-    ;
     Timer step;
     TimerTask down;
     Figure figure;
@@ -52,7 +51,6 @@ public class Manager {
 
         figure1 = new L(matrix1);
         figure1.paint();
-        //figura1.move(1);
 
         step = new Timer();
         down = new TimerTask() {
@@ -73,27 +71,24 @@ public class Manager {
                     updateScore((int) score);
                     return;
                 }
-                // Función para saber si 
+                // Function that increase the score from each player
                 for (int y = 0; y < dimy; y++) {
-                    boolean completo = true;
+                    boolean isComplete = true;
                     for (int x = 0; x < dimx; x++) {
                         if (matrix[x][y].getBackground().equals(new Color(240, 240, 240))) {
-                            completo = false;
+                            isComplete = false;
                         }
                     }
-                    if (completo) {
+                    if (isComplete) {
                         score = score + 10;
                         jLScore.setText(String.valueOf(score));
                         //----------------------------------------------------------------------
                         for (int z = y; z > 0; z--) {
                             for (int j = 0; j < dimx; j++) {
                                 matrix[j][z].setBackground(matrix[j][z - 1].getBackground());
-
                             }
                         }
-
                     }
-
                 }
 
                 if (figure.isStopped) {
@@ -223,7 +218,6 @@ public class Manager {
                     writeData(dataList);
                 }
             }
-
         }
     }
     
@@ -269,6 +263,7 @@ public class Manager {
     public void start(JButton[][] matrix, JButton[][] matrix1, JPanel table, JLabel jLScore, JButton exit) {
         step.cancel();
         score = 0;
+        
         figure = new L(matrix);
         figure.move(1);
 
@@ -400,10 +395,6 @@ public class Manager {
             }
         };
         step.schedule(down, 0, 500);
-    }
-
-    public static void startAction(JPanel Tablero) {
-
     }
 
 }

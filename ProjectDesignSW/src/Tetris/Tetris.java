@@ -30,7 +30,6 @@ public class Tetris extends javax.swing.JFrame {
     Manager manager1 = new Manager();
     Manager manager2 = new Manager();
     
-    
     int numPlayers;
     
     static int a;
