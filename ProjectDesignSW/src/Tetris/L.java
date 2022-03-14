@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 public class L extends Figure {
-
+    //JButton[][] matriz;
     JButton b1;
     JButton b2;
     JButton b3;
@@ -14,9 +14,8 @@ public class L extends Figure {
 
     int position;
 
-    public L(JButton[][] matrix) {
-        super(matrix);
-
+    public L(JButton[][] matrix) {//matriz
+        super(matrix);//matriz
         position = 0;
 
         isStopped = false;
@@ -28,11 +27,18 @@ public class L extends Figure {
         y = 1;
     }
     
-    public void draw(){
+    public void paint(){
         b1.setBackground(Color.orange);
         b2.setBackground(Color.orange);
         b3.setBackground(Color.orange);
         b4.setBackground(Color.orange);
+    }
+    
+    public void resetColor(){
+        b1.setBackground(Color.white);
+        b2.setBackground(Color.white);
+        b3.setBackground(Color.white);
+        b4.setBackground(Color.white);
     }
     
     public void move(int n){
@@ -328,7 +334,7 @@ public class L extends Figure {
                 break;
         }
     }
-
+    
     public void rotate() {
         if (x + 2 > dimx - 1 || x < 0) {
             return;

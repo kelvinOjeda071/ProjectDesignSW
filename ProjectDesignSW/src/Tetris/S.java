@@ -11,25 +11,32 @@ public class S extends Figure {
     JButton b3;
     JButton b4;
     int x, y;
-    boolean horizontal;
+    boolean isHorizontal;
 
-    public S(JButton[][] matx) {
-        super(matx);
-        horizontal = true;
+    public S(JButton[][] matrix) {
+        super(matrix);
+        isHorizontal = true;
         isStopped = false;
-        b1 = matx[dimx / 2 + 1][0];
-        b2 = matx[dimx / 2 + 2][0];
-        b3 = matx[dimx / 2 + 1][1];
-        b4 = matx[dimx / 2][1];
+        b1 = matrix[dimx / 2 + 1][0];
+        b2 = matrix[dimx / 2 + 2][0];
+        b3 = matrix[dimx / 2 + 1][1];
+        b4 = matrix[dimx / 2][1];
         x = dimx / 2;
         y = 1;
     }
     
-    public void draw(){
+    public void paint(){
         b1.setBackground(Color.MAGENTA);
         b2.setBackground(Color.MAGENTA);
         b3.setBackground(Color.MAGENTA);
         b4.setBackground(Color.MAGENTA);
+    }
+    
+    public void resetColor(){
+        b1.setBackground(Color.white);
+        b2.setBackground(Color.white);
+        b3.setBackground(Color.white);
+        b4.setBackground(Color.white);
     }
     
     public void move(int n){
@@ -44,7 +51,7 @@ public class S extends Figure {
                         return;
                     }
 
-                    if (horizontal
+                    if (isHorizontal
                             && (!matrix[x + 1][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x][y + 1].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 2][y].getBackground().equals(new Color(240, 240, 240)))) {
@@ -52,14 +59,14 @@ public class S extends Figure {
                         return;
                     }
 
-                    if (!horizontal
+                    if (!isHorizontal
                             && (!matrix[x][y].getBackground().equals(new Color(240, 240, 240))
                             || !matrix[x + 1][y + 1].getBackground().equals(new Color(240, 240, 240)))) {
                         isStopped = true;
                         return;
                     }
 
-                    if (horizontal) {
+                    if (isHorizontal) {
 
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
@@ -95,13 +102,13 @@ public class S extends Figure {
                     if (isStopped) {
                         return;
                     }
-                    if (horizontal && x + 2 >= dimx - 1) {
+                    if (isHorizontal && x + 2 >= dimx - 1) {
                         return;
                     }
-                    if (!horizontal && x + 1 >= dimx - 1) {
+                    if (!isHorizontal && x + 1 >= dimx - 1) {
                         return;
                     }
-                    if (horizontal) {
+                    if (isHorizontal) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -142,7 +149,7 @@ public class S extends Figure {
                         return;
                     }
 
-                    if (horizontal) {
+                    if (isHorizontal) {
                         b1.setBackground(new Color(240, 240, 240));
                         b2.setBackground(new Color(240, 240, 240));
                         b3.setBackground(new Color(240, 240, 240));
@@ -181,13 +188,13 @@ public class S extends Figure {
                 break;
         }
     }
-
+    
     public void rotate() {
         if (x + 1 > dimx - 1 || x < 0) {
             return;
         }
 
-        if (horizontal) {
+        if (isHorizontal) {
             b1.setBackground(new Color(240, 240, 240));
             b2.setBackground(new Color(240, 240, 240));
             b3.setBackground(new Color(240, 240, 240));
@@ -220,7 +227,7 @@ public class S extends Figure {
 
         }
 
-        horizontal = !horizontal;
+        isHorizontal = !isHorizontal;
     }
 
 }
