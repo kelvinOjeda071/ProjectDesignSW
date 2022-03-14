@@ -22,14 +22,14 @@ public class JFLogInUserMono extends javax.swing.JFrame {
     /**
      * Creates new form JFLogInUserMono
      */
-    private User logInUser;
+    private User user;
 
     public JFLogInUserMono() {
 
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        logInUser = new User();
+        user = new User();
     }
 
     public void setEmptyLabels() {
@@ -37,7 +37,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
         this.jTFPassword.setText("");
     }
 
-    public void logIn() {
+    public void logInMonoPlayer() {
         String id = this.jTFId.getText();
         String password = this.jTFPassword.getText();
         if (password.equals("") || id.equals("")) {
@@ -51,7 +51,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
                 if (id.equals(dataList.get(i).getId())) {
                     isFound[0] = true;
                     if (password.equals(dataList.get(i).getPassword())) {
-                            this.logInUser = dataList.get(i);
+                            this.user = dataList.get(i);
                             dataList.get(i).setCurrentActive(1);
                             writeData(dataList);
                             isFound[1] = true;
@@ -77,7 +77,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
         }
     }
 
-    public void switchSignInTwoPlayers() {
+    public void switchLogInMultiPlayer() {
         new JFLogInMultiUser().setVisible(true);
         this.dispose();
     }
@@ -287,7 +287,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogInActionPerformed
-        logIn();
+        logInMonoPlayer();
     }//GEN-LAST:event_jBLogInActionPerformed
 
     private void jBSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSignInActionPerformed
@@ -303,7 +303,7 @@ public class JFLogInUserMono extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFIdActionPerformed
 
     private void jBLogInMultiPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogInMultiPlayerActionPerformed
-        switchSignInTwoPlayers();
+        switchLogInMultiPlayer();
     }//GEN-LAST:event_jBLogInMultiPlayerActionPerformed
 
     /**

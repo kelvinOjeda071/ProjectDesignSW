@@ -204,29 +204,46 @@ public class CheckFacade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBAsteroidGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsteroidGameActionPerformed
+    public void playAsteroidGame(){
         asteroidGame = new AsteroidGame();
         asteroidGame.showWindow();
-        this.setVisible(false);
-    }//GEN-LAST:event_jBAsteroidGameActionPerformed
-
-    private void jBSnakeGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeGameActionPerformed
-        snakeGame = new Game();
-        snakeGame.startGame();
-        this.setVisible(false);
-    }//GEN-LAST:event_jBSnakeGameActionPerformed
-
-    private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
+        this.dispose();
+    }
+    
+    public void playSnailGame(){
         snailGame = new SnailGame();
         snailGame.showWindow();
         this.setVisible(false);
+        this.dispose();
+    }
+    
+    public void playTetrisGame(){
+        tetris = new TetrisMenu();
+        tetris.setVisible(true);
+        this.dispose();
+    }
+    
+    public void playSnakeGame(){
+        snakeGame = new Game();
+        snakeGame.startGame();
+        this.setVisible(false);
+        this.dispose();
+    }
+    private void jBAsteroidGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsteroidGameActionPerformed
+        this.playAsteroidGame();
+    }//GEN-LAST:event_jBAsteroidGameActionPerformed
+
+    private void jBSnakeGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeGameActionPerformed
+        this.playSnakeGame();
+    }//GEN-LAST:event_jBSnakeGameActionPerformed
+
+    private void jBSnailGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailGameActionPerformed
+        this.playSnailGame();
 
     }//GEN-LAST:event_jBSnailGameActionPerformed
 
     private void jBTetrisGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTetrisGameActionPerformed
-        tetris = new TetrisMenu();
-        tetris.setVisible(true);
-        this.dispose();
+        this.playTetrisGame();
     }//GEN-LAST:event_jBTetrisGameActionPerformed
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed

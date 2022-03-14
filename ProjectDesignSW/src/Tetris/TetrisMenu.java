@@ -72,7 +72,7 @@ public class TetrisMenu extends javax.swing.JFrame {
         btnExit.setBackground(new java.awt.Color(53, 186, 243));
         btnExit.setFont(new java.awt.Font("KenVector Future Thin", 0, 18)); // NOI18N
         btnExit.setForeground(new java.awt.Color(0, 0, 0));
-        btnExit.setText("EXIT");
+        btnExit.setText("Return");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);

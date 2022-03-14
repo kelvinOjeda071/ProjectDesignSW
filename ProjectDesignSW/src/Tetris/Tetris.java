@@ -112,7 +112,7 @@ public class Tetris extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnStart.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnStart.setFont(new java.awt.Font("KenVector Future Thin", 0, 14)); // NOI18N
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +125,7 @@ public class Tetris extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("KenVector Future Thin", 1, 24)); // NOI18N
         jLabel1.setText("Score");
 
         jLScore2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -134,10 +134,10 @@ public class Tetris extends javax.swing.JFrame {
 
         jLScore.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("KenVector Future Thin", 1, 24)); // NOI18N
         jLabel2.setText("Score");
 
-        btnExit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnExit.setFont(new java.awt.Font("KenVector Future Thin", 0, 14)); // NOI18N
         btnExit.setText("Exit");
         btnExit.setEnabled(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +166,7 @@ public class Tetris extends javax.swing.JFrame {
                 .addComponent(jLScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(20, 20, 20)

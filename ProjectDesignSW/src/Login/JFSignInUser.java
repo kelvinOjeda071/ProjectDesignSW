@@ -24,16 +24,15 @@ public class JFSignInUser extends javax.swing.JFrame {
     /**
      * Creates new form JFSingInUser
      */
-    private Pattern patName = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
-    private Pattern patId = Pattern.compile("[0-9]{10}");
-    private Pattern patPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
-    JFLogInUserMono jfLoginUser;
+    private Pattern patterName = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
+    private Pattern patterId = Pattern.compile("[0-9]{10}");
+    private Pattern patterPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
+    private User user;
 
     public JFSignInUser() {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        jfLoginUser = new JFLogInUserMono();
     }
 
     public void setEmptyLabels() {
@@ -45,17 +44,17 @@ public class JFSignInUser extends javax.swing.JFrame {
     }
 
     public void switchlogIn() {
-        this.jfLoginUser.setVisible(true);
+        new JFLogInUserMono().setVisible(true);
         this.dispose();
     }
 
     public void signIn() {
-        Matcher matFirstName = this.patName.matcher(this.jTFFirstName.getText());
-        Matcher matLastName = this.patName.matcher(this.jTFLastName.getText());
-        Matcher matId = this.patId.matcher(this.jTFId.getText());
-        Matcher matPassword = this.patPassword.matcher(
+        Matcher matFirstName = this.patterName.matcher(this.jTFFirstName.getText());
+        Matcher matLastName = this.patterName.matcher(this.jTFLastName.getText());
+        Matcher matId = this.patterId.matcher(this.jTFId.getText());
+        Matcher matPassword = this.patterPassword.matcher(
                 this.jPFPassword.getText());
-        Matcher matReplyPassword = this.patPassword.matcher(
+        Matcher matReplyPassword = this.patterPassword.matcher(
                 this.jPFReplyPassword.getText());
         boolean isFound = false;
 
@@ -79,19 +78,20 @@ public class JFSignInUser extends javax.swing.JFrame {
 
                 if (isFound == false) {
 
-                    dataList.add(new User(this.jTFFirstName.getText().toUpperCase(),
+                    this.user = new User(this.jTFFirstName.getText().toUpperCase(),
                             this.jTFLastName.getText().toUpperCase(),
                             this.jTFId.getText(),
                             this.jPFPassword.getText(),
                             0, // Score
                             0 // Current Active
-                    ));
+                    );
+                    dataList.add(user);
 
                     writeData(dataList);
                     JOptionPane.showMessageDialog(null, "Successfully"
                             + " registered user");
                     setEmptyLabels();
-                    this.jfLoginUser.setVisible(true);
+                    switchlogIn();
                     this.dispose();
 
                 }
